@@ -1,0 +1,94 @@
+/* pages/mypage/dnfw.wxss */
+ .col {
+    margin-left: 23.5rpx;
+    padding: 35rpx 23.5rpx 35rpx 0;
+    border-bottom: 1px solid #EEEEEE;
+}
+.dndc{
+    background:url('https://img.zhcanting.com/res/xcx/images/ser_dndc.png') left no-repeat;
+    background-size:75rpx;
+    padding-left: 130rpx;
+    height: 100rpx;
+    display: flex;
+    flex-direction: column;
+    font-size: 32.8rpx;
+}
+.jz{
+    background:url('https://img.zhcanting.com/res/xcx/images/ser_jz.png') left no-repeat;
+    background-size:75rpx;
+}
+.fwy{
+    background:url('https://img.zhcanting.com/res/xcx/images/ser_hjfwy.png') left no-repeat;
+    background-size:75rpx;
+}
+.dndc text:first-child{
+    display: inline-block;
+    margin-top: 10rpx;
+}
+.dndc text:last-child{
+    display: inline-block;
+    font-size: 28rpx;
+}
+.list{
+    padding: 0 23.5rpx;
+    margin:15rpx 0 0 23.5rpx;
+    display: flex;
+    flex-wrap:wrap;
+    
+}
+.list text{
+    display: block;
+    width: 175rpx;
+    height: 56rpx;
+    border-radius:28rpx;
+    color: #fff;
+    font-size: 28rpx;
+    flex-direction: row;
+    margin: 17.5rpx 25rpx;
+    line-height:56rpx;
+    text-align: center;
+}
+.footer{
+    padding: 54rpx 47rpx 0;
+    background: #fff;
+    height: 124rpx;
+    position: fixed;
+    z-index: 99;
+    left: 0px;
+    right: 0;
+    margin: auto;
+    bottom: 23.5rpx;
+    max-width: 750rpx;
+    box-sizing: border-box;
+    transform: translateY(140%);
+    transition:  all .3s;
+}
+.show{
+  transform: translateY(0%);
+}
+.icon{
+    width: 140rpx;
+    height:124rpx;
+    display: block;
+     background:url('https://img.zhcanting.com/res/xcx/images/ser_icon.png') left no-repeat;
+    background-size: cover;
+    position: absolute;
+    right: 23.5rpx;
+    bottom: 14rpx;
+}
+.text {
+    width: 100%;
+    height:70rpx;
+    background: rgba(0,0,0,.5);
+    font-size:30rpx;
+    color: #fff;
+    line-height: 70rpx;
+    border-radius:35rpx;
+    overflow: hidden;
+    text-align: center;
+}
+.text text {
+    background:url('https://img.zhcanting.com/res/xcx/images/ser_help.png') left no-repeat;
+    background-size:32.8rpx;
+    padding-left: 47rpx;
+}

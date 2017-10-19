@@ -1,0 +1,110 @@
+var config = require("../../config.js");
+//获取应用实例  
+var app = getApp()  
+Page( {  
+  data: {
+    path: config.resPath,
+    api: config.apiPath, 
+    scroll:true, 
+    winWidth: 0,  
+    winHeight: 0,
+    loading:false,   
+    currentTab: 0,
+    list: [],
+    page: 1,
+    num:'',
+    limit: 20,
+    hasMore: true,
+    types: 1
+  },  
+  onLoad: function() {  
+    var that = this;  
+    wx.getSystemInfo( {    
+      success: function( res ) {  
+        that.setData( {  
+          winWidth: res.windowWidth,  
+          winHeight: res.windowHeight,
+          heht: res.windowHeight
+        });  
+      }    
+    });  
+    if (!wx.getStorageSync('color')) {
+      wx.setStorageSync('color', 'blue');
+    }
+    config.navBarColor(wx.getStorageSync('color'));
+    that.setData({
+      color: wx.getStorageSync('color')
+    })
+  },  
+  onShow:function(){
+    this.setData({
+      list:[]
+    })
+    this.load();
+  },
+  bindChange: function( e ) {  
+  
+    var that = this;  
+    that.setData( { currentTab: e.detail.current });  
+  
+  },  
+  load:function(){
+    var that = this;
+    wx.showLoading({
+      title: 'loading...',
+    });
+    config.post("/wxApi/o/orders", { type: that.data.types, page: that.data.page, limit: that.data.limit }, function (ret) {
+      wx.hideLoading();
+      if (ret.code == 0) {
+        that.data.num = ret.data.length;
+        ret.data.forEach(function (o, i) {
+          that.data.list.push(o)
+        })
+        that.setData({
+          list: that.data.list,
+          num: that.data.num
+        })
+      }
+    })
+  },
+  swichNav: function( e ) {   
+    var that = this;  
+    that.data.page=1;
+    that.data.list=[];
+    that.setData({
+      list:that.data.list
+    })
+    var current = e.target.dataset.current;
+    if(current==1){
+      that.data.types = 0;
+    }else{
+      that.data.types = 1;
+    }
+    if (this.data.currentTab === current ) {  
+      return false;  
+    } else {  
+      that.setData( {  
+        currentTab: current  
+      })  
+    }  
+    that.load();
+  },
+  //加载更多
+  getMore: function () {
+    this.setData({
+      loading: true
+    })
+  },
+  end: function () {
+    if (this.data.loading && this.data.num == 20) {
+      this.data.page += 1;
+      this.setData({
+        page: this.data.page,
+        loading:false
+      })
+      this.load();
+    }
+  },
+})  
+
+

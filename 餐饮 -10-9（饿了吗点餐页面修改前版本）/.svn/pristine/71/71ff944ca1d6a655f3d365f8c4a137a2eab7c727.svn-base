@@ -1,0 +1,1506 @@
+page {
+  height: 100%;
+  overflow: hidden;
+}
+.container {
+  height: 100%;
+  overflow-y: hidden;
+}
+
+.dheader {
+  position: relative;
+  color: #000;
+  transition: all 0.6s ease-in-out;
+  height: 234rpx;
+  overflow: hidden;
+}
+.dheader image{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  z-index: 1;
+}
+
+.dheader view{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding:11rpx 17.5rpx;
+  background-color: rgba(0,0,0,0.7); 
+  z-index: 22;
+  width: 100%;
+  font-size: 26rpx;
+  color: #fff;
+}
+.over_width{
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  max-width: 380rpx;
+}
+.overflow{
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  max-width: 230rpx;
+}
+.content-container {
+  display: -webkit-flex;
+  height: 100%;
+  overflow-y: hidden;
+  box-sizing: border-box;
+  padding-bottom: 100rpx;
+}
+.classify-container {
+  width: 230rpx;
+  background: #f8f8f8;
+  height: 760rpx;
+}
+.classify-container .classify {
+  padding: 30.5rpx 0;
+  text-align: center;
+  border-bottom: 1px solid #dcdcdc;
+  border-right: 1px solid #dcdcdc;
+  border-left: 5rpx solid #f8f8f8;
+}
+.classify-container .classify .name {
+  display: inline-block;
+  font-size: 16px;
+  color: #646464;
+  text-align: left;
+}
+.i-la{
+  width: 27rpx;
+  height: 46rpx;
+  display: block;
+  background: url('https://img.zhcanting.com/res/xcx/images/cater_la.png') center center no-repeat;
+  background-size: 27rpx 27rpx;
+  padding: 0 3rpx;
+}
+.youhui{
+  background: #EE9B24;
+  padding: 0rpx 5rpx;
+  border-radius: 5rpx;
+  color: #fff;
+}
+.new{
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 78rpx;
+  height: 78rpx;
+  background: url('https://img.zhcanting.com/res/xcx/images/icon_new.png') left top no-repeat;
+  background-size: cover;
+  z-index: 99;
+}
+.i-suan{
+    width: 27rpx;
+    height: 46rpx;
+    display: block;
+    background: url('https://img.zhcanting.com/res/xcx/images/cater_suan.png') center center no-repeat;
+    background-size: 27rpx 27rpx;
+    padding: 0 5rpx;
+}
+.i-xc{
+    width: 27rpx;
+    height: 46rpx;
+    display: block;
+    background: url('https://img.zhcanting.com/res/xcx/images/cater_xiang.png') center center no-repeat;
+    background-size: 27rpx 27rpx;
+    padding: 0 5rpx;
+}
+.foodspec{
+  width: 100%;
+  height:53rpx;
+  background: #F8F8F8;
+  margin-top: .25rem;
+  border-radius:40rpx;
+  overflow: hidden;
+  position: relative;
+  text-align: right;
+  line-height: 55rpx;
+}
+.foodspec .addCart {
+  width: 53rpx;
+  height: 53rpx;
+  border-radius: 50%;
+  float: right;
+}
+.foodspec .spec{
+  color: #666;
+  font-size:15px;
+}
+.foodspec .sprice{
+  color: #ff7d7d;
+  font-size: 14px;
+  display: inline-block;
+  padding: 0 10rpx;
+}
+.goods-container {
+  background: #ffffff;
+  height: 760rpx;
+  padding-bottom: 120rpx;
+}
+.goods-container .title {
+  margin: 23.5rpx 0 0 23.5rpx;
+  background: #f6f6f6;
+  color: #666666;
+  font-weight: bold;
+  font-size: 15px;
+  line-height: 58.5rpx;
+  text-align:left;
+  border-left: 6rpx solid #ededed;
+  text-indent: .5em;
+}
+.goods-container .goods {
+  position: relative;
+  padding: 23.5rpx;
+  padding-left: 0rpx;
+  margin-left: 23.5rpx;
+  font-size: 36rpx;
+  border-bottom: 1px solid #dddddd;
+}
+.goods-container .goods .pic {
+  float: left;
+  width: 82px;
+  height: 82px;
+  margin-right: 20rpx;
+  margin-bottom: 10rpx;
+  position: relative;
+}
+.goods-container .goods .pic image{
+  width: 100%;
+  height: 100%;
+}
+.goods-container .goods .name {
+  display: -webkit-flex;
+  display: flex;
+  color: #000;
+  font-size: 16px;
+  line-height: 46rpx;
+}
+.goods-container .goods .sold {
+  color: #989898;
+  font-size: 13px;
+  text-decoration:line-through;
+  line-height: 46rpx;
+}
+.goods-container .goods .price {
+  color: #f45044;
+  font-size: 16px;
+  margin-right: 15rpx;
+  line-height: 46rpx;
+}
+.goods-container .goods .addCart {
+  width: 53rpx;
+  height: 53rpx;
+  border-radius: 50%;
+  float: right;
+}
+.goods-container .goods .shch{
+  width: 100%;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  font-size: 14px;
+  color: #262626;
+}
+.goods .time{
+  background: url('https://img.zhcanting.com/res/xcx/images/cater_wait.png') left center no-repeat;
+  background-size: 23.5rpx;
+  padding-left: 33rpx;
+}
+.goods .number{
+  background: url('https://img.zhcanting.com/res/xcx/images/cater_per.png') left center no-repeat;
+  background-size: 23.5rpx;
+  padding-left: 32rpx;
+}
+.goods-container .goods .join{
+  font-size: 30rpx;
+  margin-top: 5rpx;
+}
+.cnums .num{
+  line-height: 53rpx;
+  display: inline-block;
+  padding: 0 20rpx;
+  color: #666;
+  font-size: 28rpx;
+  float: right;
+}
+.item .info{
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  margin-bottom: 5rpx;
+}
+.tnum{
+  line-height: 53rpx;
+  display: inline-block;
+  padding: 0 20rpx;
+  color: #666;
+  font-size: 28rpx;
+}
+.cnum{
+  background: #f8f8f8;
+  border-radius: 26.5rpx;
+  float: right;
+}
+.cnums{
+  float: right;
+  display: none;
+}
+.show{
+  display: block;
+}
+.goods-container .goods .addCart image {
+  pointer-events: none;
+  width: 53rpx;
+  height: 53rpx;
+}
+
+.cart-detail, .cart-detail .mask {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 998;
+  overflow: hidden;
+}
+.cart-detail{
+  display: none;
+  transition:all 0.3s linear;
+}
+.cart-show{
+  display: block;
+  transition:all 0.3s linear;
+}
+.cart-detail .mask {
+  background: rgba(0,0,0,0.7);
+}
+.cart-detail .list {
+  position: absolute;
+  left: 0;
+  bottom: 100rpx;
+  width: 100%;
+  background: #f8f8f8;
+  padding-bottom: 23.5rpx;
+  z-index: 999;
+  height: 750rpx;
+}
+.cart-detail .empty{
+  height: 70rpx;
+  padding: 0 24rpx;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  -webkit-align-items: center;
+          align-items: center;
+  border-bottom: 1px solid #e2e2e2;
+  font-size: 16px;
+}
+.cart-detail .empty text:last-child{
+  font-size: 30rpx;
+  color: #666;
+  background: url('https://img.zhcanting.com/res/xcx/images/icon_empty.png') left center no-repeat;
+  background-size: 23rpx 28rpx;
+  padding-left: 33rpx;
+}
+.cart-detail .list .item {
+  display:-webkit-flex;
+  display:flex;
+  color: #333;
+  font-size: 16px;
+  line-height: 50rpx;
+  padding:23.5rpx 23.5rpx;
+  border-bottom: 1px solid #ddd;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+}
+.cart-detail .list .item .img{
+  width: 70px;
+  height: 70px;
+}
+.cart-detail .list .item .img image{
+  width: 100%;
+  height: 100%;
+}
+.cart-detail .list .item .nr{
+  width: 540rpx;
+  min-height: 140rpx;
+  height: auto;
+}
+.item .oper{
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row-reverse;
+          flex-direction: row-reverse;
+}
+.item .reduce,.item .add {
+  display: block;
+  font-size: 50rpx;
+  width: 50rpx;
+  height: 50rpx;
+  text-align: center;
+  border-radius: 50%;
+  color: #fff;
+  line-height: 45rpx;
+}
+.cart-detail .list .item .speci{
+  color: #aaa;
+}
+.cart-detail .list .total{
+  color: #e63b3b;
+  line-height: 1.1em;
+}
+.sprice{
+  display: inline-block;
+  font-size: 24rpx;
+  padding-left: 10rpx;
+  color: #afafaf;
+}
+.carticon{
+  position: absolute;
+  left: 15rpx;
+  bottom: 873rpx;
+  width: 62px;
+  height: 66px;
+  display: block;
+  z-index: 999;
+}
+.carticon .bg_gwc{
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+}
+.gwc{
+  position: absolute;
+  top:35rpx;
+  left:10px;
+  width:75rpx;
+  height:60rpx;
+}
+.carticon text{
+  position:absolute;
+  left:40rpx;
+  top:-5rpx;
+  font-size:30rpx;
+  line-height:40rpx;
+  padding:0 12rpx;
+  color:#fff;
+  background:#f45044;
+  border-radius:20rpx;
+  z-index: 9999;
+}
+.tabinfo{
+  position: absolute;
+  right: 0rpx;
+  bottom: 870rpx;
+  z-index: 999;
+  width: 190rpx;
+  height:56rpx;
+  line-height:56rpx;
+  text-align: center;
+  color: #fff;
+  font-size: 26rpx;
+  font-style: italic;
+}
+.tabinfo image{
+  width: 100%;
+  height: 100%;
+}
+.tabinfo .nr{
+  position: absolute;
+  z-index: 999;
+  top: 0;
+  left: 25rpx;
+}
+.tabinfo text{
+  font-size: 28rpx;
+  color: #fff;
+}
+.cart {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 114rpx;
+  background: #fff;
+  border-top: 1px solid #dee8ff;
+  z-index: 999;
+}
+.cart .data {
+  position: absolute;
+  left: 15rpx;
+  top: -20rpx;
+}
+.cart .data .icon {
+  width: 123rpx;
+  height: 123rpx;
+  border-radius: 50%;
+  position: relative;
+}
+.cart .data .icon image {
+  position: absolute;
+  left: 25rpx;
+  top: 38rpx;
+  width: 38px;
+  height: 30px;
+}
+.cart .data .icon .count {
+  position:absolute;
+  left:45rpx;
+  top:-5rpx;
+  font-size:30rpx;
+  line-height:40rpx;
+  padding:0 12rpx;
+  color:#fff;
+  background:#f45044;
+  border-radius:20rpx;
+}
+.cart .nums{
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  font-size: 15px;
+  padding-left: 15rpx;
+}
+.cart .total {
+  color: #f45044;
+  font-size: 18px;
+  margin-right: 10rpx;
+  overflow: hidden;
+  white-space: normal;
+  text-overflow:ellipsis;  
+}
+.cart .info{
+  position: absolute;
+  left: 130rpx;
+  right: 25rpx;
+  display: -webkit-flex;
+  display: flex;
+  height: 100%;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.cart .info .left{
+  width: 430rpx;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content:space-between;
+          justify-content:space-between;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.cart .info .left_width{
+  width: 620rpx;
+}
+.cart .changeinfo{
+  left: 10rpx;
+}
+.cart .submitbutton {
+  width:160rpx;
+  height: 64.5rpx;
+  font-size: 28rpx;
+  line-height: 64.5rpx;
+  border-radius: 32.25rpx;
+  border: none;
+  color: #fff;
+  text-align: center;
+  margin-left: 0;
+}
+.cart .nobutton{
+  width:160rpx;
+  height: 64.5rpx;
+  font-size: 24rpx;
+  line-height: 64.5rpx;
+  border-radius: 32.25rpx;
+  border: none;
+  background: #7b7b7b;
+  color: #fff;
+  text-align: center;
+  margin-left: 0;
+}
+.cart button[disabled]{
+  border: none;
+  background: #f7f7f7;
+}
+.confirm-container{
+  height: 100%;
+  background: #f8f8f8;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  -webkit-transform:  translateX(100%);
+          transform:  translateX(100%);
+   transition: all 0.4s linear;
+}
+.confirm-container .head{
+  padding: 11.75rpx 23.5rpx;
+  min-height: 50rpx;
+  height: auto;
+  text-align: center;
+  color: #fff;
+}
+.confirm-container .title{
+  font-size: 32.8rpx;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+          justify-content: center;
+  -webkit-align-items: center;
+          align-items: center;
+  height: auto;
+}
+.confirm-container .Modify{
+  font-size: 28rpx;
+  display: -webkit-flex;
+  display: flex;
+  height: 50rpx;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  color: #fff;
+}
+.confirm-container .Modify image{
+  width: 28rpx;
+  height: 28rpx;
+  margin-right: 10rpx;
+}
+.confirm-container .miss{
+  margin: 23.5rpx;
+  line-height: 54rpx;
+  border-radius: 27rpx;
+  font-size: 25.75rpx;
+  background: rgba(0,0,0,0.2);
+}
+.ordermenu{
+  padding: 15rpx 23.5rpx 20rpx;
+  background: #fff;
+  border-bottom: 1px solid #e7e7e7;
+}
+.ordermenu text{
+  font-size: 30.5rpx;
+  color:#262626;
+  background: url('https://img.zhcanting.com/res/xcx/images/snum_menu.png') left center no-repeat;
+  background-size: 36.3rpx 35rpx;
+  padding-left: 53rpx;
+}
+.lcontainer{
+  background: #f8f8f8;
+}
+ .curmenu{
+  background: #f7f7f7;
+} 
+.curmenu .ititle{
+    font-size: 28rpx;
+    line-height: 50rpx;
+    padding: 11.75rpx 23.5rpx 11.75rpx 75rpx;
+  background:#fff url('https://img.zhcanting.com/res/xcx/images/icon_curmenu.png') 23.5rpx center no-repeat;
+  background-size: 32.8rpx 37.5rpx;
+}
+.packpage{
+  padding: 23.5rpx;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  background: #fff;
+}
+.packpage .foodimg{
+    -webkit-flex: 2;
+            flex: 2;
+    margin-right: 21rpx;
+    height: 129rpx;
+    overflow: hidden;
+}
+.foodimg image{
+  width: 100%;
+  height: 100%;
+}
+.packpage .foodinfo{
+  -webkit-flex: 9;
+          flex: 9;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  padding-top: 15rpx;
+}
+.foodinfo text{
+  display: block;
+  font-size: 30.5rpx;
+  line-height: 45rpx;
+}
+.foodinfo .nr{
+  color: #888;
+  font-size: 28rpx;
+}
+.foodinfo .right{
+  text-align: right;
+}
+.foodinfo .right text:first-child{
+  font-size: 28rpx;
+  color: #aaa;
+}
+.foodinfo .right text:last-child{
+  color: #ff4f39;
+}
+.foodinfo .taste{
+  margin-left: 1px;
+    display: inline-block;
+    padding: 0 23.5rpx;
+    color: #fff;
+    font-size: 23.5rpx;
+    background: #8EA8FF;
+    line-height: 37.5rpx;
+    text-align: center;
+    border-radius:35rpx;
+    overflow: hidden;
+}
+.slidhide{
+  display: block;
+    -webkit-animation: slidown .5s linear both;
+            animation: slidown .5s linear both;
+}
+.ltitle{
+    color: #aaa;
+    font-size: 28rpx;
+  height: 50rpx;
+    padding: 11.75rpx 23.5rpx 11.75rpx 23.5rpx;
+  background:#fff url('https://img.zhcanting.com/res/xcx/images/order_down.png') 700rpx center no-repeat;
+  background-size: 28rpx 14rpx;
+}
+.ltitleup{
+    color: #aaa;
+    font-size: 28rpx;
+  height: 50rpx;
+    padding: 11.75rpx 23.5rpx 11.75rpx 23.5rpx;
+  background:#fff url('https://img.zhcanting.com/res/xcx/images/order_up.png') 700rpx center no-repeat;
+  background-size: 28rpx 14rpx;
+}
+.slidnone{
+  display: none;
+  -webkit-animation: slidoup .5s linear both;
+          animation: slidoup .5s linear both;
+}
+.allprice {    
+    background: #fff;
+    border-bottom: 1px solid #e7e7e7;
+    font-size: 30.5rpx;
+    color: #ff4f39;
+    text-align: right;
+    line-height: 46.8rpx;
+    padding: 20rpx 23.5rpx;
+    position: relative;
+}
+.allprice::after{
+  content: "";
+  width: 725rpx;
+  height: 1px;
+  position: absolute;
+  left: 25rpx;
+  top: 0;
+  background: #e7e7e7;
+}
+.allprice .gray{
+  color: #262626;
+}
+.confirminfo{
+  margin-top: 23.5rpx;
+  padding-left: 23.5rpx;
+  background: #fff;
+}
+.confirminfo view{
+  -webkit-flex: 12;
+          flex: 12;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 32.8rpx;
+  padding-right:23.5rpx; 
+}
+.confirminfo view text:last-child{
+  color: #aaa;
+  font-size: 30.5rpx;
+}
+.invoice{
+  background: url('https://img.zhcanting.com/res/xcx/images/order_right.png') right center no-repeat;
+  background-size: 15.5rpx 30rpx;
+  padding-right: 35rpx;
+  min-width:50rpx;
+  text-align: right;
+  width: auto;
+}
+.scroll-hei{
+  height: 100%;
+}
+.ceshi{
+  width: 100%;
+  height: 120rpx;
+}
+.order-ac{
+  position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0px;
+    background: #fff;
+    height: 115rpx;
+    line-height: 63rpx;
+    padding: 25rpx 23.5rpx;
+    border-top: 1px solid #DCDCDC;
+    box-sizing: border-box;
+}
+.order-ac{
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  font-size:32.8rpx;   
+}
+.go-back{
+  background:#fff url('https://img.zhcanting.com/res/xcx/images/order_back.png') left center no-repeat;
+  background-size: 15.2rpx 29.2rpx;
+  padding-left: 35rpx;
+}
+.determine{
+  font-size: 28rpx;
+  color: #fff;
+  padding: 0 23.5rpx;
+  border-radius: 63rpx;
+  overflow: hidden;
+  display: inline-block;
+}
+.pice{
+  font-size: 32.8rpx;
+  color: #FF4F39;
+  padding: 0 23.5rpx 5rpx;
+  border-radius: 63rpx;
+  overflow: hidden;
+  display: inline-block;
+}
+.slidrihgt{
+  -webkit-transform:  translateX(0%);
+          transform:  translateX(0%);
+}
+
+.facontainer{
+  height: 100%;
+  background: #f8f8f8;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  -webkit-transform:  translateX(100%);
+          transform:  translateX(100%);
+   transition: all 0.4s ease;
+}
+.slidleft{
+  -webkit-transform:  translateX(0%);
+          transform:  translateX(0%);
+}
+.facontainer .faheader{
+  background: #fff;
+  padding-left: 23.5rpx;
+}
+.facontainer .fatitle{
+  font-size: 32.8rpx;
+  line-height: 77.5rpx;
+  border-bottom: 1px solid #ededed;
+  margin-bottom: 15rpx;
+}
+.faheader textarea{
+  font-size: 30rpx;
+}
+.dccontainer{
+  height: 100%;
+  background: #f8f8f8;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  -webkit-transform:  translateX(100%);
+          transform:  translateX(100%);
+   transition: all 0.4s ease;
+}
+.dcleft{
+  -webkit-transform:  translateX(0%);
+          transform:  translateX(0%);
+}
+.dcimg{
+  width: 206rpx;
+    height: 210rpx;
+    padding-top: 180rpx;
+    margin: 0 auto;
+}
+.dcimg image{
+  width: 100%;
+  height: 100%;
+}
+.mess{
+    padding-top: 47rpx;
+    text-align: center;
+    font-size: 32.8rpx;
+  color: #262626;
+}
+.mess .notice{
+  padding-top: 10rpx;
+}
+.mess .btn-see{
+  width: 255rpx;
+  height: 63rpx;
+  display: inline-block;
+  text-align: center;
+  line-height: 63rpx;
+  color: #fff;
+  margin: 23.5rpx;
+  border-radius: 31.5rpx;
+}
+.mess .btn-pay{
+  width: 255rpx;
+  height: 63rpx;
+  display: inline-block;
+  text-align: center;
+  line-height: 63rpx;
+  color: #fff;
+  margin: 23.5rpx;
+  border-radius: 31.5rpx;
+}
+/*tab bar*/
+.withAnimate {
+  transition: all 200ms ease-out;
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-perspective: 1000;
+  -ms-perspective: 1000;
+  perspective: 1000;
+}
+.tab-bar {
+  position: relative;
+  white-space: nowrap;
+  display: block;
+  font-size:26rpx;
+  color: #262626;
+  height:70rpx;
+}
+.tab-bar .tab {
+  display: inline-block;
+  padding-top:8px;
+  padding-bottom:7px;
+  text-align: center;
+}
+.scroll-view-item_H{
+  display: inline-block;
+  height: 60rpx;
+}
+/*tab bar end*/
+
+/*swiper*/
+.page-section-spacing {
+  padding: 0;
+}
+.swiper{
+  height:790rpx;
+}
+.swiper-item{
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  padding: 24rpx 0 24rpx 24rpx;
+  -webkit-flex-wrap:wrap;
+          flex-wrap:wrap;
+}
+.swiper-item .list{
+  width: 340rpx;
+  height: 410rpx;
+  background: #fff;
+  margin:0 20rpx 20rpx 0;
+}
+.swiper-item .list .img{
+  position: relative;
+}
+.swiper-item .list .img image{
+  width: 340rpx;
+  height: 245rpx;
+}
+.swiper-item .list .info{
+  padding:0 13rpx 0;
+}
+.swiper-item .name{
+  font-size: 30rpx;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  margin-bottom: 15rpx;
+}
+.swiper-item .name text:first-child{
+  width: 220rpx;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.swiper-item .name .yj{
+  font-size: 24rpx;
+  border:1px solid #f8b551;
+  padding: 2rpx 5rpx;
+  border-radius: 25rpx;
+}
+.swiper-item .num,.tcontent .num{
+  width: 100%;
+  font-size: 26rpx;
+  color:#aaaaaa;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+          align-items: center;
+  margin-bottom: 10rpx;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  height: 30rpx;
+}
+.tcontent .logo{
+  padding: 15rpx;
+  height: 340rpx;
+  overflow: hidden;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+          justify-content: center;
+}
+.tcontent .logo image{
+  height: 100%;
+}
+.tcimgs{
+  width: 100%;
+}
+.swiper-item .num .time,.tcontent .num .time{
+  background: url('https://img.zhcanting.com/res/xcx/images/cater_wait.png') left center no-repeat;
+  background-size: 23.5rpx;
+  padding-left: 33rpx;
+}
+.swiper-item .num .number ,.tcontent .num .number{
+  background: url('https://img.zhcanting.com/res/xcx/images/cater_per.png') left center no-repeat;
+  background-size: 23.5rpx;
+  padding-left: 30rpx;
+}
+.swiper-item .num text:nth-child(2) ,.tcontent .num:text:nth-child(2){
+  margin-right: 20rpx;
+}
+.swiper-item .price{
+  display:-webkit-flex;
+  display:flex;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  font-size: 28rpx;
+  height: 45rpx;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.swiper-item .price text{
+  color: #e63b3b;
+}
+.swiper-item .calculate{
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+}
+.calculate image{
+  width: 46rpx;
+  height: 46rpx;
+}
+.calculate .nums{
+  padding: 5rpx 25rpx;
+}
+/*swiper end*/
+/*弹出详情*/
+.tcontent{
+  content: "";
+  position:fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, .6);
+  z-index: 1001;
+}
+.tcshow{
+  display: none;
+}
+.tcontent .nr{
+  position: absolute;
+  top: 150rpx;
+  bottom: 160rpx;
+  left: 20rpx;
+  right: 20rpx;
+  z-index: 1001;
+  background: #fff;
+  border-radius: 15rpx;
+}
+.tcontent::after{
+  content: "";
+  width: 200rpx;
+  height: 145rpx;
+  position: absolute;
+  top: 17rpx;
+  right: 45rpx;
+  z-index: 9999;
+  background: url(https://img.zhcanting.com/res/xcx/images/food.png) center center no-repeat;
+  background-size:100%; 
+}
+.tcontent .content{
+  padding: 24rpx;
+}
+.tcontent .name{
+  font-size: 32rpx;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+}
+.tcontent .price{
+  font-size:32rpx;
+  color: #e63b3b; 
+  margin: 5rpx 0 10rpx;
+}
+.tcontent .tyouhui{
+  font-size: 26rpx;
+  margin-top: 20rpx;
+}
+.tcontent .tyouhui text{
+  display: inline-block;
+  color: #fff;
+  padding: 5rpx 8rpx;
+  background: #ee9b24;
+  border-radius: 10rpx;
+  margin-right: 15rpx;
+}
+.tcontent .remark{
+  font-size: 28rpx;
+  overflow:hidden; 
+  text-overflow:ellipsis;
+  display:-webkit-box; 
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2; 
+  margin-bottom: 5rpx;
+}
+.tcontent .price text{
+  color: #aaa;
+  font-size: 26rpx;
+  text-decoration: line-through;
+  padding-left: 15rpx;
+}
+.tcontent .shch{
+  display:-webkit-flex;
+  display:flex;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  font-size: 28rpx;
+}
+.shut_down{
+  position: fixed;
+  bottom: 50rpx;
+  left: 235rpx;
+  color: #fff;
+  background: url(https://img.zhcanting.com/res/xcx/images/icon_gb.png) center center no-repeat;
+  background-size:66rpx; 
+  height: 70rpx;
+  line-height: 70rpx;
+  padding-left: 155rpx;
+  font-size: 28rpx;
+}
+.tcimg{
+  width:670rpx;height:340rpx;
+}
+.tcontent .banner{
+  width:670rpx;
+  height:340rpx;
+  border:none;
+  margin: 20rpx 0 0 20rpx;
+}
+.tcontent .foodspecs {
+    width:100%;
+    height:53rpx;
+    background:#F8F8F8;
+    margin-top:.25rem;
+    border-radius:40rpx;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row-reverse;
+            flex-direction: row-reverse;
+    -webkit-align-items: center;
+            align-items: center;
+}
+.tcontent .tnum{
+  height: 53rpx;
+  display:-webkit-flex;
+  display:flex;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+}
+.tcontent .tnum image{
+  width: 50rpx;
+  height: 50rpx;
+}
+.tcontent .spec{
+  font-size: 28rpx;
+}
+.tcontent .snum{
+  padding: 0 10rpx;
+  display: none;
+}
+.tcontent .sdec{
+  display: none;
+}
+.tcontent .show{
+  display: block;
+}
+.loading{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #fff;
+  z-index: 9999;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+          justify-content: center;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.loading image{
+  width: 100rpx;
+  height: 100rpx;
+}
+.example1 {
+  display: block;
+  width: 100%;
+  height: 100rpx;
+}
+
+.marquee_box1 {
+  width: 100%;
+  position: relative;
+}
+
+.marquee_text1 {
+  white-space: nowrap;
+  position: absolute;
+  top: 0;
+}
+.loadhide{
+  display: none;
+}
+.tinfo1{
+  width:700rpx;
+  height: 160rpx;
+  margin: 20rpx 0 0 24rpx; 
+  white-space: nowrap;
+}
+.tinfo2{
+  width:550rpx;
+  height: 160rpx;
+  margin: 20rpx 0 0 24rpx; 
+  white-space: nowrap;
+}
+.tinfo .list,.tinfo1 .list,.tinfo2 .list{
+  display: inline-block;
+  white-space: nowrap;
+  width: 260rpx;
+  height: 160rpx;
+  background: url('https://img.zhcanting.com/res/xcx/images/snap_3.png') no-repeat;
+  background-size: cover;
+  margin-right: 20rpx;
+  color: #fff;
+}
+.tinfo .graylist,.tinfo1 .graylist ,.tinfo2 .graylist{
+  display: inline-block;
+  white-space: nowrap;
+  width: 260rpx;
+  height: 160rpx;
+  background: url('https://img.zhcanting.com/res/xcx/images/graysnap_3.png') no-repeat;
+  background-size: cover;
+  margin-right: 20rpx;
+  color: #fff;
+}
+.tinfo .greenlist,.tinfo1 .greenlist ,.tinfo2 .greenlist{
+  display: inline-block;
+  white-space: nowrap;
+  width: 260rpx;
+  height: 160rpx;
+  background: url('https://img.zhcanting.com/res/xcx/images/greensnap_3.png') no-repeat;
+  background-size: cover;
+  margin-right: 20rpx;
+  color: #fff;
+}
+.tinfo .list:last-child,.tinfo1 .list:last-child,.tinfo2 .list:last-child{
+  margin: 0;
+}
+.tinfo .container,.tinfo1 .container ,.tinfo2 .container{
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+}
+.tinfo .tit,.tinfo1 .tit,.tinfo2 .tit{
+  font-size: 24rpx;
+  margin:0;
+  padding: 0;
+  height: 45rpx;
+  line-height: 45rpx;
+  background: url('https://img.zhcanting.com/res/xcx/images/snap_4.png') left center no-repeat;
+  background-size: 26rpx 21rpx;
+  padding-left: 36rpx;
+}
+.tinfo .act,.tinfo1 .act ,.tinfo2 .act{
+  width: 250rpx;
+  height: 68rpx;
+  line-height: 68rpx;
+  font-size: 36rpx;
+  background: url('https://img.zhcanting.com/res/xcx/images/snap_bor.png') no-repeat;
+  background-size:100% 100%; 
+  text-align: center;
+}
+.tinfo .act text,.tinfo1 .act text .tinfo2 .act text{
+  padding: 0;
+  margin: 0;
+  border-radius: 0;
+  background: none;
+}
+.tinfo .bottom,.tinfo1 .bottom ,.tinfo2 .bottom{
+  font-size: 20rpx;
+  height: 45rpx;
+  line-height: 45rpx;
+}
+.tcontent-bj{
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+          justify-content: center;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  z-index: 9999;
+} 
+.tcontent-bj .nr{
+  width: 720rpx;
+  height: 830rpx;
+  background: url('https://img.zhcanting.com/res/xcx/images/snap_bj.png') no-repeat;
+  background-size:cover; 
+  position: relative;
+}
+.tcontent-bj .nr::after{
+  content: '';
+  width: 211rpx;
+  height: 138rpx;
+  z-index: 2;
+  position: absolute;
+  top: 50rpx;
+  left: 255rpx;
+  background: url('https://img.zhcanting.com/res/xcx/images/snap_1.png') no-repeat;
+  background-size: cover;
+}
+.tcontent-bj .name{
+  color: #fff;
+  text-align: center;
+  padding-top: 185rpx;
+  font-size: 36rpx;
+}
+.tcontent-bj .heade{
+  color: #fff;
+  text-align: center;
+  height: 105rpx;
+  line-height: 105rpx;
+}
+.tinfo{
+  width:425rpx;
+  height: 160rpx;
+  margin: 0 auto; 
+  white-space: nowrap;
+}
+.tinfo .list{
+  display: inline-block;
+  white-space: nowrap;
+  width: 260rpx;
+  height: 160rpx;
+  background: url('https://img.zhcanting.com/res/xcx/images/snap_3.png') no-repeat;
+  background-size: cover;
+  margin-right: 20rpx;
+  color: #fff;
+}
+.tinfo .graylist{
+  display: inline-block;
+  white-space: nowrap;
+  width: 260rpx;
+  height: 160rpx;
+  background: url('https://img.zhcanting.com/res/xcx/images/graysnap_3.png') no-repeat;
+  background-size: cover;
+  margin-right: 20rpx;
+  color: #fff;
+}
+.tinfo .greenlist{
+  display: inline-block;
+  white-space: nowrap;
+  width: 260rpx;
+  height: 160rpx;
+  background: url('https://img.zhcanting.com/res/xcx/images/greensnap_3.png') no-repeat;
+  background-size: cover;
+  margin-right: 20rpx;
+  color: #fff;
+}
+.tinfo .list:last-child{
+  margin: 0;
+}
+.tinfo .container{
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+}
+.tinfo .tit{
+  font-size: 24rpx;
+  color: #fff;
+  margin:0;
+  padding: 0;
+  height: 45rpx;
+  line-height: 45rpx;
+  background: url('https://img.zhcanting.com/res/xcx/images/snap_4.png') left center no-repeat;
+  background-size: 26rpx 21rpx;
+  padding-left: 36rpx;
+}
+.tinfo .act{
+  width: 250rpx;
+  height: 68rpx;
+  line-height: 68rpx;
+  font-size: 36rpx;
+  background: url('https://img.zhcanting.com/res/xcx/images/snap_bor.png') no-repeat;
+  background-size:100% 100%; 
+  text-align: center;
+}
+.tinfo .act text{
+  padding: 0;
+  margin: 0;
+  border-radius: 0;
+}
+.tinfo .bottom{
+  font-size: 20rpx;
+  height: 45rpx;
+  line-height: 45rpx;
+}
+.tcontent-bj .tnum{
+  margin: 45rpx auto 0;
+  width: 150rpx;
+  height: 55rpx;
+  line-height: 55rpx;
+  background:#fff28c url('https://img.zhcanting.com/res/xcx/images/snap_2.png')30rpx center no-repeat;
+  background-size:47rpx 36rpx;
+  color: #da4e3f;
+  border-radius: 27.5rpx;
+  text-indent: 85rpx;
+  font-size: 28rpx;
+  display: block;
+}
+.tcontent-bj .btn{
+  width: 390rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  font-size: 32rpx;
+  color: #da4e3f;
+  background: url('https://img.zhcanting.com/res/xcx/images/snap_5.png') no-repeat;
+  background-size: cover;
+  text-align: center;
+  margin: 90rpx auto 0;
+}
+.rob_bj{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  -webkit-justify-content: center;
+          justify-content: center;
+  z-index: 9999;
+}
+.rob_bj .nr{
+  width: 100%;
+  height: 600rpx;
+  background: url('https://img.zhcanting.com/res/xcx/images/rob.png') no-repeat;
+  background-size:cover; 
+  position: relative;
+}
+.rob_bj .btn{
+  width: 168rpx;
+  height: 168rpx;
+  background: url('https://img.zhcanting.com/res/xcx/images/rob_btn.png') no-repeat;
+  background-size:cover; 
+  position: absolute;
+  right: 140rpx;
+  bottom: 60rpx;
+}
+.tshut_down{
+  margin-top: 50rpx;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  line-height: 70rpx;
+  color: #fff;
+  font-size: 28rpx;
+}
+.tshut_down image{
+  width: 70rpx;
+  height:70rpx;
+  margin-right: 20rpx;
+}
+ .hide{
+  display: none;
+} 
+.inputs{
+  width: 60rpx;
+  height: 50rpx;
+  text-align: center;
+  font-size: 32rpx;
+}
+
+.banner image {
+  height: 170rpx;
+}

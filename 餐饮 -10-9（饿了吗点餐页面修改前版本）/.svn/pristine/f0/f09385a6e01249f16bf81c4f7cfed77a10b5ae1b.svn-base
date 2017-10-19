@@ -1,0 +1,10 @@
+{
+  "extEnable": true,
+  "extAppid": "wxf6444710f6da188e",
+  "ext": {
+    "cid": "458996",
+    "fileMode": "oss",
+    "ossPath": "https://img.zhcanting.com",
+    "path": "https://www.zhcanting.com/"
+  }
+}

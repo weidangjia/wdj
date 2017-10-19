@@ -1,0 +1,85 @@
+
+<!--优惠卷.wxml-->
+<view class="swiper-tab {{color}}swiper-tab">
+  <view class="swiper-tab-list {{color}}dba_color {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">满减券</view>
+  <view class="swiper-tab-list {{color}}dba_color {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">代金券</view>
+</view>
+<view class="arrowBg"></view>
+<swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{winHeight - 31}}px" bindchange="bindChange">
+
+  <!-- 优惠券 -->
+  <view class="loading" wx:if="{{loading}}">
+    <image src="../../images/hope.gif"></image>
+  </view>
+  <swiper-item>
+  <scroll-view class="scontent" style="height:100%;padding-bottom: 75rpx;" scroll-y="true">
+    <view class="container">
+      <view class="list" wx:if="{{mjList.length>0}}" wx:for="{{mjList}}" wx:key="unique">
+        <view class="box">
+        <image src="{{api}}res/xcx/images/{{color}}coupon_bg.png"></image>
+          <view class="info">
+            <view class="time">
+              <text>{{item.time}}有效</text>
+              <text>满减券</text>
+            </view>
+            <view class="limit">
+              <text>满{{item.full}}</text>减{{item.value}}
+            </view>
+            <view class="btn {{color}}ctext_color">
+              <!--<text>限晚餐使用</text>-->
+              <text class="{{color}}dba_color">不计代金券</text>
+              <text class="{{color}}dba_color" wx:if="{{item.useType=='1'}}">通用</text>
+              <text class="{{color}}dba_color" wx:if="{{item.useType=='2'}}">仅堂食</text>
+              <text class="{{color}}dba_color" wx:if="{{item.useType=='3'}}">仅外卖</text>
+            </view>
+            <view class="binfo">
+              <text class="name" wx:if="{{item.storeId}}">{{item.storeName}}</text>
+            <text class="name" wx:else>门店通用</text>
+              <text class="date">{{item.date}}</text>
+            </view>
+          </view>
+          <view class="btn-give">
+         <view bindtap="give" data-id="{{item.uCouponId}}">转赠</view>
+          </view>
+        </view>
+      </view>
+      <view class="coudefalut" wx:if="{{mjList.length==0&&!loading}}">
+        <view class="picintro"></view>
+        <text>暂无数据</text>
+      </view>
+    </view>
+    </scroll-view>
+  </swiper-item>
+
+  <!-- 代金券 -->
+  <swiper-item>
+  <scroll-view style="height:100%;padding-bottom: 75rpx;" scroll-y="true">
+    <view class="container1">
+      <view class="dlist" wx:if="{{xjList.length>0}}" wx:for="{{xjList}}" wx:key="unique">
+        <view class="num">
+        <image src="{{api}}res/xcx/images/{{color}}cash_box.png"></image>
+          <view class="djinfo">
+          <text class="dec">代金券</text>
+          <view class="sum">
+          <text>￥</text>{{item.value}}
+          </view>
+          <text class="dbtn {{color}}dba_color {{color}}ctext_color" wx:if="{{item.remark}}">{{item.remark}}</text>
+          <text class="dbtn {{color}}dba_color {{color}}ctext_color" wx:if="{{item.useType=='1'}}">通用</text>
+          <text class="dbtn {{color}}dba_color {{color}}ctext_color" wx:if="{{item.useType=='2'}}">仅堂食</text>
+          <text class="dbtn {{color}}dba_color {{color}}ctext_color" wx:if="{{item.useType=='3'}}">仅外卖</text>
+          <view class="dian"></view>
+          </view>
+        </view>
+        <view class="dname">{{item.storeName}}</view>
+        <view class="dtime {{color}}text_color">{{item.time}}有效</view>
+        <view class="ddate">{{item.date}}</view>
+        <view bindtap="give" data-id="{{item.uCouponId}}" class="{{color}}dbtn-give dbtn-give">转赠</view>
+      </view>
+      <view class="coudefalut" wx:if="{{xjList.length ==0&&!loading}}">
+        <view class="picintro"></view>
+        <text>暂无数据</text>
+      </view>
+    </view>
+    </scroll-view>
+  </swiper-item>
+</swiper>

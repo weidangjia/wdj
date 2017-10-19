@@ -1,0 +1,170 @@
+view{
+  display: block;
+}
+image{width: 100%}  
+page{
+  height: 100%;
+  background: #f8f8f8;
+}
+.container{
+  height:auto;
+  font-family: "Microsoft Yahei";
+}
+.city{
+  margin-top: 5rpx;
+}
+.content-container{
+  padding-bottom: 120rpx;
+}
+.title{
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  padding: 23.5rpx;
+  font-size: 16px;
+}
+.switch{
+  display: inline-block;
+  text-align: center;
+  color: #fff;
+  font-size: 14px;
+  width: 140rpx;
+  height: 52.8rpx;
+  line-height: 52.8rpx;
+  border-radius: 26.4rpx;
+  margin-left: 11rpx;
+}
+.aniu{
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+}
+.choose {
+    font-size: 16px;
+    padding: 0 23.5rpx;
+    height: 76rpx;
+    line-height: 76rpx;
+    position: relative;
+    border-top: 1px solid #DCDCDC;
+    border-bottom: 1px solid #DCDCDC;
+    background: #fff;
+}
+.details{
+  padding: 23.5rpx 15.5rpx;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  border-bottom: 1rpx solid #dcdcdc;
+}
+.details .img{
+  width: 82px;
+  height: 82px;
+}
+.details .img image{
+  width: 82px;
+  height: 82px;
+}
+.text {
+  width: 555rpx;
+  margin-left: 10rpx;
+}
+.text .name{
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  font-size: 16px;
+  margin-bottom: 5rpx;
+}
+.text .icon{
+  color: #42C758;
+  font-size: 14px;
+  -webkit-align-items: center;
+          align-items: center;
+  background:url('https://img.zhcanting.com/res/xcx/images/icon_go.png') left no-repeat;
+  background-size:30.5rpx 31rpx; 
+  padding-left: 40rpx;
+  display: block;
+}
+.text text{
+  display: block;
+}
+.text text:nth-child(2){
+  font-size: 14px;
+  margin-bottom: 7rpx;
+  display:block;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  color: #666;
+  }
+.text text:nth-child(3){
+  font-size: 13px;
+  margin-bottom: 7rpx;
+  color: #666;
+}
+.text text:nth-child(4){
+  font-size: 13px;
+ background:url('https://img.zhcanting.com/res/xcx/images/icon_loca.png') left no-repeat;
+ background-size: 20rpx 26rpx;
+ padding-left: 28rpx;
+ color: #666;
+}
+.footer{
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  height: 112rpx;
+  padding: 0 28rpx;
+  position: fixed;
+  font-size: 15px;
+  -webkit-align-items: center;
+          align-items: center;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  background: #f8f8f8;
+  z-index: 99;
+  border-top: 1px solid #dcdcdc;
+}
+.footer image{
+  width: 46rpx;
+  height: 46rpx;
+}
+.footer .img{
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.address{
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.address text{
+  display: block;
+  width: 550rpx;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  padding-left: 15rpx;
+}
+.address image{
+  width: 72rpx;
+  height: 54rpx;
+}
+.maxname{
+  max-width: 400rpx;
+  display:block;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}

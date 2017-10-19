@@ -1,0 +1,71 @@
+{
+  "pages": [        
+    
+    "pages/index/index",    
+    "pages/shop/shop",    
+    "pages/index/mdxq",     
+    "pages/index/newewm",
+    "pages/index/smdc",
+    "pages/index/dc",
+    "pages/index/djq",
+    "pages/index/wddd",
+    "pages/index/mjq",
+    "pages/index/mdxz",
+    "pages/index/zf",
+    "pages/index/ddxq",    
+    "pages/index/zf-wc",
+    "pages/index/zf-syd",
+    "pages/index/zf-sm",
+    "pages/waimai/dplb",
+    "pages/waimai/wmdd",
+    "pages/waimai/ddxq",
+    "pages/waimai/zf",
+    "pages/waimai/dzxz",
+    "pages/waimai/dzlb",
+    "pages/waimai/qrdc",
+    "pages/mypage/yhj-lq",
+    "pages/mypage/yhj",    
+    "pages/mypage/yhj-zz",
+    "pages/mypage/mypage",
+    "pages/index/ydwz",
+    "pages/mypage/dnfw",
+    "pages/mypage/hyk",
+    "pages/shop/hdsm",
+    "pages/stores/stores",    
+    "pages/index/scan",
+    "pages/mypage/qyhq"    
+     
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarTitleText": "首页",
+    "navigationBarTextStyle": "#fff",
+    "navigationBarBackgroundColor": "#303030"
+  },
+  "tabBar": {
+    "color": "#aaa",
+    "selectedColor": "#303030",
+    "backgroundColor": "#fff",
+    "borderStyle": "white",
+    "list": [
+      {
+        "iconPath": "images/sfooter1_n.png",
+        "selectedIconPath": "images/sfooter1_h.png",
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "iconPath": "images/saom_n.png",
+        "selectedIconPath": "images/saom.png",
+        "pagePath": "pages/index/smdc",
+        "text": "扫码"
+      },
+      {
+        "iconPath": "images/sfooter3_n.png",
+        "selectedIconPath": "images/sfooter3_h.png",
+        "pagePath": "pages/mypage/mypage",
+        "text": "我的"
+      }
+    ]
+  }
+}

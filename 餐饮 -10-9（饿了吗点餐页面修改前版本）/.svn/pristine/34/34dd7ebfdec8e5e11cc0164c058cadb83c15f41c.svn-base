@@ -1,0 +1,814 @@
+// pages/shop/shop.js
+var config = require("../../config.js");
+Page({
+  data: {
+    path: config.resPath,
+    api: config.apiPath,
+    sliding: true,
+    confirmslid: false,
+    faslid: false,
+    dcslid: false,
+    indicatorDots: true,
+    vertical: false,
+    autoplay: true,
+    interval: 3000,
+    duration: 1200,
+    remark: '',
+    order: {},
+    tt: {},
+    deskCode: '',
+    deskId: '',
+    orderId: '',
+    ydId: '',
+    menu: '',
+    menutab: 2,
+    storeId: '',
+    cart: {
+      count: 0,
+      total: 0,
+      list: {}
+    },
+    tcshow: false,
+    showCartDetail: false,
+    isWm: 0,
+    window_width: 375,// 单位是px
+    tab_config: {
+      tabs: [],// tabs
+      fixed: false, // tabbar是否固定宽度
+      active_tab: 0, //当前激活的tab
+      item_width: 90,// 单位是px
+      tab_left: 0, // 如果tabbar不是固定宽度，则目前左移的位置
+      underline: {
+        offset: 0 //下划线的位移
+      }
+    },
+    swipe_config: {
+      swipes: [],// 不同面板的内容
+      indicator_dots: false, // 不显示小圆点
+      autoplay: false,// 自动切换
+      interval: 2000,// 自动切换频率
+      duration: 500, // 切换时间
+      current: 0 // 当前激活的panel
+    },
+    loading:true,
+    newmap:{},
+  },
+  //获取数据
+  onLoad: function (options) {
+    var that = this;
+    that.data.deskCode = options.deskCode;
+    that.data.deskId = options.deskId;
+    that.data.ydId = options.ydId;
+    if (!wx.getStorageSync('color')) {
+      wx.setStorageSync('color', 'blue');
+    }
+    if (!wx.getStorageSync('menuStyle')) {
+      wx.setStorageSync('menuStyle', '1');
+    }
+    config.navBarColor(wx.getStorageSync('color'));
+    that.setData({
+      storeId: wx.getStorageSync('sid'),
+      deskCode: that.data.deskCode,
+      deskId: that.data.deskId,
+      ydId: that.data.ydId,
+      color: wx.getStorageSync('color'),
+      menutab: wx.getStorageSync('menuStyle')
+    })
+    if (options.isWm) {
+      that.setData({
+        isWm: options.isWm
+      })
+    }
+    //计算高度，宽度
+    try {
+      let { window_width, tab_config } = that.data;
+      var res = wx.getSystemInfoSync()
+      window_width = res.windowWidth;
+
+      if (tab_config.fixed) {
+        tab_config.item_width = window_width / tab_config.tabs.length;
+      }
+      var length = that.data.text.length * that.data.size;
+      that.setData({ 
+        "window_width": window_width, 
+        "tab_config": tab_config 
+        });
+
+    } catch (e) {
+
+    }
+    var newMenu = wx.getStorageSync(that.data.storeId + 'menu');
+    if (newMenu){
+      that.recommended(newMenu);
+    }    
+    setTimeout(function () {
+      that.setData({
+        loading: false
+      })
+    }, 800)
+    var newmap = wx.getStorageSync(that.data.storeId + 'newmap');
+    if (!newmap) {
+      newmap = { total: 0, amount: 0 }
+    }
+    that.setData({
+      menu: newMenu,
+      newmap: newmap
+    });
+    //分类
+    config.post('wxApi/s/menuInfo', {}, function (ret) {
+      console.log(ret);
+      if (ret.code == 0) {
+        var menuInfo = ret.data;
+        menuInfo.gCates.forEach(function (g, i) {
+          if (newmap[g.id] > 0) {
+            m.num = newmap[g.id];
+          }
+        })
+        //所属分类
+        if (newMenu){
+          that.category(menuInfo);
+        }        
+        that.setData({
+          menuInfo: menuInfo
+        })
+      }
+    },true)   
+    that.loadata();
+  },
+  onShow:function(){
+    this.getYh();
+  },
+  category: function (menuInfo){
+    var that=this,menu=that.data.menu,newmap=that.data.newmap;
+    menu.cates.forEach(function (c, j) {
+      c.glist.forEach(function (g, k) {
+        if (newmap[g.id]){        
+        if (newmap[g.id].NO>0) {
+          menuInfo.gCates.forEach(function(m,i){
+            if(g.cateId==m.id){
+              m.num += newmap[g.id].NO;
+              return;
+            }
+          })
+        }
+        }
+      })
+    })
+    that.setData({
+      menuInfo: menuInfo
+    })
+  },
+  recommended:function(menu){
+    var menu=menu,that=this,tjList=[],swipes = [],tabs=[];
+      menu.cates.forEach(function(c,j){
+        c.glist.forEach(function(g,k){
+          if(g.isTop>0){
+            tjList.push(g);
+          }
+        })
+      })
+      for (var i = 0; i < menu.cates.length; i++) {
+        var tj = { id: menu.cates[i].id, title: menu.cates[i].title};
+        tabs.push(tj);
+        swipes.push(i);
+      }
+      if (menu.top > 0) {
+        var tj={id:"tj",title:"热门推荐"}
+        tabs.unshift(tj);
+        swipes.push(i);
+      }
+    that.setData({
+      tjList: tjList,
+      swipes: swipes,
+      tabs:tabs,
+      menu: menu
+    })
+  },
+  loadata: function () {
+    var that = this;
+    var version = wx.getStorageSync(that.data.storeId + 'menu').version;
+    config.post('wxApi/s/menuV3', { version: version!=undefined ? version:'' }, function (ret) {
+      if (ret.code == 0) {
+      if (that.data.isWm) {
+        that.setData({
+          limit: ret.data.wmLimit
+        })
+      }      
+        that.data.menu = ret.data;
+        if (that.data.menu.cates.length>0){
+        that.setData({
+          menu: that.data.menu,
+          classifySeleted: that.data.menu.cates[0].title
+        })
+        }
+        setTimeout(function () {
+          that.setData({
+            loading: false
+          })
+        }, 800)
+        var newmap=that.data.newmap;
+        newmap.total=0,newmap.amount=0;
+        ret.data.cates.forEach(function(o,i){
+          o.glist.forEach(function(g,j){
+            var num=0;
+            if (g.hasSn){
+              var gnum=0;
+              g.sns.forEach(function(s,k){
+                if (newmap[g.id + '_' + s.id]){
+                if (newmap[g.id+'_'+s.id].NO > 0) {
+                  num += newmap[g.id + '_' + s.id].NO;
+                  gnum += newmap[g.id + '_' + s.id].NO;
+                  newmap.total += newmap[g.id + '_' + s.id].NO;
+                  newmap.amount = Number((newmap.amount + s.price).toFixed(2));
+                }
+                }
+              })
+              newmap[g.id]=gnum;
+            }else{
+              if (newmap[g.id]){
+              if (newmap[g.id].NO>0){
+                num = newmap[g.id].NO;
+                newmap.total+=newmap[g.id].NO;
+                newmap.amount = Number((newmap.amount + g.nowPrice).toFixed(2));            
+              }
+              }
+            }
+            if(num>0){
+              that.data.menuInfo.gCates.forEach(function (o, i) {
+                if (o.id == g.cateId) {
+                  o.num=num;
+                  return false;
+                }
+              });
+            }            
+          })
+        })
+        wx.setStorage({
+          key: that.data.storeId + 'menu',
+          data: ret.data,
+        })
+        that.recommended(ret.data);
+        that.setData({
+          menu:ret.data,
+          newmap:newmap,
+          menuInfo: that.data.menuInfo,
+        })
+      }      
+    },true)
+  },
+  //增加
+  tapAddCart: function (e) {
+    var that = this;
+    var g = e.currentTarget.dataset.g || e.currentTarget.dataset.tcinfo;
+    var index = e.currentTarget.dataset.index;   
+		if(g.num.NO||g.num.NO==0){
+			g.num=g.num.NO;
+		}
+    if (g.total > g.num && (g.max == 0 || g.max > g.num) && g.num < 99) {
+      that.data.menu.cates.forEach(function (o, i) {
+        if (o.id == g.storeCateId) {
+          o.glist.forEach(function (k, j) {
+            if (k.id == g.id) {
+              if(!g.sns){
+                that.newmap(k.id,1,null,k.nowPrice);
+              }              
+              if (g.sns) {   
+                  that.newmap(k.id, 1, g.sns[index].id, g.sns[index].price,g);       
+              } 
+              return;
+            }
+          })
+        }
+      });
+      that.data.menuInfo.gCates.forEach(function (o, i) {
+        if (o.id == g.cateId) {
+          o.num++;
+          return false;
+        }
+      });
+      wx.setStorage({
+        key: that.data.storeId + 'menu',
+        data: that.data.menu,
+      })
+      that.setData({
+        menu: that.data.menu,
+        menuInfo: that.data.menuInfo
+      })
+    }
+  },
+  newmap: function (id,num,sns,price,tcinfo){
+    var that = this;    
+    var key = sns?(id+"_"+sns):id;
+    var newmap=that.data.newmap;
+    if(newmap.total == undefined)newmap.total = 0;
+    if (newmap.amount == undefined) newmap.amount = 0;   
+    if (newmap[key] == undefined) newmap[key] = {NO:0,PR:0};
+    if (newmap[id] == undefined || newmap[id] ==0) newmap[id] = { NO: 0, PR: 0 };
+    var cnt = newmap[key].NO;
+    cnt = cnt + num;
+    cnt = cnt > 0 ? cnt : 0;
+
+    if (newmap[key].NO != cnt){
+      newmap[key].NO = cnt;
+      newmap.total = newmap.total + num;
+      if (num > 0) {    
+        newmap.amount = Number((newmap.amount + price).toFixed(2));
+        newmap[key].PR = Number((newmap[key].NO * price).toFixed(2));            
+        if (sns) {
+          newmap[id].NO += 1;
+          var total=0;
+          for (var p in newmap){
+            if(p.startsWith(id+"_")){
+              total+=newmap[p].PR;
+            }
+          }
+          newmap[id].PR=total;
+        } else {
+          newmap[id].PR = Number((newmap[id].NO * price).toFixed(2));
+        }     
+       
+      }else{      
+        newmap.amount = Number((newmap.amount - price).toFixed(2));
+        newmap[key].PR = Number((newmap[key].NO * price).toFixed(2));  
+        if (sns) {
+          newmap[id].NO -= 1;
+          newmap[id].PR -=price;
+        } else {
+          newmap[id].PR = Number((newmap[id].NO * price).toFixed(2));
+        }       
+      }
+    }
+    if(tcinfo){
+      tcinfo.num=newmap[id];
+      if(tcinfo.hasSn){
+        tcinfo.sns.forEach(function(s,i){
+          if (newmap[tcinfo.id + '_' + s.id]){
+          if (newmap[tcinfo.id + '_' + s.id].NO > 0) s.num = newmap[tcinfo.id + '_' + s.id].NO;
+          }
+        })
+      }
+    }
+    that.setData({
+      newmap:newmap,
+      tcinfo: tcinfo
+    })
+    wx.setStorage({
+      key: that.data.storeId + 'newmap',
+      data: newmap,
+    })
+  },
+  //减少
+  tapDecCart: function (e) {
+    var that = this;
+    var g = e.currentTarget.dataset.g || e.currentTarget.dataset.tcinfo;
+    var index = e.currentTarget.dataset.index;
+    var isreturn = false;
+    if (g.sns) {
+        that.data.menu.cates.forEach(function (k, i) {
+          if (k.id == g.storeCateId) {
+            k.glist.forEach(function (o, j) {
+              if (o.id == g.id) {
+                that.newmap(g.id, -1, g.sns[index].id, g.sns[index].price,g);            
+                isreturn = true;
+                return;
+              }
+            })
+          }
+          if (isreturn) return;
+        });
+    } else {
+      that.data.menu.cates.forEach(function (o, i) {
+        if (o.id == g.storeCateId) {
+          o.glist.forEach(function (k, j) {
+            if (k.id == g.id) {
+              that.newmap(k.id, -1, null, k.nowPrice);              
+            }
+          })
+        }
+      });
+    }
+    that.data.menuInfo.gCates.forEach(function (o, i) {
+      if (o.id == g.cateId) {
+        o.num--
+        return false;
+      }
+    });
+    wx.setStorage({
+      key: that.data.storeId + 'menu',
+      data: that.data.menu,
+    })
+    that.setData({
+      menu: that.data.menu,
+      menuInfo: that.data.menuInfo
+    })
+  },
+  //提交已点菜单
+  confirm: function (e) {
+    var that = this;
+    var array = [];
+    var newmap=that.data.newmap;
+    that.data.menu.cates.forEach(function (p, j) {
+      p.glist.forEach(function (o, i) {
+        if (newmap[o.id]){        
+        if (newmap[o.id].NO > 0) {
+          var goods = { id: o.id, hasSn: o.hasSn, num: newmap[o.id].NO};
+          if(o.hasSn==1){
+            var goodsSns=[];
+            var snum=0;
+            o.sns.forEach(function(s,k){
+              if (newmap[o.id + '_' + s.id]){              
+              snum = newmap[o.id + '_' + s.id].NO;
+              snum = snum ? snum : 0;
+              goodsSns.push({ id: s.id, num: snum});
+              }
+            })
+            goods.sns = goodsSns;
+          }
+          array.push(goods);
+        }
+        }
+      })
+    });
+    var obj = { glist: array };
+    var json = JSON.stringify(obj);
+    if (e) {
+      config.formid(e.detail.formId);
+    }
+    if (that.data.isWm) {
+      if (newmap.total > 0) {
+
+        config.post('wxApi/wm/confirm', { jsonStr: json }, function (ret) {
+          if (ret.code == 0) {
+            wx.setStorage({
+              key: 'wm',
+              data: ret.data,
+            })
+            var sid = wx.getStorageSync('sid');           
+            wx.redirectTo({
+              url: '../waimai/qrdc?strname=' + that.data.menuInfo.storeName,
+            })
+          } else if(ret.code ==-2) {
+            that.onShow();
+          }else{
+            config.tost(ret.msg);
+          }
+
+        },true)
+      } else {
+        config.tost("请点餐！")
+      }
+    } else {
+      if (newmap.total > 0 && newmap.amount > 0) {
+        if (that.data.ydId) {
+          config.post("wxApi/o/confirm", { ydId: that.data.ydId, jsonStr: json }, function (ret) {
+            if (ret.code == 0) {
+              that.data.order = ret.data;
+              if (!that.data.order.remark) that.data.order.remark = '';
+              that.setData({
+                order: that.data.order,
+                confirmslid: true,
+              })
+            } else if (ret.code > 0) {
+              config.tost(ret.msg)
+            } else if (ret.code == -3) {
+              config.tost(ret.msg);
+              wx.navigateTo({
+                url: '../index/dc',
+              })
+            }
+          },true)
+        } else {
+          if (that.data.deskId == null || that.data.deskId == '') {
+            wx.navigateTo({
+              url: '../index/dc',
+            })
+            return;
+          }
+          config.post("wxApi/o/confirm", { deskId: that.data.deskId, jsonStr: json }, function (ret) {
+            if (ret.code == 0) {
+              that.data.order = ret.data;
+              if (!that.data.order.remark) that.data.order.remark = '';
+              that.setData({
+                order: that.data.order,
+                confirmslid: true,
+              })
+              var sid = wx.getStorageSync('sid');
+            } else if (ret.code > 0) {
+              config.tost(ret.msg);
+              if (ret.msg != '您已经有一个正在进行的订单') {
+                setTimeout(function () {
+                  wx.navigateTo({
+                    url: '../index/dc',
+                  })
+                }, 1000)
+              }
+            } else if (ret.code == -2) {
+              config.tost(ret.msg);
+            }
+          },true)
+        }
+      } else {
+        config.tost('请点菜');
+      }
+    }
+  },
+  addCart: function (id) {
+    var num = this.data.cart.list[id] || 0;
+    this.data.cart.list[id] = num + 1;
+    this.countCart();
+  },
+  reduceCart: function (id) {
+    var num = this.data.cart.list[id] || 0;
+    if (num <= 1) {
+      delete this.data.cart.list[id];
+    } else {
+      this.data.cart.list[id] = num - 1;
+    }
+    this.countCart();
+  },
+  countCart: function () {
+    var count = 0,
+      total = 0;
+    for (var id in this.data.cart.list) {
+      var goods = this.data.goods[id];
+      count += this.data.cart.list[id];
+      total += goods.price * this.data.cart.list[id];
+    }
+    this.data.cart.count = count;
+    this.data.cart.total = total;
+    this.setData({
+      cart: this.data.cart,
+    });
+  },
+  //滚动事件
+  // onGoodsScroll: function (e) {
+  //   if (e.detail.scrollTop > 150 && !this.data.scrollDown) {
+  //     this.setData({
+  //       scrollDown: true
+  //     });
+  //   } else if (e.detail.scrollTop < 150 && this.data.scrollDown) {
+  //     this.setData({
+  //       scrollDown: false
+  //     });
+  //   }
+
+  //   var scale = e.detail.scrollWidth / 585,
+  //     scrollTop = e.detail.scrollTop / scale,
+  //     h = 0,
+  //     classifySeleted,
+  //     len = this.data.menu.cates.length;
+  //   this.data.menu.cates.forEach(function 　(classify, i) {
+  //     var _h = classify.glist.length * (257) + 62;
+  //     if (scrollTop >= h - 100 / scale) {
+  //       classifySeleted = classify.title;
+  //     }
+  //     h += _h;
+  //   })
+  //   this.setData({
+  //     classifySeleted: classifySeleted
+  //   });
+  // },
+  tapClassify: function (e) {
+    var id = e.currentTarget.dataset.id;
+    this.setData({
+      classifyViewed: id
+    });
+    var that = this;
+    setTimeout(function () {
+      that.setData({
+        classifySeleted: id
+      });
+    }, 10);
+  },
+  getYh: function () {
+    var id=wx.getStorageSync('sid');
+    var that = this;
+    config.post('wxApi/coupon/store', { id: id }, function (ret) {
+      if (ret.code == 0) {
+        that.setData({
+          couponList: ret.data
+        })
+      }
+    },true)
+    config.post('wxApi/coupon/present', {}, function (ret) {
+      console.log(ret);
+      if (ret.data.coupons.length > 0) {
+        var sendInfo = {};
+        sendInfo.couponCanGet = ret.data.couponCanGet;
+        sendInfo.couponTotalPrice = ret.data.couponTotalPrice;
+        sendInfo.coupons = ret.data.coupons;
+        sendInfo.cname = ret.data.cname;
+        wx.setStorageSync('sendInfo', sendInfo);
+        that.setData({
+          sendInfo: sendInfo,
+          sendShow: true,
+        })
+      }
+    }, true)
+  },
+  showCartDetail: function () {
+    this.setData({
+      showCartDetail: !this.data.showCartDetail
+    });
+  },
+  hideCartDetail: function () {
+    this.setData({
+      showCartDetail: false
+    });
+  },
+  silde: function () {
+    this.setData({
+      sliding: !this.data.sliding
+    })
+  },
+  // //确认点餐
+  submits: function (e) {
+    config.formid(e.detail.formId);
+    var that = this;
+    var newmap=that.data.newmap;
+    wx.removeStorage({
+      key: this.data.storeId + 'newmap',
+      success: function (res) { },
+    })
+    wx.removeStorage({
+      key: that.data.storeId + 'menu',
+    })
+    if (newmap.total > 0 && newmap.amount > 0) {
+      var obj = { list: that.data.order.list };
+      var json = JSON.stringify(obj);
+      if (that.data.ydId) {
+        config.post("/wxApi/o/add", { ydId: that.data.ydId, remark: that.data.order.remark, jsonStr: json }, function (ret) {
+          if (ret.code == 0) {
+            that.data.orderId = ret.msg;
+            that.setData({
+              dcslid: true,
+              orderId: ret.msg
+            })
+          }else if(ret.code=-2){
+            config.tost(ret.msg);
+            that.onShow();
+          } else {
+            config.tost(ret.msg);
+          }
+        },true);
+      } else {
+        config.post("/wxApi/o/add", { deskId: that.data.deskId, remark: that.data.order.remark, jsonStr: json }, function (ret) {
+          if (ret.code == 0) {
+            that.data.orderId = ret.msg;
+            if (that.data.menuInfo.mode==2){
+              wx.redirectTo({
+                url: '../index/zf?id=' + that.data.orderId,
+              })
+            }else{
+              that.setData({
+                dcslid: true,
+                orderId: ret.msg
+              })
+            }           
+          } else if (ret.code = -2) {
+            config.tost(ret.msg);
+            that.onShow();
+          } else {
+            config.tost(ret.msg);
+          }
+        },true);
+      }
+    }
+  },
+  remark: function (e) {
+    this.data.order.remark = e.detail.value;
+    this.setData({
+      order: this.data.order,
+    })
+  },
+  goback: function () {
+    this.setData({
+      confirmslid: false,
+    })
+  },
+  faslid: function () {
+    this.setData({
+      faslid: !this.data.faslid
+    })
+  },
+  faback: function () {
+    this.setData({
+      faslid: false,
+    })
+  },
+  goddxq: function () {
+    wx.navigateTo({
+      url: '../index/ddxq-wzf'
+    })
+  },
+  //查看订单
+  ckdd: function () {
+    wx.redirectTo({
+      url: '../index/ddxq?id=' + this.data.orderId,
+    })
+  },
+  ljzf: function () {
+    wx.redirectTo({
+      url: '../index/zf?id=' + this.data.orderId,
+    })
+  },
+  onShareAppMessage: function (res) {
+  },
+  // 更换页面到指定page ，从0开始
+  updateSelectedPage(page) {
+    let that = this;
+    let { window_width, tab_config, swipe_config } = this.data;
+    let underline_offset = tab_config.item_width * page;
+
+    tab_config.active_tab = page;
+    swipe_config.current = page;
+    tab_config.underline.offset = underline_offset;
+    if (!tab_config.fixed) {
+      // 如果tab不是固定的 就要 检测tab是否被遮挡
+      let show_item_num = Math.round(window_width / tab_config.item_width); // 一个界面完整显示的tab item个数
+      let min_left_item = tab_config.item_width * (page - show_item_num + 1); // 最小scroll-left 
+      let max_left_item = tab_config.item_width * page; //  最大scroll-left
+      if (tab_config.tab_left < min_left_item || tab_config.tab_left > max_left_item) {
+        // 如果被遮挡，则要移到当前元素居中位置
+        tab_config.tab_left = max_left_item - (window_width - tab_config.item_width) / 2;
+      }
+    }
+    that.setData({
+      "tab_config": tab_config,
+      "swipe_config": swipe_config
+    });
+  },
+  handlerTabTap(e) {
+    let that = this;
+    that.updateSelectedPage(e.currentTarget.dataset.index);
+  },
+  swiperChange(e) {
+    let that = this;
+    that.updateSelectedPage(e.detail.current);
+  },
+  onScroll(e) {
+    let that = this;
+  },
+  tcshow: function (e) {
+    var that=this;
+    var newmap=that.data.newmap;
+    var obj = e.currentTarget.dataset.g;   
+    if (obj.hasSn){
+      obj.sns.forEach(function(s,j){
+        if (newmap[obj.id+'_'+s.id]>0){
+          s.num = newmap[obj.id + '_' + s.id] > 0;
+          }
+        })
+      }else{
+        if (newmap[obj.id] > 0) {
+          obj.num = newmap[obj.id]
+        }
+      }      
+    var tcimgs = obj.imgs.split(",");
+    that.setData({
+      tcinfo: obj,
+      tcshow: true,
+      tcimgs: tcimgs
+    })
+  },
+  tcdown: function () {
+    this.setData({
+      tcshow: false
+    })
+  },
+  get: function () {
+    wx.navigateTo({
+      url: '../mypage/qyhq',
+    })
+  },
+  shutDown: function () {
+    wx.removeStorageSync('sendInfo');
+    this.setData({
+      sendShow: false
+    })
+  },
+  shutDown1: function () {
+    this.setData({
+      robShow: false
+    })
+  },
+  goyhq: function () {
+    wx.navigateTo({
+      url: '../mypage/qyhq',
+    })
+  },
+  empty:function(){
+    this.data.newmap={};
+    this.data.menuInfo.gCates={};
+    wx.removeStorage({
+      key: this.data.storeId + 'newmap',
+      success: function(res) {},
+    })
+    this.setData({
+      newmap:this.data.newmap,
+      menuInfo: this.data.menuInfo,
+      showCartDetail:false
+    })
+  },
+});
+

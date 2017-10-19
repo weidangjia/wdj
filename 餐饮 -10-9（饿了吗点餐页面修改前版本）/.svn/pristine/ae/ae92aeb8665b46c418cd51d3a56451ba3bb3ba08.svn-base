@@ -1,0 +1,28 @@
+<!--店内服务-->
+<view class="container">
+    <view class="col" bindtap="goShop">
+      <view class="dndc">
+      <text>店内点餐</text>
+      <text>在线点餐，无需等待</text>
+      </view>
+    </view>
+    <view class="col" bindtap="goZf">
+      <view class="dndc jz">
+      <text>结账</text>
+      <text>在线支付不排队</text>
+      </view>
+    </view>
+    <view class="col">
+      <view class="dndc fwy">
+      <text>呼叫服务员</text>
+      <text>需要帮忙？随传随到</text>
+      </view>
+    </view>
+    <view class="list">
+      <text class="{{color}}cba_color" wx:for="{{list}}" wx:key="*this" data-type="{{item}}" bindtap="call">{{item}}</text>
+    </view>
+    <view class="footer {{show?'show':''}}">
+      <text class="icon"></text>
+      <view class="text"><text></text>呼叫服务员成功，请耐心等候服务</view>
+    </view>
+</view>

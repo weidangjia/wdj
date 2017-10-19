@@ -1,0 +1,226 @@
+// pages/index/zf.js
+var config = require("../../config.js");
+var id;
+Page({
+  data:{
+    Path: config.resPath,
+    api: config.apiPath,
+    faslid:false,
+    rad:false,
+    liselec:-1,
+    lishow:false,
+    disshow:false,
+    orderId:'',
+    order:'',
+    djList:'',
+    mjList:'',
+    types:'1',
+    fainfo:'',
+    state:'1'
+  },
+  onLoad: function (options){
+    var that = this;
+    if (!wx.getStorageSync('color')) {
+      wx.setStorageSync('color', 'blue');
+    }
+    config.navBarColor(wx.getStorageSync('color'));
+    if(options.id){
+    that.data.orderId=options.id;
+    that.setData({
+      orderId: options.id
+    })   
+    }
+    that.setData({
+      color:wx.getStorageSync('color')
+    })
+  },
+  onShow: function (){
+    var that=this; 
+    config.post("/wxApi/o/payInfo", { id: that.data.orderId }, function (ret) {
+      if (ret.code == 0) {
+        that.setData({
+          order: ret.data
+        })
+        wx.setStorageSync('sid', ret.data.storeId);
+      }
+      else if (ret.code == -1) {
+        config.alert(ret.msg);
+        // wx.redirectTo({
+        //   url: '../index/wddd',
+        // })
+      } else {
+        config.tost(ret.msg);
+      }
+    });
+  },
+  	faslid:function(){
+		this.setData({
+			faslid:!this.data.faslid
+		})
+	},
+  goDj:function(){
+    wx.setStorageSync('order',this.data.order);
+    wx.navigateTo({
+      url: '../index/djq?id=' + this.data.orderId,
+    })
+  },
+  goMj:function(){
+    wx.setStorageSync('order', this.data.order);
+    wx.navigateTo ({
+      url: '../index/mjq?id=' + this.data.orderId,
+    })
+  },
+  fpcom:function(){
+
+  },
+  // liselec:function(e){  
+  //   var that = this;  
+  //   var index=e.currentTarget.dataset.index;
+  //   var types = e.currentTarget.dataset.type;
+  //   var id = e.currentTarget.dataset.id;
+  //   that.setData({
+  //     liselec:index
+  //   })
+  //   if (id=='') {
+  //     if (types == 1) {
+  //       that.data.order.mjId = "";
+  //       that.setData({
+  //         order: that.data.order
+  //       })
+  //       id = "noMj";
+  //     } else {
+  //       that.data.order.djId = "";
+  //       that.setData({
+  //         order:that.data.order
+  //       })
+  //       id = "noDj";
+  //     }
+  //   }
+  //   setTimeout(function () {
+  //     config.post("/wxApi/o/selectCoupon", { id: that.data.orderId, couponId:id }, function (ret) {
+  //     if (ret.code == 0) {
+  //       if (id) {
+  //         if (types == 1) {
+  //           that.data.order.mjId = id;
+  //           that.setData({
+  //             order:that.data.order
+  //           })
+  //         } else {
+  //           that.data.order.djId = id;
+  //           that.setData({
+  //             order:that.data.order
+  //           })
+  //         }
+  //       }      
+        
+  //         that.setData({
+  //           disshow: !that.data.disshow,
+  //         })
+  //         wx.redirectTo({
+  //           url: '../index/zf?id='+that.data.orderId,
+  //         })       
+        
+  //     } else {
+  //       config.tost(ret.msg);
+  //     }
+  //   });
+  //   },100)
+  // },
+  faback:function(){
+    this.data.order.invoiceHead='';
+    this.setData({
+      faslid: !this.data.faslid,
+      order:this.data.order
+    })
+  },
+  fpcom:function(){
+    this.data.order.invoiceHead = this.data.fainfo;
+    this.setData({
+      faslid: !this.data.faslid,
+      order: this.data.order
+    })
+  },
+  goBack:function(){
+    wx.navigateBack({
+      delta: 1
+    })
+  },
+  lishow:function(){
+    this.setData({
+      lishow:!this.data.lishow
+    })
+  },
+  liback:function(){
+    this.setData({
+      lishow:false,
+      disshow:false
+    })
+  },
+  invoiceHead:function(e){
+    this.setData({
+      fainfo: e.detail.value
+    })
+  },
+  confirm:function(){
+    this.invoiceHead();
+    this.setData({
+      faslid: !this.data.faslid,
+    })
+  },
+  tapClassify: function (e) {
+    var index = e.currentTarget.dataset.index;
+    this.data.order.way = index;
+    this.setData({
+      Seleted: index,
+      order:this.data.order
+    });
+  },
+  pay:function(e){
+    var that= this;
+    if (that.data.order.way == 0) {
+      config.tost("请选择支付方式");
+      return;
+    }
+
+    if (that.data.order.way == 1) {
+      if(that.data.state==1){
+      config.post("/wxApi/o/payByQr", { id: that.data.orderId }, function (ret) {
+        config.formid(e.detail.formId);
+        if (ret.code == 0) {
+          wx.redirectTo({
+            url: '../index/zf-sm',
+          })
+        } else {
+          config.tost(ret.msg);
+        }
+      });
+      that.setData({
+        state:'2'
+      })
+      }
+    } else if (that.data.order.way == 2) {
+      wx.redirectTo({
+          url: '../index/zf-syd?deskCode='+that.data.order.deskCode,
+        })
+    }else if(that.data.order.way == 4){//微信
+      config.post('wxApi/xcx/payByWx', { id: that.data.orderId },function(ret){
+        config.formid(e.detail.formId);
+        if(ret.code==0){
+          wx.requestPayment({
+            'timeStamp':ret.data.timeStamp,
+            'nonceStr': ret.data.nonceStr,
+            'package': ret.data.package,
+            'signType': ret.data.signType,
+            'paySign': ret.data.paySign,
+            'success': function (res) {
+              config.tost("支付成功");
+              wx.redirectTo({
+                url: '../index/ddxq?id=' + that.data.orderId,
+              })
+            },            
+          })
+        }
+      })
+    }
+  }
+})

@@ -1,0 +1,50 @@
+<!--pages/waimai/dzlb.wxml-->
+<view class="content">
+  <view class="list" wx:for="{{dzlist}}" wx:key="unique"  wx:if="{{byGeo==''}}">
+    <view class="left" data-obj="{{item}}" bindtap="select">
+      <view class="info">
+      <text class="name">{{item.name}}</text>
+      <text>{{item.phone}}</text>
+      </view>
+      <view class="address"><text wx:if="{{item.isDefault==1}}">[默认]</text>{{item.address+' '+item.remark}}</view>
+    </view>
+    <view class="right" data-info="{{item}}" bindtap="godz">
+        <image src="/images/wm_dz.png"></image>
+    </view>
+  </view>
+<view wx:if="byGeo">
+  <view class="list" wx:for="{{dzlist}}" wx:key="unique" wx:if="{{item.useful==1}}">
+    <view class="left" data-obj="{{item}}" bindtap="select">
+      <view class="info">
+      <text class="name">{{item.name}}</text>
+      <text>{{item.phone}}</text>
+      </view>
+      <view class="address"><text wx:if="{{item.isDefault==1}}">[默认]</text>{{item.address+' '+item.remark}}</view>
+    </view>
+    <view class="right" data-info="{{item}}" bindtap="godz">
+        <image src="/images/wm_dz.png"></image>
+    </view>
+  </view>
+  <view class="list beyond" wx:for="{{dzlist}}" wx:key="unique" wx:if="{{item.useful==0}}">
+    <view class="left">
+      <view class="info">
+      <text class="name">{{item.name}}<text>[超出配送范围]</text></text>
+      <text>{{item.phone}}</text>
+      </view>
+      <view class="address"><text wx:if="{{item.isDefault==1}}">[默认]</text>{{item.address+' '+item.remark}}</view>
+    </view>
+    <view class="right" data-info="{{item}}" bindtap="godz">
+        <image src="/images/wm_dz.png"></image>
+    </view>
+  </view>
+  </view>
+</view>
+<view class="noadderss" wx:if="{{dzlist==''}}">
+  <image src="{{api}}res/xcx/images/icon_noadd.png"></image>
+  <text>暂无地址</text>
+</view>
+<view style="height:120rpx"></view>
+<view class="wmfooter">
+  <view class="back" bindtap="back">返回</view>
+  <view class="add {{color}}ba_color" bindtap="add">新增地址</view>
+</view>

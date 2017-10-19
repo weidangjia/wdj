@@ -1,0 +1,313 @@
+/* pages/waimai/qrdc.wxss */
+/*page{
+  padding-bottom: 50rpx;
+}*/
+image{width: 100%}  
+.cheader{
+  height: 130rpx;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  -webkit-justify-content: center;
+          justify-content: center;
+  -webkit-align-items: center;
+          align-items: center;
+  color: #fff;
+  background-size: 20rpx 31rpx;
+  font-size: 16px;
+  line-height:50rpx;
+}
+.cheader view{
+  max-width: 660rpx;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.current{
+  padding-left: 35rpx;
+  background: url(https://img.zhcanting.com/res/xcx/images/wm_locab.png) left center no-repeat;
+  background-size: 21rpx 28rpx;
+}
+.time{
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content:space-between;
+          justify-content:space-between;
+  -webkit-align-items: center;
+          align-items: center;
+  height: 90rpx;
+  padding: 0 24rpx;
+  font-size: 16px;
+}
+.time .arrow{
+  background: url(https://img.zhcanting.com/res/xcx/images/go_store.png) right center no-repeat;
+  background-size: 18rpx 28rpx;
+  font-size: 15px;
+  color: #aaaaaa;
+  padding-right: 40rpx;
+}
+.titl{
+  height: 85rpx;
+  line-height: 85rpx;
+  color: #fff;
+  text-align: center;
+  font-size: 16px;
+  background: #f89d45 url(https://img.zhcanting.com/res/xcx/images/snum_menu.png) 24rpx center no-repeat;
+  background-size: 36rpx 34rpx;
+}
+.menu{
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: row;
+          justify-content: row;
+  margin-left: 24rpx;
+  padding: 22rpx 24rpx 22rpx 0;
+  border-bottom: 1px solid #ececec;
+}
+.menu:last-child{
+  border: none;
+}
+.content{
+  background: #f7f7f7;
+}
+.menu-container{
+   height: 0px;
+   overflow: hidden;
+   transition: overflow 0.3ms linear both;
+}
+.slidup{
+  height: auto;
+}
+.menu image{
+  width: 130rpx;
+  height: 130rpx;
+}
+.menu .info{
+  width: 560rpx;
+  margin-left: 10rpx;
+}
+.menu .tit{
+  font-size: 15px;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  margin-bottom: 10rpx;
+}
+.menu .num{
+  color: #aaa;
+  font-size: 14px;
+}
+.menu .detail{
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  font-size: 14px;
+  color: #888;
+}
+.price{
+  font-size: 16px;
+  color: #ff4f39;
+}
+.nr{
+  display: -webkit-flex;
+  display: flex;
+  margin-left: 24rpx;
+  border-bottom: 1px solid #ececec;
+  height: 85rpx;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-justify-content:space-between;
+          justify-content:space-between;
+  font-size: 16px;
+  padding-right: 24rpx;
+}
+.line{
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  color: #fff;
+  font-size: 16px;
+}
+.line:first-child{
+  margin-bottom: 10rpx;
+}
+.nr .gray,.lastnr .gray{
+  color: #aaa;
+  font-family: "Microsoft Yahei";
+  text-align: right;
+}
+.nr input,.lastnr input{
+  color: #aaa;
+  width: 450rpx;
+  text-align: right;
+}
+.cbtn{
+    background-size: 29rpx 20rpx;
+    color: #fff;
+    border-radius: 47rpx;
+    padding: 0rpx 23.5rpx 0rpx 60rpx;
+    display: inline-block;
+    height: 47rpx;
+    line-height: 47rpx;
+}
+
+.bh{
+  padding-left:10rpx;
+  color: #aaa;
+  font-size: 14px;
+}
+.title{
+    background: #fff;
+    font-size: 15px;
+    color: #888;
+    text-align: center;
+    padding: 20rpx 0px;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: space-between;
+            justify-content: space-between;
+}
+.title text{
+    margin-left: 23.5rpx;
+    background: url('https://img.zhcanting.com/res/xcx/images/snum_menu.png') left center no-repeat;
+    background-size: 35rpx 34rpx;
+    padding-left: 56rpx;
+}
+.packpage{
+    margin: 23.5rpx;
+    margin-bottom: 0px;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+            flex-direction: row;
+    padding-bottom: 23.5rpx;
+    border-bottom: 1px solid #e7e7e7;
+}
+.packpage:last-child{
+    border: none;
+}
+.packpage .foodimg{
+    -webkit-flex: 2;
+            flex: 2;
+    margin-right: 21rpx;
+    height: 129rpx;
+    overflow: hidden;
+}
+.foodimg image{
+    width: 100%;
+    height: 100%;
+}
+.packpage .foodinfo{
+    -webkit-flex: 9;
+            flex: 9;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: space-between;
+            justify-content: space-between;
+    padding-top: 15rpx;
+}
+.packpage .foodinfo{
+    -webkit-flex: 9;
+            flex: 9;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: space-between;
+            justify-content: space-between;
+    padding-top: 15rpx;
+}
+.foodinfo text{
+    display: block;
+    font-size: 15px;
+    line-height: 45rpx;
+}
+.foodinfo .nr{
+    color: #888;
+    font-size: 14px;
+}
+.foodinfo .right{
+    text-align: right;
+}
+.foodinfo .right text:first-child{
+    font-size: 14px;
+    color: #aaa;
+}
+.foodinfo .right text:last-child{
+    color: #ff4f39;
+}
+.foodinfo .taste{
+    margin-left: 1px;
+    display: inline-block;
+    padding: 0 23.5rpx;
+    color: #fff;
+    font-size: 11px;
+    line-height: 37.5rpx;
+    text-align: center;
+    border-radius:35rpx;
+    overflow: hidden;
+}
+.allprice {
+    font-size: 15px;
+    background: #f8f8f8;
+    text-align: right;
+    line-height:47rpx;
+    padding: 20rpx 23.5rpx;
+}
+.cancel{
+    font-size: 14px;
+    display: inline-block;
+    padding-left: 45rpx;
+    zoom: 1; 
+     background: url('https://img.zhcanting.com/res/xcx/images/order_finsh.png') left center no-repeat;
+     background-size:30rpx 20rpx;
+}
+.hasPay{
+    font-size: 14px;
+    color: #35b220;
+    display: inline-block;
+    padding-left: 35rpx;
+    zoom: 1; 
+    background: url('https://img.zhcanting.com/res/xcx/images/wm_yzf.png') left center no-repeat;
+    background-size:25rpx 18rpx;
+}
+.hasPick{
+  font-size: 14px;
+  display: inline-block;
+  padding-left: 48rpx;
+  zoom: 1; 
+  background: url('https://img.zhcanting.com/res/xcx/images/wm_order.png') left center no-repeat;
+  background-size:38rpx 36rpx;
+}
+.hascom{
+  font-size: 14px;
+  display: inline-block;
+  padding-left: 48rpx;
+  zoom: 1; 
+  background: url('https://img.zhcanting.com/res/xcx/images/wm_wc.png') left center no-repeat;
+  background-size:38rpx 38rpx;
+}
+.count{
+  font-size: 14px;
+  color: #ff4f39;
+  display: block;
+  padding-right: 30rpx;
+}
+.dotime{
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-align-items: center;
+          align-items: center;
+}
+.caneldd{
+  margin: 24rpx;
+  color: #fff;
+  text-align: center;
+  line-height: 65rpx;
+  border-radius: 32.5rpx;
+  font-size: 14px;
+}

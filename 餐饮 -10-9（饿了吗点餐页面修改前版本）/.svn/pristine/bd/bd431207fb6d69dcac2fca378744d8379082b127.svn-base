@@ -1,0 +1,39 @@
+/* pages/index/diancan.wxss */
+.nav{
+    display: -webkit-flex;
+    -webkit-flex-direction: row;
+    -webkit-justify-content: center;
+    margin: 123rpx 46.875rpx 60rpx;
+}
+.nav view{
+    width: 140.5rpx;
+    height: 181.5rpx;
+    text-align: center;
+    font-size: 28rpx;
+}
+.tb{
+    width: 76rpx;
+    height: 76rpx;
+    display: block;
+    margin: 0 0 23.5rpx 32rpx;
+}
+.arrow{
+    width: 32.8rpx;
+    height: 23.5rpx;
+    margin-top:30rpx; 
+}
+.aniu{
+    margin: 0 auto;
+    width: 656rpx;
+    height: 93.75rpx;
+    line-height: 93.75rpx;
+    text-align: center;
+    border-radius: 46.875rpx;
+    color: #fff;
+    font-size: 32.8rpx;
+}
+.aniu text{
+    background: url('https://img.zhcanting.com/res/xcx/images/code_icon.png') left center no-repeat;
+    background-size: 49rpx 45rpx;
+    padding-left: 80rpx;
+}

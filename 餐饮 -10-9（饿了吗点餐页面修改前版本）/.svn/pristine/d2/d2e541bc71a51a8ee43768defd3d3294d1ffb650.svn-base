@@ -1,0 +1,107 @@
+/* pages/waimai/dplb.wxss */
+.header{
+  height: 130rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  background-size: 20rpx 31rpx;
+  font-size: 32rpx;
+  line-height:50rpx;
+}
+.header view{
+  max-width: 660rpx;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.current{
+  padding-left: 35rpx;
+  background: url(https://img.zhcanting.com/res/xcx/images/wm_locab.png) left center no-repeat;
+  background-size: 21rpx 28rpx;
+}
+.list{
+  display: flex;
+  margin-left: 24rpx;
+  padding: 24rpx 24rpx 24rpx 0;
+  border-bottom: 1px solid #ececec;
+}
+.gray{
+  opacity: .5;
+}
+.prompt{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  line-height: 60rpx;
+  color: #fff;
+  font-size: 24rpx;
+  text-align: center;
+}
+.list:last-child{
+  border: none;
+}
+.name{
+  font-size: 30rpx;
+}
+.list image{
+  width: 170rpx;
+  height: 170rpx;
+}
+.list .info{
+  padding-left: 15rpx;
+  width: 520rpx;
+}
+.info .title{
+  font-size: 32rpx;
+  display: flex;
+  justify-content: space-between;
+}
+.info .been{
+  padding-left: 36rpx;
+  color: #0abb1b;
+  font-size: 28rpx;
+  background: url(https://img.zhcanting.com/res/xcx/images/icon_go.png) left center no-repeat;
+  background-size: 28rpx 34rpx;
+}
+.info .address{
+  font-size: 28rpx;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  margin-bottom: 5rpx;
+}
+.info .send{
+  font-size: 28rpx;
+  margin-bottom: 8rpx;
+}
+.info .distance{
+  font-size: 28rpx;
+  padding-left: 32rpx;
+  background: url(https://img.zhcanting.com/res/xcx/images/icon_loca.png) left center no-repeat;
+  background-size: 20rpx 28rpx;
+}
+.img {
+  position: relative;
+}
+.dpname{
+  max-width: 400rpx;
+  display:block;
+  white-space:nowrap;
+  overflow:hidden; 
+  text-overflow:ellipsis;
+}
+.nostores{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-size: 32rpx;
+  color: #999;
+}
+.nostores image{
+  width: 120rpx;
+  height: 130rpx;
+  margin: 110rpx 0 30rpx;
+}

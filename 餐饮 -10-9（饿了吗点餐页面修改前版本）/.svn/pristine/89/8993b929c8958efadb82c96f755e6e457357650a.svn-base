@@ -1,0 +1,63 @@
+/* pages/waimai/dzlb.wxss */
+page{
+  height: 100%;
+  background: #f8f8f8;
+}
+.content{
+  padding-left: 24rpx;
+  background: #fff;
+}
+.list{
+  display: flex;
+  flex-flow: row;
+  padding: 30rpx 24rpx 30rpx 0;
+  font-size: 26rpx;
+  border-bottom: 1px solid #ececec;
+}
+.list:last-child{
+  border: none;
+}
+.left{
+  width: 635rpx;
+}
+.left .info{
+  display: flex;
+  justify-content: space-between;
+  line-height: 32rpx;
+  margin-bottom:10rpx; 
+}
+.address text{
+  color: #ff4f39;
+}
+.name{
+  font-size: 33rpx;
+}
+.name text{
+  font-size: 26rpx;
+}
+.right{
+  display: flex;
+  width: 70rpx;
+  justify-content: center;
+  align-items: center;
+}
+.right image{
+  width: 26rpx;
+  height: 25rpx;
+}
+.beyond{
+  color: #aaa;
+}
+.noadderss{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-size: 32rpx;
+  color: #999;
+}
+.noadderss image{
+  width: 120rpx;
+  height: 130rpx;
+  margin: 110rpx 0 30rpx;
+}

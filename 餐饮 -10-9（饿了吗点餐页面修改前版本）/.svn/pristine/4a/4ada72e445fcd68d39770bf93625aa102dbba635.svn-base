@@ -1,0 +1,35 @@
+<!--pages/index/djq.wxml-->
+<!--代金券-->
+<image class="top" src="{{api}}res/xcx/images/{{color}}resu_scan.png"></image>
+<view class="facontainer1">
+<scroll-view scroll-y="true" class="scroll">
+  <view class="judbox" bindtap="liselec" data-type="2" data-id="" wx:if="{{djList.length> 0}}">
+    <text>不使用任何现金券</text>
+    <text class="rad_n"></text>
+  </view>  
+  <view class="container1">        
+      <view wx:for="{{djList}}" wx:key="*this" class="dlist" bindtap="liselec" data-type="2" data-id="{{item.id}}" data-index="{{index}}">
+        <view class="num">
+        <image src="{{api}}res/xcx/images/{{color}}cash_box.png"></image>
+          <view class="djinfo">
+          <text class="dec">代金券</text>
+          <view class="sum">
+          <text>￥</text>{{item.value}}
+          </view>
+          <text class="dbtn {{color}}dba_color {{color}}ctext_color" wx:if="{{item.remark}}">{{item.remark}}</text>
+          <view class="dian"></view>
+          </view>
+        </view>
+        <view class="dname">{{order.storeName}}</view>
+        <view class="dtime {{color}}ctext_color">{{item.time}}有效</view>
+        <view class="ddate">{{item.date}}</view>
+      <view data-id="{{item.id}}" class="{{order.djId==item.id? color+'liselec liselec':''}}">
+      </view>
+      </view>
+        <view class="coudefalut" wx:if="{{djList.length == 0}}">
+    <view class="picintro"></view>
+    <text>暂无数据</text>
+    </view>
+    </view>
+    </scroll-view>
+</view>

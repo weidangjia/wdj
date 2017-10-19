@@ -1,0 +1,54 @@
+<!--pages/mypage/yhj-zz.wxml-->
+<view class="recWraper {{color}}recWraper">
+  <view class="deco"></view>
+  <view class="arrowBg"></view>
+  <view class="coulist">
+  <view class="dlist" wx:for="{{obj}}" wx:if="{{item.type==2}}" wx:key="unique">
+        <view class="num">
+        <image src="{{api}}res/xcx/images/{{color}}cash_box.png"></image>
+        <view class="djinfo">
+          <text class="dec">代金券</text>
+          <view class="sum">
+          <text>￥</text>{{item.value}}
+          </view>
+          <text class="dbtn {{color}}dba_color {{color}}text_color" wx:if="{{item.remark}}">{{item.remark}}</text>
+          <view class="dian"></view>
+          </view>
+        </view>
+        <view class="dname">{{item.storeName}}</view>
+        <view class="dtime {{color}}ctext_color">{{item.time}}有效</view>
+        <view class="ddate">{{item.date}}</view>
+      </view>
+    <view class="list" wx:for="{{obj}}" wx:key="unique" wx:if="{{item.type==1}}">
+      <view class="box">
+      <image src="{{api}}res/xcx/images/{{color}}coupon_bg.png"></image>
+        <view class="info">
+          <view class="time">
+            <text>{{item.time}}有效</text>
+            <text>满减券</text>
+          </view>
+          <view class="limit">
+            <text>满{{item.full}}</text>减{{item.value}}
+          </view>
+          <view class="btn {{color}}ctext_color">
+            <!--<text>限晚餐使用</text>-->
+            <text class="{{color}}dba_color">不计代金券</text>
+            <text wx:if="{{item.remark}}">{{item.remark}}</text>
+          </view>
+          <view class="binfo">
+            <text class="name">{{item.storeName}}</text>
+            <text class="date">{{item.date}}</text>
+          </view>
+        </view>
+        <view class="btn-give">
+          <button open-type="share" data-index="{{index}}">转赠</button>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="deco1"></view>
+</view>
+
+<view class="drowpshare">
+  <view class="pic"></view>
+</view>

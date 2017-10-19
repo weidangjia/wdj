@@ -1,0 +1,79 @@
+<!--我的订单.wxml-->
+<scroll-view scroll-y style="height:{{winHeight}}px" bindscrolltolower="getMore" bindtouchend="end">
+<view class="sw">
+<view class="swiper-tab {{color}}swiper-tab">
+ <view class="swiper-tab-list {{color}}dba_color {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="{{currentTab==1?'swichNav':''}}">进行中</view>
+  <view class="swiper-tab-list {{color}}dba_color {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="{{currentTab==0?'swichNav':''}}">已完成</view>
+</view>
+</view>
+
+<view class="nolist" wx:if="{{list==''}}">
+  <view class="img">
+    <image src="{{api}}res/xcx/images/icon_noder.png"></image>
+  </view>
+  <text>暂无订单</text>
+</view>
+  <!-- 我的订单-进行中 -->
+  <view class="ongoing  {{currentTab==0?'':'hide'}}">
+    <view class="container">
+      <view class="list" wx:for="{{list}}" wx:key="*this">
+        <navigator url="../waimai/ddxq?id={{item.id}}">
+        <view class="line">
+          <text>订单：{{item.code}}</text>
+          <text>{{item.time}}</text>
+        </view>
+        <!--<view class="line">
+          时间：{{item.time}}
+        </view>-->
+        <view class="line" wx:if="{{item.bookTime}}">
+          预约时间：{{item.bookTime}}
+        </view>
+        <view class="line">
+          <text>{{item.storeName}}<text class="{{item.deskName=='尚未到店'?'not':'blue'}}">{{item.deskName}}</text></text>
+          <text>总额</text>
+        </view>
+        <view class="line">
+          <text class="btn {{color}}ba_color" wx:if="{{item.state==1}}">未支付</text>
+          <text class="btn {{color}}ba_color" wx:if="{{item.state==2}}">已支付</text>
+          <text class="btn {{color}}ba_color" wx:if="{{item.state==3}}">已接单</text>
+
+          <text class="big-red">
+            <text class="font32">￥</text>{{item.amount}}</text>
+        </view>
+        <view class="nav">
+          <view wx:for="{{item.cates}}" wx:key="*this" wx:for-item="cates">{{cates.title}}
+            <text class="big-blue {{color}}text_color">{{cates.num}}</text>
+          </view>
+        </view>
+        </navigator>
+      </view>
+    </view>
+</view>
+  <!-- 我的订单-已完成 -->
+    <view class="ongoing {{currentTab==1?'':'hide'}}">
+      <view class="list" wx:for="{{list}}" wx:key="*this" wx:if="{{item.state!=1}}">
+      <navigator url="../waimai/ddxq?id={{item.id}}&qxshow=true">
+        <view class="line">
+          <text>订单：{{item.code}}</text>
+          <text>{{item.time}}</text>
+        </view>
+        <view class="line">
+          <text>{{item.storeName}}<text class="blue not">{{item.deskName}}</text></text>
+          <text>总额</text>
+        </view>
+        <view class="line">
+        <text class="btn {{color}}ba_color" wx:if="{{item.state==-1}}">商家拒单</text>
+          <text class="btn {{color}}ba_color" wx:if="{{item.state==0}}">已取消</text>
+          <text class="btn {{color}}dba_color" wx:if="{{item.state==4}}">已完成</text>
+          <text class="big-red">
+            <text class="font32">￥</text>{{item.amount}}</text>
+        </view>
+        <view class="nav">
+          <view wx:for="{{item.cates}}" wx:key="*this" wx:for-item="cates">{{cates.title}}
+            <text class="big-blue {{color}}text_color">{{cates.num}}</text>
+          </view>
+        </view>
+        </navigator>
+      </view>
+    </view>
+</scroll-view>

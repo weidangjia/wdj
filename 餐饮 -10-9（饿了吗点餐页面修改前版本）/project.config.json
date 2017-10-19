@@ -1,0 +1,64 @@
+{
+	"description": "项目配置文件。",
+	"setting": {
+		"urlCheck": true,
+		"es6": true,
+		"postcss": true,
+		"minified": true
+	},
+	"compileType": "weapp",
+	"libVersion": "1.5.3",
+	"appid": "wx0b6ad807fdd8e26f",
+	"projectname": "%E5%BA%8F%E5%A4%9A%E5%A4%9A",
+	"condition": {
+		"weapp": {
+			"current": -1,
+			"list": [
+				{
+					"id": -1,
+					"name": "门店选择",
+					"pathName": "pages/index/mdxz",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "门店详情",
+					"pathName": "pages/index/mdxq",
+					"query": "id=1da627b984594cd28b184350d532a7df"
+				},
+				{
+					"id": 2,
+					"name": "点餐",
+					"pathName": "pages/shop/shop",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "代金券",
+					"pathName": "pages/index/djq",
+					"query": "id=9ba06647e37747d69e2414c09dbd2093"
+				},
+				{
+					"id": 4,
+					"name": "抢优惠券",
+					"pathName": "pages/mypage/qyhq",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "外卖订单详情",
+					"pathName": "pages/waimai/ddxq",
+					"query": ""
+				}
+			]
+		},
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		}
+	}
+}

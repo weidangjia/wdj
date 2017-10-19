@@ -1,0 +1,62 @@
+<!--pages/mypage/qyhq.wxml-->
+<image class="top" src="{{api}}res/xcx/images/{{color}}resu_scan.png"></image>
+<view style="height:36rpx;widht:100%"></view>
+<view class="facontainer1 {{lishow ? 'slidleft' : ''}}">
+  <scroll-view scroll-y="true" class="scroll">
+  <view class="container">
+    <view wx:for="{{list}}" class="list {{item.hasJoin==1?'selected':''}}" wx:key="*this">
+      <view class="box liselec">
+      <image src="{{api}}res/xcx/images/{{color}}coupon_bg.png"></image>
+        <view class="minfo">
+          <view class="time">
+            <text>{{item.time}}有效</text>
+            <text>{{item.type==1?'满减券':'现金券'}}</text>
+          </view>
+          <view class="limit">
+            <text wx:if="{{item.full}}">满{{item.full}}<text>减{{item.value}}</text></text>
+            <text wx:else>{{item.value}}元</text>
+          </view>
+          <view class="ybtn">
+            <text wx:if="{{item.type==1}}" class="{{color}}dba_color {{color}}ctext_color">不计代金券</text>
+            <text class="{{color}}dba_color {{color}}ctext_color" wx:if="{{item.useType==1}}">通用</text>
+            <text class="{{color}}dba_color {{color}}ctext_color" wx:elif="{{item.useType==2}}">限堂食</text>
+            <text class="{{color}}dba_color {{color}}ctext_color" wx:elif="{{item.useType==3}}">限外卖</text>
+            
+          </view>
+          <view class="binfo">
+            <text class="name" wx:if="{{item.storeId}}">{{item.storeName}}</text>
+            <text class="name" wx:else>门店通用</text>
+            <text class="date">{{item.date}}</text>
+          </view>
+        </view>
+           <view class="rcentent" wx:if="{{item.seconds-count<=0}}" data-id="{{item.actId}}" bindtap="{{(item.rate<100)&&(item.hasJoin==0)?'get':''}}">
+            <view class="circleProgress_wrapper">
+              <view class="cirnr {{color}}text_color">
+                <text>已抢</text>
+                <text>{{item.rate}}%</text>
+              </view>
+              <view class="wrapper right">
+                  <view class="circleProgress rightcircle" style="{{item.rate<=50?'transform: rotate('+(-135+item.rate*3.6)+'deg)':'transform: rotate(45deg)'}};"></view>
+              </view>
+              <view class="wrapper left">
+                  <view class="circleProgress leftcircle" style="{{item.rate>50?'transform: rotate('+(-135+(item.rate-50)*3.6)+'deg)':''}};"></view>
+              </view>
+            </view> 
+            <view class="btn" wx:if="{{item.rate!=100&&item.hasJoin==0}}">{{item.actPrice>0?item.actPrice+'元抢购':'立即抢购'}}</view>
+            <view class="btn" wx:elif="{{item.rate==100&&item.hasJoin==0}}">已抢光</view>
+            <view class="btn" wx:elif="{{item.hasJoin==1}}">您已领取</view>
+          </view> 
+        <view class="rtime" wx:if="{{item.seconds-count>0}}">
+          <view>距离开抢还剩</view>
+          <view class="stime">{{(((item.seconds-count)/3600)|int)==0?'00':((((item.seconds-count)/3600)|int)<10?('0'+(((item.seconds-count)/3600)|int)):(((item.seconds-count)/3600)|int))}}:{{(((item.seconds-count)%3600/60)|int)==0?'00':((((item.seconds-count)%3600/60)|int)<10?('0'+(((item.seconds-count)%3600/60)|int)):(((item.seconds-count)%3600/60)|int))}}:{{(((item.seconds-count)%3600%60)|int)<10?('0'+(((item.seconds-count)%3600%60)|int)):(((item.seconds-count)%3600%60)|int)}}
+          </view>
+        </view>
+      </view>
+    </view>
+     <view class="coudefalut" wx:if="{{mjList.length == 0}}">
+    <view class="picintro"></view>
+    <text>暂无数据</text>
+    </view>
+  </view>
+  </scroll-view>
+</view>

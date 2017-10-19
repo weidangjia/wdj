@@ -1,0 +1,122 @@
+var config = require("../../config.js");
+var WxParse = require('../../wxParse/wxParse.js')
+Page({
+    data: {
+        resPath: config.resPath,
+        api: config.apiPath,
+        indicatorDots: true,
+        vertical: false,
+        autoplay: true,
+        interval: 3000,
+        duration: 1200,
+        path:{},
+        obj:'',
+        imgs:'',
+        id:'',
+    },
+    onLoad: function (options){
+      var that=this;
+      var id =options.id;
+      if (options.deskId){
+        that.setData({
+          deskId: options.deskId,
+          storeId: options.storeId
+        })
+      }
+      if (!wx.getStorageSync('color')) {
+        wx.setStorageSync('color', 'blue');
+      }
+      config.navBarColor(wx.getStorageSync('color'));
+      that.setData({
+        color: wx.getStorageSync('color')
+      })
+      wx.setStorageSync('sid',id);      
+      config.post('wxApi/s/info',{id:id},function(ret){
+        that.data.obj = ret.data;
+        that.setData({
+          obj: that.data.obj,
+          logo:wx.getStorageSync('logo'),
+          btnPd:ret.data.btnPd,
+          btnYd: ret.data.btnYd,
+          btnDc: ret.data.btnDc,
+          btnWm: ret.data.btnWm
+        })
+        if (ret.code == 0) {
+          that.data.imgs = ret.data.imgs.split(",");
+          that.setData({
+            imgs: that.data.imgs
+          })
+        }      
+        if (that.data.obj.remark == '') {
+          return;
+        }
+        WxParse.wxParse('remark', 'html', that.data.obj.remark, that, 5);    
+      });   
+        that.getYh(id);
+     },  
+    getYh:function(id){
+      var that=this;
+      config.post('wxApi/coupon/store', { id:id},function(ret){
+        console.log(ret);
+        if(ret.code==0){
+          that.setData({
+            couponList:ret.data
+          })
+        }
+      })
+    },
+     phone:function(){
+       wx.makePhoneCall({
+         phoneNumber: this.data.obj.phone
+       })
+     },
+     goyd:function(){
+       wx.redirectTo({
+         url:'../index/ydwz',
+       })
+     },
+     loaction:function(e){
+       var obj=e.currentTarget.dataset.data;
+       wx.openLocation({
+         latitude:Number(obj.lat),
+         longitude: Number(obj.lng),
+         name:obj.title,
+         address:obj.address,
+       })
+     },
+     onShareAppMessage: function (res) {
+     },
+     goYd:function(){
+       wx.navigateTo({
+         url: '../index/ydwz',
+       })
+     },
+     goDc: function () {
+       var deskId=this.data.deskId;
+       var storeId = this.data.storeId;
+       if (this.data.obj.id == storeId){
+         wx.navigateTo({
+           url: '../shop/shop?deskId='+deskId,
+         })
+       }else{
+         wx.navigateTo({
+           url: '../shop/shop',
+         })
+       }       
+     },
+     goPd: function () {
+       wx.navigateTo({
+         url: '../index/mdxz',
+       })
+     },
+     goWm: function () {
+       wx.redirectTo({
+         url: '../shop/shop?isWm=1',
+       })
+     },
+     get:function(){
+       wx.navigateTo({
+         url: '../mypage/qyhq',
+       })
+     }
+})

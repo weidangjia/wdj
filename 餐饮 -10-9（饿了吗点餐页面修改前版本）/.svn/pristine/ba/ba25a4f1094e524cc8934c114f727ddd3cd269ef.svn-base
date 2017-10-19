@@ -1,0 +1,30 @@
+<!--活动说明-->
+<view class="banner">
+  <image src="{{api}}res/xcx/images/act_banner.png"></image>
+</view>
+<view class="container">
+  <view wx:if="{{store.saleInfo}}">
+    <text class="hui">惠</text>
+    <view class="nr">
+      <text class="h3">菜单优惠</text>
+      <text>{{store.saleInfo}}</text>      
+    </view>
+  </view>
+  <view wx:if="{{store.ruleInfo}}">
+    <text class="gui">规</text>
+    <view class="nr">
+      {{store.ruleInfo}}
+    </view>
+  </view>
+  <view wx:if="{{store.notifyInfo}}">
+    <text class="gao">告</text>
+    <view class="nr">
+      <text class="{{color}}text_color">{{store.notifyInfo}}</text>      
+    </view>
+  </view>
+</view>
+<view class="footer">
+  <text class="hui">惠</text>
+  <text class="gui">规</text>
+  <text class="gao">告</text>
+</view>

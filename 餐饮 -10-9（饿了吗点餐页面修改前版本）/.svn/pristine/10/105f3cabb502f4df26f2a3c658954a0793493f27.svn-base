@@ -1,0 +1,23 @@
+<!--pages/index/smdc.wxml-->
+<!--扫描二维码页面-->
+<view class="container">
+  <view class="nav">
+    <!-- <view><image class="tb" src="{{path}}images/code_step1.png"></image><text>关注</text></view>
+    <view><image class="arrow" src="{{path}}images/code_arrow.png"></image></view> -->
+    <view><image class="tb" src="{{api}}res/xcx/images/code_step2.png"></image><text>扫描</text></view>
+    <view><image class="arrow" src="{{api}}res/xcx/images/code_arrow.png"></image></view>
+    <view><image class="tb" src="{{api}}res/xcx/images/code_step3.png"></image><text>下单</text></view>
+    </view>
+    <view class="aniu {{color}}cba_color" bindtap="saom">
+    <text>{{aliasQr}}</text>
+    </view>
+</view>
+  <view class="xddlogo" wx:if="{{logo==1}}">
+    <image class="yds" src="../../images/yds.png"></image>
+  </view>
+  <view class="xddlogo" wx:if="{{logo==2}}">
+    <image class="xdd" src="../../images/xdd.png"></image>
+  </view>
+  <!-- <view class="tabbox"></view>
+  <import src="../tabbar/tabbar.wxml"/>
+<template is="tabbar" data="{{tabbar}}"/> -->

@@ -1,0 +1,120 @@
+/* pages/index/wddd-jx.wxss */
+page{
+  background: #f8f8f8;
+}
+.sw{
+  background: #fff;
+  padding: 23.5rpx 0;
+  border-bottom: 1px solid #ddd;
+}
+.swiper-tab{  
+    width:703rpx;  
+    margin: 0 auto;
+    text-align: center;  
+    line-height: 72.5rpx;
+    display: block;
+}  
+.swiper-tab-list{  font-size: 30rpx;  
+    display: inline-block;  
+    width: 50%;
+    color: #8993B8;
+}  
+.swiper-tab-list:first-child{
+    border-radius: 72.5rpx 0 0 72.5rpx;
+}
+.swiper-tab-list:last-child{
+    border-radius: 0 72.5rpx 72.5rpx 0;
+}
+.on{ 
+    color: #fff;    
+}  
+.ongoing{
+  background: #fff;
+  padding-left: 23.5rpx;
+  font-size: 32rpx;
+} 
+.list{  
+  padding: 23.5rpx 0 23.5rpx 0;       
+  color: #262626;
+  border-bottom: 1px solid #ddd;
+}
+.list:last-child{
+  border: none;
+}
+.line:first-child{
+  margin-bottom: 5rpx;
+}
+.line{
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: space-between;
+            justify-content: space-between;
+    margin-right: 23.5rpx;
+    line-height: 50rpx;
+}
+.hide{
+  display: none;
+}
+
+.not{
+    color: #F89D45;
+}
+.btn{
+    display: block;
+    color: #fff;
+    font-size: 26rpx;
+    height: 40rpx;
+    line-height: 40rpx;
+    padding: 0 10rpx;
+}
+.big-red{
+    display: inline-block;
+    font-size: 45rpx;
+    color: #e63b3b;
+}
+.font32{
+    font-size: 37.5rpx;
+}
+.nav{
+    display: -webkit-flex;
+    display: flex;
+     background:#f8f8f8 url('https://img.zhcanting.com/res/xcx/images/icon_menu.png') 23.5rpx center no-repeat;
+     background-size: 34rpx 40rpx;
+     padding-left: 50rpx;
+    -webkit-flex-direction: row;
+            flex-direction: row;
+    line-height: 82rpx;
+    margin: 13.5rpx 0 0;
+    text-align: center;
+    font-size: 28rpx;
+}
+.nav view{
+    -webkit-flex: 4;
+            flex: 4;
+}
+.blue{
+  color: #5379FF;
+}
+.big-blue{
+    font-size: 49rpx;
+    display: inline-block;
+    padding-left: 10rpx;
+    padding-top: 5rpx;
+}
+.nolist{
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+          justify-content: center;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  font-size: 32rpx;
+  color: #999;
+}
+.nolist image{
+  width: 135rpx;
+  height: 135rpx;
+  margin: 110rpx 0 30rpx;
+}

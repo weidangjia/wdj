@@ -1,0 +1,90 @@
+<!--pages/waimai/qrdc.wxml-->
+<navigator url="../waimai/dzlb?byGeo=1">
+<view class="header {{color}}header">
+  <text class="current" wx:if="{{seadd==''}}">当前定位：</text>
+  <view wx:if="{{seadd==''}}">{{address}}</view>
+  <view wx:else>{{seadd.address}}{{seadd.remark}}</view>
+  <view class="name">{{seadd.name}}<text wx:if="{{seadd.sex==1}}">(先生)</text><text wx:if="{{seadd.sex==2}}">(女士)</text> {{seadd.phone}}</view>
+</view>
+</navigator>
+<view class="time" bindtap="toggletime">
+  <text>送餐时间</text>
+  <text class="arrow">[预计{{time}}]送达</text>
+</view>
+<view class="titl">{{strname}}</view>
+<view class="content">
+<view class="menu" wx:for="{{obj.list}}" wx:key="*this">
+  <image src="{{api+item.img}}"></image>
+  <view class="info">
+    <view class="tit">
+      <text>{{item.title}}</text>
+      <text class="num">X{{item.num}}</text>
+    </view>
+    <view class="detail">
+      <!--<text class="taste">樱花口味</text>-->
+      <text class="price"> ￥ {{item.price}}</text>
+    </view>
+  </view>
+</view>
+</view>
+<!--<view class="nr">
+  <text>餐盒费</text>
+  <text class="price">￥ 10.00</text>
+</view>-->
+<view class="nr">
+  <text>配送费</text>
+  <text class="price">￥ {{obj.expressAmount}}</text>
+</view>
+<!--<view class="nr">
+  <text>满减券</text>
+  <text class="mj">满500减50<text>[不计抵用券]</text></text>
+</view>
+<view class="nr">
+  <text>代金券</text>
+  <text class="dj"><text>已抵用10元</text></text>
+</view>
+<view class="total">
+  <view class="line">
+   <text>总计：100元</text>
+   <text>已优惠：9元</text>
+  </view>
+  <view class="line">
+    <text></text>
+    <text>待支付：199元</text>
+  </view>
+</view>-->
+<view class="nr">
+  <text>用餐人数</text>
+  <input placeholder-class="gray" value="1" type="number" bindinput="userNum" />
+</view>
+<view class="nr">
+  <text>备注</text>
+  <input placeholder-class="gray" placeholder="请输入备注" bindinput="remark" />
+</view>
+<view class="lastnr">
+  <text>索要发票</text>
+  <input placeholder-class="gray" placeholder="请输入发票信息" bindinput="invoiceHead" />
+</view>
+<view style="height:120rpx"></view>
+<view class="wmfooter">
+  <view class="back" bindtap="back">返回</view>
+  <view class="fprice"><text>￥ {{obj.amount}}</text> <view class="add {{color}}ba_color" bindtap="sub">确认点餐</view></view>
+</view>
+
+<!--用餐时间-->
+<view class="zan-dialog {{ showtime ? 'zan-dialog--show' : '' }}">
+  <view class="zan-dialog__mask" bindtap="toggletime" />
+  <view class="zan-dialog__container times">
+    <view class="title">
+      <text>选择送餐时间</text>
+      <view bindtap="timeclose" class="close"></view>
+    </view>
+    <view class="nr1">
+    <scroll-view class="year"  scroll-y="true">
+      <view class="tabTit">
+        <text class="{{active == index?' active':''}}" wx:for="{{obj.periods}}" data-index="{{index}}" wx:key="" bindtap="filterTab">{{item}}<text class="pes">({{obj.expressAmount}}配送费)</text></text>
+      </view>
+      </scroll-view>
+    </view>
+  </view>
+</view>

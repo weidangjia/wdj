@@ -1,0 +1,216 @@
+<!-- <scroll-view scroll-y class="contents" upper-threshold="50" lower-threshold="50" bindscrolltoupper="up" bindscrolltolower="down"> -->
+  <view>
+  <swiper indicator-dots="{{indicatorDots}}" vertical="{{vertical}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" style="width:100%;height:468.75rpx;border:none;">
+     <block a:for="{{imgs}}" >
+      <swiper-item>
+        <image class="swiper-item" src="{{api+item}}" mode="aspectFill" />
+      </swiper-item>
+    </block> 
+  </swiper>
+    <view class="home-list" a:if="{{btnNum==4}}">
+    <block>
+      <view bindtap="goYd" class="sindexnav">
+        <image src="{{api}}res/xcx/images/sbanav1.png" class="size" />
+        <text>{{btnArry[0]}}</text>
+      </view>
+    </block>
+    <block>
+      <view bindtap="toMenu" class="sindexnav">
+        <image src="{{api}}res/xcx/images/sbanav2.png" class="size" />
+        <text>{{btnArry[1]}}</text>
+      </view>
+    </block>
+    <block>
+      <view class="sindexnav" bindtap="takeOut">
+        <image src="{{api}}res/xcx/images/sbanav3.png" class="size" />
+        <text>{{btnArry[2]}}</text>
+      </view>
+    </block>
+    <block>
+        <view class="sindexnav" bindtap="goPh">
+          <image src="{{api}}res/xcx/images/sbanav4.png" class="size" />
+          <text>{{btnArry[3]}}</text>
+        </view>
+    </block>
+  </view>  
+   <view class="home-list1" a:if="{{btnNum==1}}">
+      <view class="hy {{color}}text_color"><image src="../../images/icon_hy.png" class="img"></image>欢迎光临"{{cname}}"</view>
+      <view class="btn" data-text="{{btnArry[0]}}" bindtap="goNext"><image a:if="{{btnArry[0]==aliasYd}}" src="../../images/icon_yd.png"></image>
+        <image a:if="{{btnArry[0]==aliasDc}}" src="../../images/icon_dian.png" class="img"></image>
+        <image a:if="{{btnArry[0]==aliasWm}}" src="../../images/icon_wm.png" class="img"></image>
+        <image a:if="{{btnArry[0]==aliasPd}}" src="../../images/icon_pd.png" class="img"></image>我要{{btnArry[0]}}</view>
+  </view> 
+    <view class="home-list2" a:if="{{btnNum==2}}">
+      <view class="hy {{color}}text_color"><image src="../../images/icon_hy.png" class="img"></image>欢迎光临"{{cname}}"</view>
+      <view class="info">
+        <view class="btn" data-text="{{btnArry[0]}}" bindtap="goNext">
+        <image a:if="{{btnArry[0]==aliasYd}}" src="../../images/icon_yd.png"></image>
+        <image a:if="{{btnArry[0]==aliasDc}}" src="../../images/icon_dian.png" class="img"></image>
+        <image a:if="{{btnArry[0]==aliasWm}}" src="../../images/icon_wm.png" class="img"></image>
+        <image a:if="{{btnArry[0]==aliasPd}}" src="../../images/icon_pd.png" class="img"></image>{{btnArry[0]}}</view>
+        <view class="btn" data-text="{{btnArry[1]}}" bindtap="goNext">
+        <image a:if="{{btnArry[1]==aliasYd}}" src="../../images/icon_yd.png"></image>
+        <image a:if="{{btnArry[1]==aliasDc}}" src="../../images/icon_dian.png" class="img"></image>
+        <image a:if="{{btnArry[1]==aliasWm}}" src="../../images/icon_wm.png" class="img"></image>
+        <image a:if="{{btnArry[1]==aliasPd}}" src="../../images/icon_pd.png" class="img"></image>{{btnArry[1]}}</view>
+      </view>
+  </view>  
+   <view class="home-list3" a:if="{{btnNum==3}}">
+    <view class="yd" data-text="{{btnArry[0]}}" bindtap="goNext">
+      <view class="img">
+        <image a:if="{{btnArry[0]==aliasYd}}" src="../../images/icon_yd.png"></image>
+        <image a:if="{{btnArry[0]==aliasDc}}" src="../../images/icon_dian.png"></image>
+        <image a:if="{{btnArry[0]==aliasWm}}" src="../../images/icon_wm.png"></image>
+        <image a:if="{{btnArry[0]==aliasPd}}" src="../../images/icon_pd.png"></image>
+      </view>
+      <text>{{btnArry[0]}}</text>
+    </view>
+    <view class="dc" data-text="{{btnArry[1]}}" bindtap="goNext">
+      <view class="img">
+        <image a:if="{{btnArry[1]==aliasYd}}" src="../../images/icon_yd.png"></image>
+        <image a:if="{{btnArry[1]==aliasDc}}" src="../../images/icon_dian.png"></image>
+        <image a:if="{{btnArry[1]==aliasWm}}" src="../../images/icon_wm.png"></image>
+        <image a:if="{{btnArry[1]==aliasPd}}" src="../../images/icon_pd.png"></image>
+      <!-- <text>{{m1.substring(btnArry[1])}}</text></view>
+      <text>{{m1.substring(btnArry[1])}}</text> -->
+    </view>
+    <view class="wm" data-text="{{btnArry[2]}}" bindtap="goNext">
+      <view class="img">
+        <image a:if="{{btnArry[2]==aliasYd}}" src="../../images/icon_yd.png"></image>
+        <image a:if="{{btnArry[2]==aliasDc}}" src="../../images/icon_dian.png"></image>
+        <image a:if="{{btnArry[2]==aliasWm}}" src="../../images/icon_wm.png"></image>
+        <image a:if="{{btnArry[2]==aliasPd}}" src="../../images/icon_pd.png"></image>
+      </view>
+      <text>{{btnArry[2]}}</text>
+    </view>
+  </view>     
+  </view>
+  <!--加载动画-->
+  <view class="loading" a:if="{{loading}}">
+    <image src="../../images/hope.gif"></image>
+  </view>
+  <view class="{{color}}home-stores home-stores" a:if="{{order}}">
+    <view class="title {{color}}text_color">
+      <text>最近订单</text>
+      <view class="call">
+        <navigator url="../mypage/dnfw?deskId={{order.deskId}}&deskCode={{order.deskName}}&id={{order.id}}" a:if="{{order.deskName!='尚未到店'&&btnHj==1}}">
+          <text class="bord1 {{color}}cbk_color">呼叫服务员</text>
+        </navigator>
+        <navigator url="../index/wddd">
+          <text class="bord {{color}}cbk_color">更多</text>
+        </navigator>
+      </view>
+    </view>
+    <navigator url="../index/ddxq?id={{order.id}}">
+      <view class="detail">
+        <view class="htit">
+          <text class="maxname">{{order.storeName+order.deskName}}</text>
+          <text>正在进行</text>
+        </view>
+        <view class="sl">
+          <text>订单号：{{order.code}}</text>
+        </view>
+        <view class="sl">
+          <text>下单时间：{{order.time}}</text>
+          <text>总额：<text>{{order.amount}}元</text>
+          </text>
+        </view>
+      </view>
+    </navigator>
+  </view>
+  
+  <!--多门店-->
+  <view class="home-stores" a:if="{{muti==1}}">
+    <view class="title {{color}}text_color">
+      <text>门店</text>
+      <navigator url="../stores/stores">
+        <text class="bord2 {{color}}ba_color">更多</text>
+      </navigator>
+    </view>
+    <view a:for="{{stores}}">
+        <view class="details" data-id="{{item.id}}" bindtap="goMdxq">
+          <view class="img">
+            <image src="{{api+item.logo}}"></image>
+          </view>
+          <view class="text">
+            <view class="name">
+              <text class="dpname">{{item.title}}</text>
+              <text class="icon" a:if="{{item.times>0}}">我去过</text>
+            </view>
+
+            <text>{{item.address}}</text>
+            <text>{{item.deskInfo}}</text>
+            <view a:if="{{state!=0}}"><image src="../../images/icon_loca.png"></image>距离：{{item.distance}}</view>
+          </view>
+        </view>
+    </view>
+  </view>
+  <!--单门店-->
+    <view class="home-stores" a:if="{{muti==0}}">
+    <view class="title {{color}}text_color">
+      <text>店铺详情</text>
+    </view>
+      <view class="storeTop">
+<view class="total">
+    <view class="logo"><image src="{{api+store.img}}"></image></view>
+    <view class="text">
+        <view>{{store.title}}</view>
+        <view class="{{color}}text_color" a:if="{{store.avg}}">￥人均:{{store.avg}}元</view>
+        <view>{{store.deskInfo}}</view>
+    </view>
+</view>
+    <view class="dinfo">
+    <text bindtap="loaction" data-data="{{store}}">{{store.address}}</text>
+    <view class="cicon" bindtap="phone" data-phone="{{store.phone}}"><image src="{{api}}res/xcx/images/{{color}}icon_inphone.png"></image></view>
+    </view>
+    </view>
+    <view class="content">
+    <view class="h2 {{color}}text_color" a:if="{{store.remark}}">更多信息</view>
+    <view class="h2 {{color}}text_color"a:if="{{store.glist.length}}">推荐菜品</view>
+    <view class="list {{color}}text_color">
+      <text a:for="{{store.glist}}">{{item.title}}</text>
+    </view>
+  </view>
+  </view>
+  <view class="xddlogo" a:if="{{logo==1}}">
+  <image class="yds" a:if="{{supportImg}}" src="{{api+supportImg}}"></image>
+    <image class="yds" a:else src="../../images/yds.png"></image>
+  </view>
+  <view class="xddlogo" a:if="{{logo==2}}">
+    <image class="xdd" src="../../images/xdd.png"></image>
+  </view>
+  <view class="yh-info {{stype=='up'?'sup':'sdown'}}" a:if="{{couponCanGet!=''}}" bindtap="goyhq">
+    <text>还有新的优惠券，去抢券</text>
+  </view>
+</view>
+
+<!-- </scroll-view> -->
+<!--领优惠券-->
+  <!-- <view class="tcontent-bj {{sendShow?'':'hide'}}">
+  <view class="nr">
+    <view class="name">{{cname}}送给您</view>
+    <view class="heade">总价值 <text style="color:#da4e3f">{{sendInfo.couponTotalPrice}}</text> 元优惠券</view>
+    <scroll-view scroll-x="true" class="tinfo" style="{{sendInfo.coupons.length==1?'width:260rpx':''}}" >
+      <view class="list {{color}}list" a:for="{{sendInfo.coupons}}">
+        <view class="container">
+          <text class="tit">{{item.type=='1'?'满减券':'现金券'}}</text>
+          <view class="act" a:if="{{item.full}}">满{{item.full}}<text style="font-size:24rpx;text-align:center">减{{item.value}}</text></view>
+          <view class="act" a:else>{{item.value}}元</view>
+          <view class="bottom">门店通用</view>
+        </view>
+      </view>
+    </scroll-view>
+    <view class="tnum">X{{sendInfo.coupons.length}}</view>
+    <view class="btn" bindtap="goyhq">查看更多优惠活动</view>
+  </view>
+  <view class="shut_down" bindtap="shutDown"><image src="../../images/icon_gb.png"></image>关闭</view>
+</view>  
+
+<view class="rob_bj {{robShow?'':'hide'}}">
+<view class="nr">
+  <view class="btn" bindtap="goyhq"></view>
+</view>
+<view class="shut_down" bindtap="shutDown1"><image src="../../images/icon_gb.png"></image>关闭</view>
+</view>     -->
+
+<!--页面方法-->

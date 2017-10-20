@@ -1,0 +1,567 @@
+page{
+    font-family: "Microsoft Yahei";
+    color: #262626;
+}
+input{
+    font-family: "Microsoft Yahei";
+}
+/*配色方案一*/
+ .bluetext_color{
+  color: #0f96fe ;
+}
+.blueba_color{
+  background: #0f96fe ;
+}
+.bluebd_color{
+  border: 1px solid #0f96fe ;
+}
+/*yhq*/
+.blueswiper-tab{
+  background:#0f96fe url('http://img.zhcanting.com/res/xcx/images/new_tbg.png') bottom center no-repeat;
+    background-size:100%; 
+}
+.bluebtn-send{
+  border:2rpx solid #0f96fe;
+}
+/*shop*/
+.blueclassify-container .classify.active .name{
+  color: #0f96fe ;
+}
+.blueclassify-container .classify.active {
+  background: #fff;
+  border-right: none;
+  color: #0f96fe ;
+  border-left: 5rpx solid #0f96fe ;
+}
+/*mdxz*/
+.bluechoose{
+  border-right: 4rpx solid #0f96fe ;
+}
+/*mypage*/
+.blueuserinfo{
+  background:#0f96fe;
+}
+/*index*/
+.bluehome-stores .title{
+  border-left: 4rpx solid #0f96fe ;
+}
+/*wddd*/
+.blueorder-tab .on{
+  background: #0f96fe ;
+  color: #fff;
+}
+.blueswiper-tab .on{
+  background: #0f96fe ;
+  color: #fff;
+}
+.bluebk_color{
+  border:1px solid #0f96fe;
+}
+/*dplb*/
+.blueheader {background: #0f96fe url(https://img.zhcanting.com/res/xcx/images/dc_arrow.png) 715rpx center no-repeat;}
+/*yhj-zz&yhj-lq*/
+.bluerecWraper .deco{background: #0f96fe  url('https://img.zhcanting.com/res/xcx/images/rece_topbg.png') center center no-repeat;}
+/*ddxq*/
+.blueorder{ background: #0f96fe  url('https://img.zhcanting.com/res/xcx/images/snum_menu.png') 30rpx center no-repeat;}
+/*wmzf*/
+.bluedermine{background: #0f96fe  url('http://img.zhcanting.com/res/xcx/images/wm_wx.png') 25rpx center no-repeat;} 
+/*yhj*/
+.bluedbtn-give{background:#0f96fe  url('http://img.zhcanting.com/res/xcx/images/cash_gift.png') 45rpx center no-repeat; }
+/*辅色*/
+.bluecba_color{
+  background: #8EA8FF;
+}
+.bluecbk_color{
+  border: 1px solid rgba(63,116,236,.3);
+}
+.bluedbk_color{
+  border:1px solid #8EA8FF;
+}
+.blueres{border: 1px dashed #8EA8FF;}
+
+.bluectext_color{
+  color: #8EA8FF;
+}
+.bluedba_color{
+  background: #fff4de;
+}
+/*shop*/
+.bluesba_color{
+  background: #0f96fe;
+}
+.bluetab-bar .under-line {
+  position: absolute;
+  height: 3rpx;
+  background-color: #8EA8FF;
+}
+/*zf&&ddxq*/
+.bluecbtn{background:#8EA8FF url('http://img.zhcanting.com/res/xcx/images/gou_n.png') 23.5rpx 17rpx no-repeat;}
+/*ydwz*/
+.bluetime .seactnr{border-bottom:11.7rpx solid #8EA8FF;}
+.bluetime .cnr{border-bottom: 11.7rpx solid #8EA8FF;}
+/*代金券*/
+.blueliselec{background: rgba(63,116,236,.8) url('http://img.zhcanting.com/res/xcx/images/ncou_choose.png')  center no-repeat;
+} 
+
+/*配色方案二*/
+ .greentext_color{
+  color: #1ebda7 ;
+}
+.greenba_color{
+  background: #1ebda7 ;
+}
+.greenbd_color{
+  border: 1px solid #1ebda7 ;
+}
+/*yhq*/
+.greenswiper-tab{
+  background:#1ebda7 url('http://img.zhcanting.com/res/xcx/images/new_tbg.png') bottom center no-repeat;
+    background-size:100%; 
+}
+.greenbtn-send{
+  border:2rpx solid #1ebda7;
+}
+/*mypage*/
+.greenuserinfo{
+  background:#1ebda7;
+}
+/*shop*/
+.greenclassify-container .classify.active .name{
+  color: #1ebda7 ;
+}
+.greenclassify-container .classify.active {
+  background: #fff;
+  border-right: none;
+  color: #1ebda7 ;
+  border-left: 5rpx solid #1ebda7 ;
+}
+/*mdxz*/
+.greenchoose{
+  border-right: 4rpx solid #1ebda7 ;
+}
+/*index*/
+.greenhome-stores .title{
+  border-left: 4rpx solid #1ebda7 ;
+}
+/*wddd*/
+.greenorder-tab .on{
+  background: #1ebda7 ;
+  color: #fff;
+}
+.greenswiper-tab .on{
+  background: #1ebda7 ;
+  color: #fff;
+}
+.greenbk_color{
+  border:1px solid #1ebda7;
+}
+/*dplb*/
+.greenheader {background: #1ebda7 url(https://img.zhcanting.com/res/xcx/images/dc_arrow.png) 715rpx center no-repeat;}
+/*yhj-zz&yhj-lq*/
+.greenrecWraper .deco{background: #1ebda7  url('https://img.zhcanting.com/res/xcx/images/rece_topbg.png') center center no-repeat;}
+/*ddxq*/
+.greenorder{ background: #1ebda7  url('https://img.zhcanting.com/res/xcx/images/snum_menu.png') 45rpx center no-repeat;}
+/*wmzf*/
+.greendermine{background: #1ebda7  url('http://img.zhcanting.com/res/xcx/images/wm_wx.png') 25rpx center no-repeat;} 
+/*yhj*/
+.greendbtn-give{background:#1ebda7  url('http://img.zhcanting.com/res/xcx/images/cash_gift.png') 45rpx center no-repeat; }
+/*辅色*/
+.greencba_color{
+  background: #1ebda7;
+}
+.greencbk_color{
+  border: 1px solid rgba(30,189,167,.3);
+}
+.greendbk_color{
+  border:1px solid #1ebda7;
+}
+.greenres{border: 1px dashed #1ebda7;}
+
+.greenctext_color{
+  color: #1ebda7;
+}
+.greendba_color{
+  background: #fff4de;
+}
+/*shop*/
+.greensba_color{
+  background: #1ebda7;
+}
+.greentab-bar .under-line {
+  position: absolute;
+  height: 3rpx;
+  background-color: #1ebda7;
+}
+/*zf&&ddxq*/
+.greencbtn{background:#1ebda7 url('http://img.zhcanting.com/res/xcx/images/gou_n.png') 23.5rpx 17rpx no-repeat;}
+/*ydwz*/
+.greentime .seactnr{border-bottom:11.7rpx solid #1ebda7;}
+.greentime .cnr{border-bottom: 11.7rpx solid #1ebda7;}
+/*代金券*/
+.greenliselec{background: rgba(30,189,167,.8) url('http://img.zhcanting.com/res/xcx/images/ncou_choose.png')  center no-repeat;} 
+
+/*配色方案三*/
+
+ .graytext_color{
+  color: #303030 ;
+}
+.grayba_color{
+  background: #303030 ;
+}
+.graybd_color{
+  border: 1px solid #303030 ;
+}
+/*yhq*/
+.grayswiper-tab{
+  background:#303030 url('http://img.zhcanting.com/res/xcx/images/new_tbg.png') bottom center no-repeat;
+    background-size:100%; 
+}
+.graybtn-send{
+  border:2rpx solid #303030;
+}
+/*mypage*/
+.grayuserinfo{
+  background:#303030;
+}
+/*shop*/
+.graysba_color{
+  background: #0f96fe;
+}
+.grayclassify-container .classify.active .name{
+  color: #303030 ;
+}
+.grayclassify-container .classify.active {
+  background: #fff;
+  border-right: none;
+  color: #303030 ;
+  border-left: 5rpx solid #303030 ;
+}
+.graychoose{
+  border-right: 4rpx solid #303030 ;
+}
+/*index*/
+.grayhome-stores .title{
+  border-left: 4rpx solid #303030 ;
+}
+/*wddd*/
+.grayorder-tab .on{
+  background: #303030 ;
+  color: #fff;
+}
+.grayswiper-tab .on{
+  background: #303030 ;
+  color: #fff;
+}
+.graybk_color{
+  border:1px solid #303030;
+}
+/*dplb*/
+.grayheader {background: #303030 url(https://img.zhcanting.com/res/xcx/images/dc_arrow.png) 715rpx center no-repeat;}
+/*yhj-zz&yhj-lq*/
+.grayrecWraper .deco{background: #303030  url('https://img.zhcanting.com/res/xcx/images/rece_topbg.png') center center no-repeat;}
+/*ddxq*/
+.grayorder{ background: #303030  url('https://img.zhcanting.com/res/xcx/images/snum_menu.png') 45rpx center no-repeat;}
+/*wmzf*/
+.graydermine{background: #303030  url('http://img.zhcanting.com/res/xcx/images/wm_wx.png') 25rpx center no-repeat;} 
+/*yhj*/
+.graydbtn-give{background:#303030  url('http://img.zhcanting.com/res/xcx/images/cash_gift.png') 45rpx center no-repeat; }
+/*辅色*/
+.graycba_color{
+  background: #eeaf4b;
+}
+.graycbk_color{
+  border: 1px solid rgba(48,48,48,.3);
+}
+.graydbk_color{
+  border:1px solid #eeaf4b;
+}
+.grayctext_color{
+  color: #eeaf4b;
+}
+.graydba_color{
+  background: #fff4de;
+}
+/*shop*/
+.graytab-bar .under-line {
+  position: absolute;
+  height: 3rpx;
+  background-color: #eeaf4b;
+}
+/*zf&&ddxq*/
+.graycbtn{background:#eeaf4b url('http://img.zhcanting.com/res/xcx/images/gou_n.png') 23.5rpx 17rpx no-repeat;}
+/*ydwz*/
+.graytime .seactnr{border-bottom:11.7rpx solid #eeaf4b;}
+.graytime .cnr{border-bottom: 11.7rpx solid #eeaf4b;}
+/*代金券*/
+.grayliselec{background: rgba(48,48,48,.8) url('http://img.zhcanting.com/res/xcx/images/ncou_choose.png')  center no-repeat;} 
+
+/*配色结束*/
+
+/*dz*/
+.add{
+  font-size:18px;
+  width: 235rpx;
+  line-height: 115rpx;
+  text-align: center;
+  color: #fff;
+}
+.oldadd{
+  font-size:14px;
+  width: 235rpx;
+  line-height: 63rpx;
+  text-align: center;
+  color: #fff;
+  border-radius:31.5rpx;
+}
+/*支付公共样式*/
+.paysuccess
+{
+  position: relative;
+}
+.paysuccess>image{
+  width: 100%;
+  height: 36rpx;
+  position: absolute;
+  top: 0;
+}
+.paysuccess .main {
+    padding-top:110rpx;
+}
+.paysuccess .main .smpic {
+    width:180rpx;
+    height:180rpx;
+    display: block;
+    margin: 0 auto;
+    overflow: hidden;
+}
+.paysuccess .main .smpic image{
+    height: 180rpx;
+    width: 180rpx;
+}
+.paysuccess .main .pic {
+    width:210rpx;
+    height:180rpx;
+    display: block;
+    margin: 0 auto;
+    overflow: hidden;
+}
+.paysuccess .main .pic image{
+    width: 100%;
+    height: 100%;
+}
+.paysuccess .pictext {
+    margin-top: 25rpx;
+}
+.paysuccess .pictext text{
+    display: block;
+    text-align: center;
+    font-size:18px;
+    color: #868686;
+}
+.paysuccess .mess {
+    width: 390rpx;
+    height:72rpx;
+    display: block;
+    background: #FCFEFF;
+    border: 1px solid #E2E9FF;
+    margin: 0 auto;
+    text-align: center;
+    padding: 10rpx 0px;
+}
+.paysuccess .mess .bg-zf {
+    display: inline-block;
+    vertical-align: top;
+    height: 72rpx;
+    line-height: 72rpx;
+    color: #639BF0;
+    font-size: 21px;
+    background: url('https://img.zhcanting.com/res/xcx/images/icon_suceepay.png') left center no-repeat;
+    background-size:54rpx 52.5rpx;
+    padding-left: 68rpx;
+}
+.transparent{
+  opacity:0.8;
+}
+/*****外卖公共样式*******/
+.wmfooter{
+  position:fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 114rpx;
+  border-top: 1px solid #dbdbdb;
+  background: #fff;
+  padding-left:24rpx;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  -webkit-align-items: center;
+          align-items: center;
+  z-index: 99;
+  background: #474749;
+  color: #fff;
+  border-left: 5rpx solid #575758;
+}
+.back{
+  font-size: 16px;
+  padding-left: 35rpx;
+  background: url('https://img.zhcanting.com/res/xcx/images/order_back.png') left center no-repeat;
+  background-size:18rpx 30rpx; 
+}
+.wm-oldfooter{
+  position:fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 114rpx;
+  border-top: 1px solid #dbdbdb;
+  background: #fff;
+  padding: 0 24rpx;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  -webkit-align-items: center;
+          align-items: center;
+  z-index: 99;
+}
+.xddlogo{
+  display:-webkit-flex;
+  display:flex;
+  -webkit-justify-content: center;
+          justify-content: center;
+  -webkit-align-items: center;
+          align-items: center;
+  height: 100rpx;
+}
+.xddlogo .yds{
+  width: 278rpx;
+  height: 37rpx;
+}
+.xddlogo .xdd{
+  width: 278rpx;
+  height: 37rpx;
+}
+.xddlogo text{
+  font-size: 12px;
+  color: #aaa;
+  display: inline-block;
+  padding-left: 10rpx;
+}
+.tabars{
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  font-size: 15px;
+  width: 100%;
+  position:fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 115rpx;
+  background: #fff;
+  padding-top: 15rpx;
+}
+.tabars view{
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex:4;
+          flex:4;
+  -webkit-justify-content: center;
+          justify-content: center;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  -webkit-align-items: center;
+          align-items: center;
+  color: #999;
+}
+.tabars image{
+  width: 48rpx;
+  height: 52rpx;
+}
+/*tabbar*/
+.tabbox{
+  height: 120rpx;
+  width: 100%;
+}
+.tabbar_box{
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+            flex-direction: row;
+    -webkit-justify-content: space-around;
+            justify-content: space-around;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 999;
+    width: 100%;
+    height: 115rpx;
+}
+.tabbar_nav{
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+            flex-direction: column;
+    -webkit-justify-content: center;
+            justify-content: center;
+    -webkit-align-items: center;
+            align-items: center;
+    font-size: 14px;
+    height: 100%;
+}
+
+.tabbar_icon{
+    width: 52rpx;
+    height: 52rpx;
+}
+ .example {
+  display: block;
+  height: 82rpx;
+  line-height: 82rpx;
+  width: 700rpx;
+  margin: 0 25rpx;
+  background: url('https://img.zhcanting.com/res/xcx/images/dc_arrow.png') right center no-repeat;
+  background-size: 15rpx 27rpx;
+}
+.marquee_box {
+  width: 675rpx;
+  height: 82rpx;
+  line-height: 82rpx;
+  position: relative;
+  overflow: hidden;
+}
+
+.marquee_text {
+  white-space: nowrap;
+  position: absolute;
+  top: 0;
+}
+.loadings{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 99999;
+  background: #fff;
+}
+.loadings image{
+  width: 60px;
+  height: 60px;
+}
+.bluedermines{
+    background: #0f96fe;
+}
+.graydermines{
+    background: #303030;
+}
+.greendermines{
+    background: #1ebda7;
+}

@@ -1,0 +1,35 @@
+{
+  "pages": [
+    "pages/index/index"   
+  ],
+  "window":{
+    "defaultTitle": "首页",
+    "titleBarColor":"#303030",
+    "pullRefresh":"YES"
+  },
+  "tabBar": {
+    "textColor": "#dddddd",
+    "selectedColor": "#303030",
+    "backgroundColor": "#ffffff",
+    "items": [
+      {
+        "pagePath": "pages/index/index",
+        "name": "首页",
+        "icon": "images/sfooter1_n.png",
+        "activeIcon": "images/sfooter1_h.png"
+      },
+      {
+        "pagePath": "pages/logs/logs",
+        "name": "扫码",
+        "icon": "images/saom_n.png",
+        "activeIcon": "images/saom.png"
+      },
+      {
+        "pagePath": "pages/logs/logs",
+        "name": "我的",
+        "icon": "images/sfooter3_n.png",
+        "activeIcon": "images/sfooter3_h.png"
+      }
+    ]
+  }
+}

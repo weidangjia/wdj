@@ -1,0 +1,2 @@
+
+require('../../pages/index/index');

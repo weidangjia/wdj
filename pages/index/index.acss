@@ -10,6 +10,9 @@ page{
   font-family: "Microsoft Yahei";
   padding-bottom: 24rpx;
 }
+.contents{
+  height: 100%;
+}
 .swiper-item{
   width: 101%;
   height: 101%;

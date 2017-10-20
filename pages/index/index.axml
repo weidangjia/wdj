@@ -1,4 +1,4 @@
-<!-- <scroll-view scroll-y class="contents" upper-threshold="50" lower-threshold="50" bindscrolltoupper="up" bindscrolltolower="down"> -->
+<scroll-view scroll-y style="height:{{windowHeight}}px" upper-threshold="50" lower-threshold="50" onScrollToUpper="up" onScrollToLower="down">
   <view>
   <swiper indicator-dots="{{indicatorDots}}" vertical="{{vertical}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" style="width:100%;height:468.75rpx;border:none;">
      <block a:for="{{imgs}}" >
@@ -9,25 +9,25 @@
   </swiper>
     <view class="home-list" a:if="{{btnNum==4}}">
     <block>
-      <view bindtap="goYd" class="sindexnav">
+      <view onTap="goYd" class="sindexnav">
         <image src="{{api}}res/xcx/images/sbanav1.png" class="size" />
         <text>{{btnArry[0]}}</text>
       </view>
     </block>
     <block>
-      <view bindtap="toMenu" class="sindexnav">
+      <view onTap="toMenu" class="sindexnav">
         <image src="{{api}}res/xcx/images/sbanav2.png" class="size" />
         <text>{{btnArry[1]}}</text>
       </view>
     </block>
     <block>
-      <view class="sindexnav" bindtap="takeOut">
+      <view class="sindexnav" onTap="takeOut">
         <image src="{{api}}res/xcx/images/sbanav3.png" class="size" />
         <text>{{btnArry[2]}}</text>
       </view>
     </block>
     <block>
-        <view class="sindexnav" bindtap="goPh">
+        <view class="sindexnav" onTap="goPh">
           <image src="{{api}}res/xcx/images/sbanav4.png" class="size" />
           <text>{{btnArry[3]}}</text>
         </view>
@@ -35,7 +35,7 @@
   </view>  
    <view class="home-list1" a:if="{{btnNum==1}}">
       <view class="hy {{color}}text_color"><image src="../../images/icon_hy.png" class="img"></image>欢迎光临"{{cname}}"</view>
-      <view class="btn" data-text="{{btnArry[0]}}" bindtap="goNext"><image a:if="{{btnArry[0]==aliasYd}}" src="../../images/icon_yd.png"></image>
+      <view class="btn" data-text="{{btnArry[0]}}" onTap="goNext"><image a:if="{{btnArry[0]==aliasYd}}" src="../../images/icon_yd.png"></image>
         <image a:if="{{btnArry[0]==aliasDc}}" src="../../images/icon_dian.png" class="img"></image>
         <image a:if="{{btnArry[0]==aliasWm}}" src="../../images/icon_wm.png" class="img"></image>
         <image a:if="{{btnArry[0]==aliasPd}}" src="../../images/icon_pd.png" class="img"></image>我要{{btnArry[0]}}</view>
@@ -43,12 +43,12 @@
     <view class="home-list2" a:if="{{btnNum==2}}">
       <view class="hy {{color}}text_color"><image src="../../images/icon_hy.png" class="img"></image>欢迎光临"{{cname}}"</view>
       <view class="info">
-        <view class="btn" data-text="{{btnArry[0]}}" bindtap="goNext">
+        <view class="btn" data-text="{{btnArry[0]}}" onTap="goNext">
         <image a:if="{{btnArry[0]==aliasYd}}" src="../../images/icon_yd.png"></image>
         <image a:if="{{btnArry[0]==aliasDc}}" src="../../images/icon_dian.png" class="img"></image>
         <image a:if="{{btnArry[0]==aliasWm}}" src="../../images/icon_wm.png" class="img"></image>
         <image a:if="{{btnArry[0]==aliasPd}}" src="../../images/icon_pd.png" class="img"></image>{{btnArry[0]}}</view>
-        <view class="btn" data-text="{{btnArry[1]}}" bindtap="goNext">
+        <view class="btn" data-text="{{btnArry[1]}}" onTap="goNext">
         <image a:if="{{btnArry[1]==aliasYd}}" src="../../images/icon_yd.png"></image>
         <image a:if="{{btnArry[1]==aliasDc}}" src="../../images/icon_dian.png" class="img"></image>
         <image a:if="{{btnArry[1]==aliasWm}}" src="../../images/icon_wm.png" class="img"></image>
@@ -56,7 +56,7 @@
       </view>
   </view>  
    <view class="home-list3" a:if="{{btnNum==3}}">
-    <view class="yd" data-text="{{btnArry[0]}}" bindtap="goNext">
+    <view class="yd" data-text="{{btnArry[0]}}" onTap="goNext">
       <view class="img">
         <image a:if="{{btnArry[0]==aliasYd}}" src="../../images/icon_yd.png"></image>
         <image a:if="{{btnArry[0]==aliasDc}}" src="../../images/icon_dian.png"></image>
@@ -65,7 +65,7 @@
       </view>
       <text>{{btnArry[0]}}</text>
     </view>
-    <view class="dc" data-text="{{btnArry[1]}}" bindtap="goNext">
+    <view class="dc" data-text="{{btnArry[1]}}" onTap="goNext">
       <view class="img">
         <image a:if="{{btnArry[1]==aliasYd}}" src="../../images/icon_yd.png"></image>
         <image a:if="{{btnArry[1]==aliasDc}}" src="../../images/icon_dian.png"></image>
@@ -74,7 +74,7 @@
       <!-- <text>{{m1.substring(btnArry[1])}}</text></view>
       <text>{{m1.substring(btnArry[1])}}</text> -->
     </view>
-    <view class="wm" data-text="{{btnArry[2]}}" bindtap="goNext">
+    <view class="wm" data-text="{{btnArry[2]}}" onTap="goNext">
       <view class="img">
         <image a:if="{{btnArry[2]==aliasYd}}" src="../../images/icon_yd.png"></image>
         <image a:if="{{btnArry[2]==aliasDc}}" src="../../images/icon_dian.png"></image>
@@ -128,7 +128,7 @@
       </navigator>
     </view>
     <view a:for="{{stores}}">
-        <view class="details" data-id="{{item.id}}" bindtap="goMdxq">
+        <view class="details" data-id="{{item.id}}" onTap="goMdxq">
           <view class="img">
             <image src="{{api+item.logo}}"></image>
           </view>
@@ -160,8 +160,8 @@
     </view>
 </view>
     <view class="dinfo">
-    <text bindtap="loaction" data-data="{{store}}">{{store.address}}</text>
-    <view class="cicon" bindtap="phone" data-phone="{{store.phone}}"><image src="{{api}}res/xcx/images/{{color}}icon_inphone.png"></image></view>
+    <text onTap="loaction" data-data="{{store}}">{{store.address}}</text>
+    <view class="cicon" onTap="phone" data-phone="{{store.phone}}"><image src="{{api}}res/xcx/images/{{color}}icon_inphone.png"></image></view>
     </view>
     </view>
     <view class="content">
@@ -179,14 +179,15 @@
   <view class="xddlogo" a:if="{{logo==2}}">
     <image class="xdd" src="../../images/xdd.png"></image>
   </view>
-  <view class="yh-info {{stype=='up'?'sup':'sdown'}}" a:if="{{couponCanGet!=''}}" bindtap="goyhq">
+
+  <view class="yh-info {{stype=='up'?'sup':'sdown'}}" a:if="{{couponCanGet!=''}}" onTap="goyhq">
     <text>还有新的优惠券，去抢券</text>
   </view>
 </view>
 
-<!-- </scroll-view> -->
+</scroll-view>
 <!--领优惠券-->
-  <!-- <view class="tcontent-bj {{sendShow?'':'hide'}}">
+  <view class="tcontent-bj {{sendShow?'':'hide'}}">
   <view class="nr">
     <view class="name">{{cname}}送给您</view>
     <view class="heade">总价值 <text style="color:#da4e3f">{{sendInfo.couponTotalPrice}}</text> 元优惠券</view>
@@ -201,16 +202,16 @@
       </view>
     </scroll-view>
     <view class="tnum">X{{sendInfo.coupons.length}}</view>
-    <view class="btn" bindtap="goyhq">查看更多优惠活动</view>
+    <view class="btn" onTap="goyhq">查看更多优惠活动</view>
   </view>
-  <view class="shut_down" bindtap="shutDown"><image src="../../images/icon_gb.png"></image>关闭</view>
+  <view class="shut_down" onTap="shutDown"><image src="../../images/icon_gb.png"></image>关闭</view>
 </view>  
 
 <view class="rob_bj {{robShow?'':'hide'}}">
 <view class="nr">
-  <view class="btn" bindtap="goyhq"></view>
+  <view class="btn" onTap="goyhq"></view>
 </view>
-<view class="shut_down" bindtap="shutDown1"><image src="../../images/icon_gb.png"></image>关闭</view>
-</view>     -->
+<view class="shut_down" onTap="shutDown1"><image src="../../images/icon_gb.png"></image>关闭</view>
+</view>    
 
 <!--页面方法-->

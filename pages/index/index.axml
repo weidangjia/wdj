@@ -214,4 +214,4 @@
 <view class="shut_down" onTap="shutDown1"><image src="../../images/icon_gb.png"></image>关闭</view>
 </view>    
 
-<!--页面方法-->
+<!--页面方法--> 

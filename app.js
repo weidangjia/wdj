@@ -1,29 +1,24 @@
 App({
-  userInfo: null,
-  getUserInfo() {
-    return new Promise((resolve, reject) => {
-      if (this.userInfo) resolve(this.userInfo);
-
-      my.getAuthCode({
-        success: (authcode) => {
-          console.info(authcode);
-
-          my.getAuthUserInfo({
-            scopes: ['auth_user'],
-            success: (res) => {
-              this.userInfo = res;
-              resolve(this.userInfo);
-            },
-            fail: () => {
-              reject({});
-            },
-          });
-        },
-        fail: () => {
-          reject({});
-        },
-      });
-    });
+  data:{
+    "extEnable": true,
+    "extAppid": "wxf6444710f6da188e",
+    "ext": {
+      "cid": "458996",
+      "uid":"858249554318479cb3353a7452c39b70",
+      "fileMode": "oss",
+      "ossPath": "https://img.zhcanting.com",
+      "path": "https://www.zhcanting.com/"
+    }
   },
-
-});
+  onLaunch(query) { 
+    // console.log(query)
+  },
+  onShow:function(res){
+    my.getAuthCode({
+      scopes: 'auth_user',
+      success: (res) => {
+        this.data.ext.uid = res.authCode
+      },
+    });
+  }
+})

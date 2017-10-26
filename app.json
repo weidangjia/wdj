@@ -1,34 +1,46 @@
 {
   "pages": [
-    "pages/index/index"   
+    "pages/index/index",
+    "pages/mypage/mypage",
+    "pages/waimai/dzlb",
+    "pages/waimai/dzxz",
+    "pages/mypage/qyhq",
+    "pages/mypage/yhj-zz",
+    "pages/mypage/yhj",
+    "pages/mypage/hyk",
+    "pages/index/mdxz",
+    "pages/index/ddxq",
+    "pages/stores/stores",
+    "pages/index/ydwz",
+    "pages/index/mdxq",
+    "pages/index/smdc"
   ],
-  "window":{
+  "window": {
     "defaultTitle": "首页",
-    "titleBarColor":"#303030",
     "pullRefresh":"YES"
   },
   "tabBar": {
-    "textColor": "#dddddd",
+    "textColor": "#000",
     "selectedColor": "#303030",
     "backgroundColor": "#ffffff",
     "items": [
       {
+        "icon":"images/sfooter1_n.png",
+        "activeIcon":"images/sfooter1_h.png",
         "pagePath": "pages/index/index",
-        "name": "首页",
-        "icon": "images/sfooter1_n.png",
-        "activeIcon": "images/sfooter1_h.png"
+        "name": "首页"
       },
       {
-        "pagePath": "pages/logs/logs",
-        "name": "扫码",
-        "icon": "images/saom_n.png",
-        "activeIcon": "images/saom.png"
+        "icon":"images/saom_n.png",
+        "activeIcon":"images/saom.png",
+        "pagePath": "pages/index/smdc",
+        "name": "扫码"
       },
       {
-        "pagePath": "pages/logs/logs",
-        "name": "我的",
-        "icon": "images/sfooter3_n.png",
-        "activeIcon": "images/sfooter3_h.png"
+        "icon":"images/sfooter3_n.png",
+        "activeIcon":"images/sfooter3_h.png",
+        "pagePath": "pages/mypage/mypage",
+        "name": "我的"
       }
     ]
   }

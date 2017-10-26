@@ -35,7 +35,6 @@ Page({
     // });
     my.getSystemInfo({
       success: (res) => {
-        console.log(res);
         that.setData({
           windowHeight:res.windowHeight
         })
@@ -53,7 +52,10 @@ Page({
         sendInfo.couponCanGet = ret.data.couponCanGet;
         sendInfo.couponTotalPrice = ret.data.couponTotalPrice;
         sendInfo.coupons = ret.data.coupons;
-        my.setStorageSync({keyi:'sendInfo',data:sendInfo});
+        my.setStorageSync({
+          key:'sendInfo',
+          data:sendInfo
+        });
         that.setData({
           sendInfo: sendInfo,
           sendShow: true
@@ -106,8 +108,6 @@ Page({
         that.setData({
           muti: ret.data.muti
         })
-        console.log(that.data.muti);
-
         if (!order) {
           that.setData({
             stores: ret.data.stores,
@@ -349,5 +349,60 @@ Page({
   onPullDownRefresh() {
     // 页面被下拉
     this.getdata();
+  },
+  goYd:function(){
+    var that = this;
+    if(that.data.muti == 0){
+
+    } else {
+      my.navigateTo({
+          url: '../stores/stores?from=yd',
+      })
+    }
+  },
+  toMenu:function(){
+    var that = this;
+    console.log(that.data)
+    var order = that.data.order;
+    if(that.data.muti==0&&!order) {
+    my.setStorageSync({
+      key:'sid',
+      data:that.data.store.id
+    });
+    my.navigateTo({
+      url: '../shop/shop',
+    })
+    } else if (that.data.muti == 0 && !order){
+      my.navigateTo({
+        url: '../shop/shop?deskId='+order.deskId,
+      })
+    }else if (order && order.state != 3) {
+        my.setStorageSync({
+          key:'sid',
+          'sid': order.storeId
+        })
+        if (order.state == 0) {
+          my.navigateTo({
+            url: '../stores/stores?from=dc',
+          })
+        } else {
+          my.setStorageSync({
+            key:'sid',
+            data: order.storeId
+          })
+          my.navigateTo({
+            url: '../shop/shop?deskId=' + order.deskId + '&deskCode=' + order.deskName
+          })
+        }
+      }else{
+        my.navigateTo({
+          url: '../stores/stores?from=dc',
+      })
+    }
+  },
+  goPh:function(){
+    my.navigateTo({
+      url: '../index/mdxz',
+    })
   },
 })

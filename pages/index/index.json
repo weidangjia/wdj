@@ -1,3 +1,5 @@
-{   "backgroundTextStyle": "dark",
+{   
+    "defaultTitle":"首页",
+    "backgroundTextStyle": "white",
     "enablePullDownRefresh": true
 }

@@ -1,0 +1,89 @@
+<!--index.wxml-->
+<!-- <import src="../template/template.wxml"/>
+<template wx:if="{{loading}}" is="loading"/>  -->
+<view>
+  <view class="res">
+    <view class="resimg">
+      <image a:if="{{obj.img}}" src="{{api+obj.img}}"></image>
+    </view>
+    <view class="resinfo">
+      <text class="restitle">{{obj.title}}</text>
+      <text>{{obj.address}}</text>
+      <text>{{obj.deskInfo}}</text>
+    </view>
+  </view>
+  <view class="list">
+    <view onTap="toggletime">
+      <text>预定时间</text>
+      <text class="gray" a:if="{{!store.days.no}}">请选择预定时间</text>
+      <text class="gray" a:else>{{store.days.date+' '+store.services}}</text>
+    </view>
+    <view onTap="toggleDialog">
+      <text>预约位置</text>      
+      <text class="gray" a:if="{{book.desk==''}}">请选择位置</text>
+      <text class="gray" a:else>{{book.desk.title+book.desk.code+'('+book.desk.remark+','+book.desk.groupName+')'}}</text>
+    </view>
+    <view>
+      <text class="name">姓名</text>
+      <input class="inpts" placeholder-style="font-family: Microsoft Yahei;color:#aaa;" onInput="name" value='{{book.bookName}}' placeholder="请输入姓名" />
+    </view>
+    <view>
+      <text class="name">电话</text>
+      <input class="inpts" placeholder-style="font-family: Microsoft Yahei;color:#aaa;" type="number" onInput="phone" value='{{book.bookPhone}}' placeholder="请输入联系方式" />
+    </view>
+  </view>
+</view>
+
+<!--用餐时间-->
+<view class="zan-dialog {{ showtime ? 'zan-dialog--show' : '' }}">
+  <view class="zan-dialog__mask" onTap="toggletime" />
+  <view class="zan-dialog__container time {{color}}time">
+    <view class="title">
+      <text>选择预定时间</text>
+      <view onTap="timeclose" class="close"></view>
+    </view>
+    <view class="cnr">
+    <scroll-view class="year"  scroll-y="true">
+      <view class="tabTit">
+        <text class="{{activeIndex == index?' active':''}}" a:for="{{years}}" data-index="{{index}}" a:key="unique" onTap="filterTab">{{item.date+' '+item.week}}</text>
+      </view>
+      </scroll-view>
+      <scroll-view class="day" scroll-y="true">
+        <view a:for="{{obj.services}}" a:for-item="item" a:key="unique">
+          <text class="daytitle {{color}}cba_color">{{item.title}}</text>
+          <text a:for="{{item.times}}" a:key="unique" data-t="{{item.times}}" data-s="{{item}}"  onTap="mealtimeclose" data-index="{{index}}"  a:for-item="itemtime">{{itemtime.time}}</text>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+</view>
+
+<!--选择位置-->
+<view class="zan-dialog {{ showDialog ? 'zan-dialog--show' : '' }}">
+  <view class="zan-dialog__mask" onTap="toggleDialog" />
+  <view class="zan-dialog__container {{color}}time time seat">
+    <view class="title">
+      <text>选择座位</text>
+      <view onTap="close" class="close"></view>
+    </view>
+    <scroll-view class="seactnr" scroll-y="true">
+      <view a:for="{{desks}}">
+        <view a:if="{{item.used == 0}}" data-index="{{index}}" onTap="seatclose" class="{{item.used==0?'seact':'unseact'}}{{ sltse == index?' seatselect':''}}" a:key="unique" >
+          <text>{{item.title+item.code+'('+item.remark+','+item.groupName+')'}}</text>
+          <text>可用</text>
+        </view>
+        <view a:elif="{{item.used == 1}}" data-index="{{index}}" class="{{item.used==0?'seact':'unseact'}}{{ sltse == index?' seatselect':''}}"  a:key="unique" >
+          <text>{{item.title+item.code+'('+item.remark+','+item.groupName+')'}}</text>
+          <text>已预订</text>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+</view>
+
+<view class="footer">
+  <view onTap="back">返回</view>
+  <form report-submit="true" onSubmit="submit">
+    <button  class="immed {{color}}ba_color" formType="submit">立即预定</button>
+  </form>
+</view>

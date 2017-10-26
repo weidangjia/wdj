@@ -1,3 +1,4 @@
+@import "/wxParse/wxParse.acss";
 page{
     font-family: "Microsoft Yahei";
     color: #262626;

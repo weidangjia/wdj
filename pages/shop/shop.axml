@@ -1,0 +1,868 @@
+<view class="container">
+  <view class="loading" a:if="{{loading}}">
+    <image src="../../images/hope.gif"></image>
+  </view>
+  <view class="dheader">
+    <navigator url="../shop/hdsm">
+      <image a:if="{{menuInfo.saleImg}}" src="{{api+menuInfo.saleImg}}"></image>
+      <image a:else src="{{api}}res/xcx/images/deflt_banner.png"></image>
+    </navigator>
+    <view calss="header-info">{{menuInfo.saleInfo}}</view>
+  </view>
+  <!--横向-->
+  <view class="page-body" a:if="{{menutab==2}}">
+    <!--店内分类-->
+     <view a:if="{{tab_config.fixed}}" class="tab-bar {{color}}tab-bar">
+      <view a:for="{{tabs}}" a:key="unique" bindtap="handlerTabTap" data-index="{{m2.tag(tabs,index,2)}}" class="tab {{tab_config.active_tab==index?'{{color}}text_color':''}} " style="width: {{tab_config.item_width}}px;" a:if="{{isWm==0&&m1.dnType(item.data)==2}}">
+        <text>{{item.title}}</text>
+      </view>
+      <view style="width: {{tab_config.item_width}}px; left: {{tab_config.underline.offset}}px;" class="under-line withAnimate"></view>
+    </view>
+    <scroll-view a:elif="{{isWm==0}}" class="tab-bar {{color}}tab-bar" scroll-x="true" bindscroll="onScroll" style="width: 100%;" scroll-left="{{tab_config.tab_left}}" >
+      <view a:for="{{tabs}}" a:key="unique" data-index="{{m2.tag(tabs,index,2)}}" bindtap="handlerTabTap" class="tab {{tab_config.active_tab==index?'{{color}}ctext_color':''}} " style="width: {{tab_config.item_width}}px;" a:if="{{isWm==0&&m1.dnType(item.data)==2}}">
+        <text>{{item.title}}</text>
+      </view>
+      <view style="width: {{tab_config.item_width}}px; left: {{tab_config.underline.offset}}px;" class="under-line withAnimate"></view>
+    </scroll-view> 
+    <!--外卖分类-->
+    <view a:if="{{tab_config.fixed}}" class="tab-bar {{color}}tab-bar">
+      <view a:for="{{tabs}}" a:key="unique" bindtap="handlerTabTap"  class="tab {{tab_config.active_tab==index?'{{color}}text_color':''}} " style="width: {{tab_config.item_width}}px;" a:if="{{isWm==1&&m1.wmType(item.data)==3}}">
+        <text>{{item.title}}</text>
+      </view>
+      <view style="width: {{tab_config.item_width}}px; left: {{tab_config.underline.offset}}px;" class="under-line withAnimate"></view>
+    </view>
+
+    <scroll-view a:elif="{{isWm==1}}" class="tab-bar {{color}}tab-bar" scroll-x="true" bindscroll="onScroll" style="width: 100%;" scroll-left="{{tab_config.tab_left}}">
+      <view a:for="{{tabs}}" a:key="unique" data-index="{{m2.tag(tabs,index,3)}}" bindtap="handlerTabTap" class="tab {{tab_config.active_tab==index?'{{color}}ctext_color':''}} " style="width: {{tab_config.item_width}}px;" a:if="{{isWm==1&&m1.wmType(item.data)==3}}">
+        <text>{{item.title}}</text>
+      </view>
+      <view style="width: {{tab_config.item_width}}px; left: {{tab_config.underline.offset}}px;" class="under-line withAnimate"></view>
+    </scroll-view>
+
+
+    <view style="height:790rpx;background:#f2f2f2">
+      <swiper class="swiper" indicator-dots="{{swipe_config.indicator_dots}}" autoplay="{{swipe_config.autoplay}}" interval="{{swipe_config.interval}}" duration="{{swipe_config.duration}}" current="{{swipe_config.current}}" bindchange="swiperChange">
+      <!--店内推荐-->
+        <block a:key="unique" a:if="{{menu.top>0&&isWm==0&&m1.dnType(tabs[0].data)==2}}">
+          <swiper-item>
+            <scroll-view scroll-y="true" style="height:790rpx;">
+              <!--优惠券-->
+              <scroll-view scroll-x="true" class="tinfo1" a:if="{{couponList.length>0}}">
+                <view class="list {{color}}list" a:for="{{couponList}}" bindtap="get" a:key="unique">
+                  <view class="container">
+                    <text class="tit">{{item.type==1?'满减券':'现金券'}}</text>
+                    <view class="act" a:if="{{item.full}}">满{{item.full}}
+                      <text style="font-size:24rpx;text-align:center">减{{item.value}}</text>
+                    </view>
+                    <view class="act" a:else>{{item.value}}元</view>
+                    <view class="bottom">立即领取</view>
+                  </view>
+                </view>
+              </scroll-view>
+              <view class="swiper-item">
+              <!--店内推荐菜品-->
+                <view class="list" a:for="{{tjList}}" a:if="{{isWm==0&&(item.showType==2||item.showType==1)}}" a:key="unique">
+                  <view class="img" bindtap="tcshow" data-g="{{item}}">
+                    <text a:if="{{item.isNew}}" class="new"></text>
+                    <image src="{{api+item.logo}}"></image>
+                  </view>
+                  <view class="info">
+                    <view class="name">
+                      <text>{{item.title}}</text>
+                      <text a:if="{{item.sns}}" class="yj {{color}}ctext_color" data-g="{{item}}" bindtap="tcshow">多规格</text>
+                    </view>
+                    <view class="num">
+                      <text class="time" a:if="{{item.cookType!=''}}">[{{item.cookType}}] <text a:if="{{item.cookMinute>0}}">{{item.cookMinute}}分钟</text></text>
+                      <text class="number" a:if="{{item.orderCnt>0}}">{{item.orderCnt}}点过</text>
+                    </view>
+                    <view class="price">
+                      <text>￥{{item.nowPrice}}</text>
+                      <view class="calculate">
+                        <view class="cnums {{newmap[item.id].NO>0?'show':''}}">
+                          <view class="addCart" data-g="{{item}}" data-index="{{index}}" bindtap="{{item.sns?'tcshow':'tapDecCart'}}">
+                            <image src="{{api}}res/xcx/images/{{color}}icon_dec.png"></image>
+                          </view>
+                        </view>
+                        <text class="cnums nums {{newmap[item.id].NO>0?'show':''}}">{{newmap[item.id].NO}}</text>
+                        <view class="addcart" a:if="{{item.total>0}}" data-g="{{item}}" bindtap="{{item.sns?'tcshow':'tapAddCart'}}" data-index="{{index}}">
+                          <image src="{{api}}res/xcx/images/{{color}}icon_in.png"></image>
+                        </view>
+                        <view a:if="{{item.total<=0}}" class="addcart">
+                          <image src="{{api}}res/xcx/images/{{color}}icon_in_n.png"></image>
+                        </view>
+                      </view>
+                    </view>
+                  </view>
+                </view>
+            </view>
+            </scroll-view>
+          </swiper-item>
+        </block>
+      <!--外卖推荐-->
+      <block a:key="unique" a:if="{{menu.top>0&&isWm==1&&m1.wmType(tabs[0].data)==3}}">
+          <swiper-item>
+            <scroll-view scroll-y="true" style="height:790rpx;">
+              <!--优惠券-->
+              <scroll-view scroll-x="true" class="tinfo1" a:if="{{couponList.length>0}}">
+                <view class="list {{color}}list" a:for="{{couponList}}" bindtap="get" a:key="unique">
+                  <view class="container">
+                    <text class="tit">{{item.type==1?'满减券':'现金券'}}</text>
+                    <view class="act" a:if="{{item.full}}">满{{item.full}}
+                      <text style="font-size:24rpx;text-align:center">减{{item.value}}</text>
+                    </view>
+                    <view class="act" a:else>{{item.value}}元</view>
+                    <view class="bottom">立即领取</view>
+                  </view>
+                </view>
+              </scroll-view>
+              <view class="swiper-item">
+              <!--店内推荐菜品-->
+                <view class="list" a:for="{{tjList}}" a:if="{{isWm==1&&(item.showType==3||item.showType==1)}}" a:key="unique">
+                  <view class="img" bindtap="tcshow" data-g="{{item}}">
+                    <text a:if="{{item.isNew}}" class="new"></text>
+                    <image src="{{api+item.logo}}"></image>
+                  </view>
+                  <view class="info">
+                    <view class="name">
+                      <text>{{item.title}}</text>
+                      <text a:if="{{item.sns}}" class="yj {{color}}ctext_color" data-g="{{item}}" bindtap="tcshow">多规格</text>
+                    </view>
+                    <view class="num">
+                      <text class="time" a:if="{{item.cookType!=''}}">[{{item.cookType}}] <text a:if="{{item.cookMinute>0}}">{{item.cookMinute}}分钟</text></text>
+                      <text class="number" a:if="{{item.orderCnt>0}}">{{item.orderCnt}}点过</text>
+                    </view>
+                    <view class="price">
+                      <text>￥{{item.nowPrice}}</text>
+                      <view class="calculate">
+                        <view class="cnums {{newmap[item.id].NO>0?'show':''}}">
+                          <view class="addCart" data-g="{{item}}" data-index="{{index}}" bindtap="{{item.sns?'tcshow':'tapDecCart'}}">
+                            <image src="{{api}}res/xcx/images/{{color}}icon_dec.png"></image>
+                          </view>
+                        </view>
+                        <text class="cnums nums {{newmap[item.id].NO>0?'show':''}}">{{newmap[item.id].NO}}</text>
+                        <view class="addcart" a:if="{{item.total>0}}" data-g="{{item}}" bindtap="{{item.sns?'tcshow':'tapAddCart'}}" data-index="{{index}}">
+                          <image src="{{api}}res/xcx/images/{{color}}icon_in.png"></image>
+                        </view>
+                        <view a:if="{{item.total<=0}}" class="addcart">
+                          <image src="{{api}}res/xcx/images/{{color}}icon_in_n.png"></image>
+                        </view>
+                      </view>
+                    </view>
+                  </view>
+                </view>
+            </view>
+            </scroll-view>
+          </swiper-item>
+        </block>
+
+        <block a:for="{{menu.cates}}" a:key="unique" a:for-item="cates">
+        <!--店内商品-->
+          <swiper-item a:if="{{isWm==0&&m1.dnType(cates)==2}}">
+            <scroll-view scroll-x="true" class="tinfo1" a:if="{{couponList.length>0&&menu.top==0&&index==0}}">
+              <view class="list {{color}}list" a:for="{{couponList}}" a:key="unique" bindtap="get">
+                <view class="container">
+                  <text class="tit">{{item.type==1?'满减券':'现金券'}}</text>
+                  <view class="act" a:if="{{item.full}}">满{{item.full}}
+                    <text style="font-size:24rpx;text-align:center">减{{item.value}}</text>
+                  </view>
+                  <view class="act" a:else>{{item.value}}元</view>
+                  <view class="bottom">立即领取</view>
+                </view>
+              </view>
+            </scroll-view>
+            <scroll-view scroll-y="true" style="height:790rpx;">
+              <view class="swiper-item">
+                <view class="list" a:for="{{cates.glist}}" a:key="unique" a:if="{{isWm==0&&(item.showType==2||item.showType==1)}}">
+                  <view class="img" bindtap="tcshow" data-g="{{item}}">
+                    <text a:if="{{item.isNew}}" class="new"></text>
+                    <image src="{{api+item.logo}}"></image>
+                  </view>
+                  <view class="info">
+                    <view class="name">
+                      <text>{{item.title}}</text>
+                      <text a:if="{{item.sns}}" class="yj {{color}}ctext_color" data-g="{{item}}" bindtap="tcshow">多规格</text>
+                    </view>
+                    <view class="num">
+                      <text class="time" a:if="{{item.cookType!=''}}">[{{item.cookType}}] <text a:if="{{item.cookMinute>0}}">{{item.cookMinute}}分钟</text></text>
+                      <text class="number" a:if="{{item.orderCnt>0}}">{{item.orderCnt}}点过</text>
+                    </view>
+                    <view class="price">
+                      <text>￥{{item.nowPrice}}</text>
+                      <view class="calculate">
+                        <view class="cnums {{newmap[item.id].NO>0?'show':''}}">
+                          <view class="addCart" data-g="{{item}}" data-index="{{index}}" bindtap="{{item.sns?'tcshow':'tapDecCart'}}">
+                            <image src="{{api}}res/xcx/images/{{color}}icon_dec.png"></image>
+                          </view>
+                        </view>
+                        <text class="cnums nums {{newmap[item.id].NO>0?'show':''}}">{{newmap[item.id].NO}}</text>
+                        <view class="addcart" a:if="{{item.total>0}}" data-g="{{item}}" bindtap="{{item.sns?'tcshow':'tapAddCart'}}" data-index="{{index}}">
+                          <image src="{{api}}res/xcx/images/{{color}}icon_in.png"></image>
+                        </view>
+                        <view a:if="{{item.total<=0}}" class="addcart">
+                          <image src="{{api}}res/xcx/images/{{color}}icon_in_n.png"></image>
+                        </view>
+                      </view>
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </scroll-view>
+          </swiper-item>
+        <!--外卖商品-->
+        <swiper-item a:if="{{isWm==1&&m1.wmType(cates)==3}}">
+            <scroll-view scroll-x="true" class="tinfo1" a:if="{{couponList.length>0&&menu.top==0&&index==0}}">
+              <view class="list {{color}}list" a:for="{{couponList}}" a:key="unique" bindtap="get">
+                <view class="container">
+                  <text class="tit">{{item.type==1?'满减券':'现金券'}}</text>
+                  <view class="act" a:if="{{item.full}}">满{{item.full}}
+                    <text style="font-size:24rpx;text-align:center">减{{item.value}}</text>
+                  </view>
+                  <view class="act" a:else>{{item.value}}元</view>
+                  <view class="bottom">立即领取</view>
+                </view>
+              </view>
+            </scroll-view>
+            <scroll-view scroll-y="true" style="height:790rpx;">
+              <view class="swiper-item">
+                <view class="list" a:for="{{cates.glist}}" a:key="unique" a:if="{{isWm==1&&(item.showType==3||item.showType==1)}}">
+                  <view class="img" bindtap="tcshow" data-g="{{item}}">
+                    <text a:if="{{item.isNew}}" class="new"></text>
+                    <image src="{{api+item.logo}}"></image>
+                  </view>
+                  <view class="info">
+                    <view class="name">
+                      <text>{{item.title}}</text>
+                      <text a:if="{{item.sns}}" class="yj {{color}}ctext_color" data-g="{{item}}" bindtap="tcshow">多规格</text>
+                    </view>
+                    <view class="num">
+                      <text class="time" a:if="{{item.cookType!=''}}">[{{item.cookType}}] <text a:if="{{item.cookMinute>0}}">{{item.cookMinute}}分钟</text></text>
+                      <text class="number" a:if="{{item.orderCnt>0}}">{{item.orderCnt}}点过</text>
+                    </view>
+                    <view class="price">
+                      <text>￥{{item.nowPrice}}</text>
+                      <view class="calculate">
+                        <view class="cnums {{newmap[item.id].NO>0?'show':''}}">
+                          <view class="addCart" data-g="{{item}}" data-index="{{index}}" bindtap="{{item.sns?'tcshow':'tapDecCart'}}">
+                            <image src="{{api}}res/xcx/images/{{color}}icon_dec.png"></image>
+                          </view>
+                        </view>
+                        <text class="cnums nums {{newmap[item.id].NO>0?'show':''}}">{{newmap[item.id].NO}}</text>
+                        <view class="addcart" a:if="{{item.total>0}}" data-g="{{item}}" bindtap="{{item.sns?'tcshow':'tapAddCart'}}" data-index="{{index}}">
+                          <image src="{{api}}res/xcx/images/{{color}}icon_in.png"></image>
+                        </view>
+                        <view a:if="{{item.total<=0}}" class="addcart">
+                          <image src="{{api}}res/xcx/images/{{color}}icon_in_n.png"></image>
+                        </view>
+                      </view>
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </scroll-view>
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+  </view>
+  <!--弹出详情-->
+  <view class="tcontent {{tcshow?'':'tcshow'}}">
+    <view class="nr">
+      <!-- <swiper indicator-dots="{{indicatorDots}}"
+        autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+        <block a:for="{{tcimgs}}">
+          <swiper-item>
+            <image src="{{api+item}}"/>
+          </swiper-item>
+        </block>
+      </swiper> -->
+      <swiper a:if="{{tcimgs!=''}}" indicator-dots="{{indicatorDots}}" vertical="{{vertical}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" class="banner">
+        <block a:for="{{tcimgs}}" a:key="unique">
+          <swiper-item>
+            <image class="tcimgs" src="{{api+item}}" />
+          </swiper-item>
+        </block>
+      </swiper>
+      <view class="logo" a:if="{{tcimgs==''}}">
+        <image src="{{api+tcinfo.logo}}"></image>
+      </view>
+      <view class="content">
+        <view class="name">{{tcinfo.title}}
+          <text a:if="{{tcinfo.hasXc}}" class="i-xc"></text>
+          <text a:for="{{tcinfo.spiceLevel}}" class="i-la" a:key="unique"></text>
+          <text a:if="{{tcinfo.hasSuan}}" class="i-suan"></text>
+        </view>
+        <view class="price">￥{{tcinfo.nowPrice}}
+          <text a:if="{{tcinfo.oldPrice}}"> ￥{{tcinfo.oldPrice}}</text>
+        </view>
+        <view class="remark" a:if="{{tcinfo.remark}}">{{tcinfo.remark}}</view>
+        <view class="num">
+          <text class="time" a:if="{{tcinfo.cookType!=''}}">[{{tcinfo.cookType}}]</text>
+          <text a:if="{{item.cookMinute>0}}">{{item.cookMinute}}分钟</text>
+          <text class="number" a:if="{{tcinfo.orderCnt>0}}">{{tcinfo.orderCnt}}点过</text>
+        </view>
+        <view class="foodspecs" a:for="{{tcinfo.sns}}" a:for-item="sns" a:key="unique">
+          <view class="tnum">
+            <view class="sdec {{newmap[tcinfo.id+'_'+sns.id].NO>0?'show':''}}" data-tcinfo="{{tcinfo}}" data-index="{{index}}" bindtap="tapDecCart">
+              <image src="{{api}}res/xcx/images/{{color}}icon_dec.png"></image>
+            </view>
+            <text class="snum {{newmap[tcinfo.id+'_'+sns.id].NO>0?'show':''}}">{{newmap[tcinfo.id+'_'+sns.id].NO}}</text>
+            <view data-g="{{tcinfo}}" bindtap="tapAddCart" data-index="{{index}}">
+              <image src="{{api}}res/xcx/images/{{color}}icon_in.png"></image>
+            </view>
+          </view>
+          <text class="sprice">￥{{sns.price}}</text>
+          <text class="spec">{{sns.title}} </text>
+        </view>
+        <view class="foodspecs" a:if="{{!tcinfo.hasSn}}">
+          <view class="tnum">
+            <view class="sdec {{newmap[tcinfo.id].NO>0?'show':''}}" data-tcinfo="{{tcinfo}}" bindtap="tapDecCart">
+              <image src="{{api}}res/xcx/images/{{color}}icon_dec.png"></image>
+            </view>
+            <text class="snum {{newmap[tcinfo.id].NO>0?'show':''}}">{{newmap[tcinfo.id].NO}}</text>
+            <view data-g="{{tcinfo}}" a:if="{{tcinfo.total>0}}" bindtap="tapAddCart" data-index="{{index}}">
+              <image src="{{api}}res/xcx/images/{{color}}icon_in.png"></image>
+            </view>
+            <view data-g="{{tcinfo}}" a:if="{{tcinfo.total<=0}}">
+              <image src="{{api}}res/xcx/images/{{color}}icon_in_n.png"></image>
+            </view>
+          </view>
+          <text class="sprice">￥{{tcinfo.nowPrice}}</text>
+          <text class="spec">{{tcinfo.title}} </text>
+        </view>
+        <view class="tyouhui" a:if="{{tcinfo.youhui}}">
+          <text>惠</text>{{tcinfo.youhui}}</view>
+      </view>
+    </view>
+    <view class="shut_down" bindtap="tcdown">
+      关闭
+    </view>
+  </view>
+
+  <!--竖向-->
+  <view a:if="{{menutab==1}}" class="content-container">
+    <scroll-view class="classify-container {{color}}classify-container" scroll-y="true">
+      <!--外卖分类-->
+      <view class="classify" a:for="{{tabs}}" a:for-item="classify" a:key="id" data-id="s{{classify.id}}" a:if="{{isWm==1&&m1.wmType(classify.data)==3}}" bindtap="tapClassify">
+        <view class="name">{{classify.title}}</view>
+      </view>
+      <!--店内分类-->
+      <view class="classify" a:for="{{tabs}}" a:for-item="classify" a:key="id" data-id="s{{classify.id}}" a:if="{{isWm==0&&m1.dnType(classify.data)==2}}" bindtap="tapClassify">
+        <view class="name">{{classify.title}}</view>
+      </view>
+    </scroll-view>
+    <scroll-view class="goods-container" scroll-y="true" scroll-into-view="{{classifyViewed}}">
+      <!--推荐菜品-->
+      <scroll-view scroll-x="true" class="tinfo2" a:if="{{couponList.length>0}}">
+        <view class="list {{color}}list" a:for="{{couponList}}" a:key="unique" bindtap="get">
+          <view class="container">
+            <text class="tit">{{item.type==1?'满减券':'现金券'}}</text>
+            <view class="act" a:if="{{item.full}}">满{{item.full}}
+              <text style="font-size:24rpx;text-align:center">减{{item.value}}</text>
+            </view>
+            <view class="act" a:else>{{item.value}}元</view>
+            <view class="bottom" data-id="{{item.actId}}">立即领取</view>
+          </view>
+        </view>
+      </scroll-view>
+      <!--外卖热门推荐-->
+      <view a:if="{{menu.top>0&&isWm==1&&m1.wmType(tabs[0].data)==3}}" id="stj">
+        <view class="title">热门推荐</view>
+        <view class="goods" a:for="{{tjList}}" a:for-item="id" a:key="unique" a:if="{{isWm==1&&(id.showType==3||id.showType==1)}}">
+          <view class="pic" bindtap="tcshow" data-g="{{id}}">
+            <text a:if="{{id.isNew}}" class="new"></text>
+            <image src="{{api+id.logo}}"></image>
+          </view>
+          <view class="name ellips is">{{id.title}}
+            <text a:if="{{id.hasXc}}" class="i-xc"></text>
+            <text a:for="{{id.spiceLevel}}" class="i-la" a:key="unique"></text>
+            <text a:if="{{id.hasSuan}}" class="i-suan"></text>
+          </view>
+          <text class="price">￥{{id.nowPrice}}         <text a:if="{{id.sns}}"> 起</text>
+          </text>
+          <text class="sold" a:if="{{id.oldPrice}}">￥{{id.oldPrice}}</text>
+          <view class="join">
+            <text class="youhui" a:if="{{newmap[id.id].NO>0&&id.youhui}}">惠</text>
+            <text a:else>{{id.youhui}}</text>
+            <view class="cnum" a:if="{{!id.sns}}">
+              <view a:if="{{id.total>0}}" class="addCart" data-g="{{id}}" bindtap="tapAddCart" data-index="{{index}}">
+                <image src="{{api}}res/xcx/images/{{color}}icon_in.png"></image>
+              </view>
+              <view a:if="{{id.total<=0}}" class="addCart">
+                <image src="{{api}}res/xcx/images/{{color}}icon_in_n.png"></image>
+              </view>
+              <view class="cnums {{newmap[id.id].NO>0?'show':''}}">
+                <text class="num">{{newmap[id.id].NO}}</text>
+                <view class="addCart" data-g="{{id}}" data-index="{{index}}" bindtap="tapDecCart">
+                  <image src="{{api}}res/xcx/images/{{color}}icon_dec.png"></image>
+                </view>
+              </view>
+            </view>
+          </view>
+          <view class="shch">
+            <view>
+              <text class="time" a:if="{{id.cookType!=''}}">[{{id.cookType}}]</text>
+              <text a:if="{{id.cookMinute>0}}">{{id.cookMinute}}分钟</text>
+            </view>
+            <view class="number" a:if="{{id.orderCnt>0}}">{{id.orderCnt}}点过</view>
+          </view>
+          <view class="foodspec" a:for="{{id.sns}}" a:for-item="sns" a:key="unique">
+            <text class="spec">{{sns.title}} </text>
+            <text class="sprice">￥{{sns.price}}</text>
+            <view class="cnum">
+              <view class="addCart" data-g="{{id}}" bindtap="tapAddCart" data-index="{{index}}">
+                <image src="{{api}}res/xcx/images/{{color}}icon_in.png"></image>
+              </view>
+              <view class="cnums {{newmap[id.id+'_'+id.sns[index].id].NO>0?'show':''}}">
+                <text class="num">{{newmap[id.id+'_'+id.sns[index].id].NO}}</text>
+                <view class="addCart" data-g="{{id}}" data-index="{{index}}" bindtap="tapDecCart">
+                  <image src="{{api}}res/xcx/images/{{color}}icon_dec.png"></image>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <!--店内热门推荐-->
+      <view a:if="{{menu.top>0&&isWm==0&&m1.dnType(tabs[0].data)==2}}" id="stj">
+        <view class="title">热门推荐</view>
+        <view class="goods" a:for="{{tjList}}" a:for-item="id" a:key="unique" a:if="{{isWm==0&&(id.showType==2||id.showType==1)}}">
+          <view class="pic" bindtap="tcshow" data-g="{{id}}">
+            <text a:if="{{id.isNew}}" class="new"></text>
+            <image src="{{api+id.logo}}"></image>
+          </view>
+          <view class="name ellips is">{{id.title}}
+            <text a:if="{{id.hasXc}}" class="i-xc"></text>
+            <text a:for="{{id.spiceLevel}}" class="i-la" a:key="unique"></text>
+            <text a:if="{{id.hasSuan}}" class="i-suan"></text>
+          </view>
+          <text class="price">￥{{id.nowPrice}}         <text a:if="{{id.sns}}"> 起</text>
+          </text>
+          <text class="sold" a:if="{{id.oldPrice}}">￥{{id.oldPrice}}</text>
+          <view class="join">
+            <text class="youhui" a:if="{{newmap[id.id].NO>0&&id.youhui}}">惠</text>
+            <text a:else>{{id.youhui}}</text>
+            <view class="cnum" a:if="{{!id.sns}}">
+              <view a:if="{{id.total>0}}" class="addCart" data-g="{{id}}" bindtap="tapAddCart" data-index="{{index}}">
+                <image src="{{api}}res/xcx/images/{{color}}icon_in.png"></image>
+              </view>
+              <view a:if="{{id.total<=0}}" class="addCart">
+                <image src="{{api}}res/xcx/images/{{color}}icon_in_n.png"></image>
+              </view>
+              <view class="cnums {{newmap[id.id].NO>0?'show':''}}">
+                <text class="num">{{newmap[id.id].NO}}</text>
+                <view class="addCart" data-g="{{id}}" data-index="{{index}}" bindtap="tapDecCart">
+                  <image src="{{api}}res/xcx/images/{{color}}icon_dec.png"></image>
+                </view>
+              </view>
+            </view>
+          </view>
+          <view class="shch">
+            <view>
+              <text class="time" a:if="{{id.cookType!=''}}">[{{id.cookType}}]</text>
+              <text a:if="{{id.cookMinute>0}}">{{id.cookMinute}}分钟</text>
+            </view>
+            <view class="number" a:if="{{id.orderCnt>0}}">{{id.orderCnt}}点过</view>
+          </view>
+          <view class="foodspec" a:for="{{id.sns}}" a:for-item="sns" a:key="unique">
+            <text class="spec">{{sns.title}} </text>
+            <text class="sprice">￥{{sns.price}}</text>
+            <view class="cnum">
+              <view class="addCart" data-g="{{id}}" bindtap="tapAddCart" data-index="{{index}}">
+                <image src="{{api}}res/xcx/images/{{color}}icon_in.png"></image>
+              </view>
+              <view class="cnums {{newmap[id.id+'_'+id.sns[index].id].NO>0?'show':''}}">
+                <text class="num">{{newmap[id.id+'_'+id.sns[index].id].NO}}</text>
+                <view class="addCart" data-g="{{id}}" data-index="{{index}}" bindtap="tapDecCart">
+                  <image src="{{api}}res/xcx/images/{{color}}icon_dec.png"></image>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <!--外卖商品-->
+      <view a:for="{{menu.cates}}" a:for-item="classify" a:key="unique" id="s{{classify.id}}" a:if="{{isWm==1&&m1.wmType(classify)==3}}">
+        <view class="title">{{classify.title}}</view>
+        <view class="goods" a:for="{{classify.glist}}" a:for-item="id" a:key="unique" a:if="{{isWm==1&&(id.showType==3||id.showType==1)}}">
+          <view class="pic" bindtap="tcshow" data-g="{{id}}">
+            <text a:if="{{id.isNew}}" class="new"></text>
+            <image src="{{api+id.logo}}"></image>
+          </view>
+          <view class="name ellips is">{{id.title}}
+            <text a:if="{{id.hasXc}}" class="i-xc"></text>
+            <text a:for="{{id.spiceLevel}}" class="i-la" a:key="unique"></text>
+            <text a:if="{{id.hasSuan}}" class="i-suan"></text>
+          </view>
+          <text class="price">￥{{id.nowPrice}}         <text a:if="{{id.sns}}"> 起</text>
+          </text>
+          <text class="sold" a:if="{{id.oldPrice}}">￥{{id.oldPrice}}</text>
+          <view class="join">
+            <text class="youhui" a:if="{{newmap[id.id].NO>0&&id.youhui}}">惠</text>
+            <text a:else>{{id.youhui}}</text>
+            <view class="cnum" a:if="{{!id.sns}}">
+              <view a:if="{{id.total>0}}" class="addCart" data-g="{{id}}" bindtap="tapAddCart" data-index="{{index}}">
+                <image src="{{api}}res/xcx/images/{{color}}icon_in.png"></image>
+              </view>
+              <view a:if="{{id.total<=0}}" class="addCart">
+                <image src="{{api}}res/xcx/images/{{color}}icon_in_n.png"></image>
+              </view>
+              <view class="cnums {{newmap[id.id].NO>0?'show':''}}">
+                <text class="num">{{newmap[id.id].NO}}</text>
+                <view class="addCart" data-g="{{id}}" data-index="{{index}}" bindtap="tapDecCart">
+                  <image src="{{api}}res/xcx/images/{{color}}icon_dec.png"></image>
+                </view>
+              </view>
+            </view>
+          </view>
+          <view class="shch">
+            <view>
+              <text class="time" a:if="{{id.cookType!=''}}">[{{id.cookType}}]</text>
+              <text a:if="{{id.cookMinute>0}}">{{id.cookMinute}}分钟</text>
+            </view>
+            <view class="number" a:if="{{id.orderCnt>0}}">{{id.orderCnt}}点过</view>
+          </view>
+          <view class="foodspec" a:for="{{id.sns}}" a:for-item="sns" a:key="unique">
+            <text class="spec">{{sns.title}} </text>
+            <text class="sprice">￥{{sns.price}}</text>
+            <view class="cnum">
+              <view class="addCart" data-g="{{id}}" bindtap="tapAddCart" data-index="{{index}}">
+                <image src="{{api}}res/xcx/images/{{color}}icon_in.png"></image>
+              </view>
+              <view class="cnums {{newmap[id.id+'_'+id.sns[index].id].NO>0?'show':''}}">
+                <text class="num">{{newmap[id.id+'_'+id.sns[index].id].NO}}</text>
+                <view class="addCart" data-g="{{id}}" data-index="{{index}}" bindtap="tapDecCart">
+                  <image src="{{api}}res/xcx/images/{{color}}icon_dec.png"></image>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <!--店内商品-->
+      <view a:for="{{menu.cates}}" a:for-item="classify" a:key="unique" id="s{{classify.id}}" a:if="{{isWm==0&&m1.dnType(classify)==2}}">
+        <view class="title">{{classify.title}}</view>
+        <view class="goods" a:for="{{classify.glist}}" a:for-item="id" a:key="unique" a:if="{{isWm==0&&(id.showType==2||id.showType==1)}}">
+          <view class="pic" bindtap="tcshow" data-g="{{id}}">
+            <text a:if="{{id.isNew}}" class="new"></text>
+            <image src="{{api+id.logo}}"></image>
+          </view>
+          <view class="name ellips is">{{id.title}}
+            <text a:if="{{id.hasXc}}" class="i-xc"></text>
+            <text a:for="{{id.spiceLevel}}" class="i-la" a:key="unique"></text>
+            <text a:if="{{id.hasSuan}}" class="i-suan"></text>
+          </view>
+          <text class="price">￥{{id.nowPrice}}         <text a:if="{{id.sns}}"> 起</text>
+          </text>
+          <text class="sold" a:if="{{id.oldPrice}}">￥{{id.oldPrice}}</text>
+          <view class="join">
+            <text class="youhui" a:if="{{newmap[id.id].NO>0&&id.youhui}}">惠</text>
+            <text a:else>{{id.youhui}}</text>
+            <view class="cnum" a:if="{{!id.sns}}">
+              <view a:if="{{id.total>0}}" class="addCart" data-g="{{id}}" bindtap="tapAddCart" data-index="{{index}}">
+                <image src="{{api}}res/xcx/images/{{color}}icon_in.png"></image>
+              </view>
+              <view a:if="{{id.total<=0}}" class="addCart">
+                <image src="{{api}}res/xcx/images/{{color}}icon_in_n.png"></image>
+              </view>
+              <view class="cnums {{newmap[id.id].NO>0?'show':''}}">
+                <text class="num">{{newmap[id.id].NO}}</text>
+                <view class="addCart" data-g="{{id}}" data-index="{{index}}" bindtap="tapDecCart">
+                  <image src="{{api}}res/xcx/images/{{color}}icon_dec.png"></image>
+                </view>
+              </view>
+            </view>
+          </view>
+          <view class="shch">
+            <view>
+              <text class="time" a:if="{{id.cookType!=''}}">[{{id.cookType}}]</text>
+              <text a:if="{{id.cookMinute>0}}">{{id.cookMinute}}分钟</text>
+            </view>
+            <view class="number" a:if="{{id.orderCnt>0}}">{{id.orderCnt}}点过</view>
+          </view>
+          <view class="foodspec" a:for="{{id.sns}}" a:for-item="sns" a:key="unique">
+            <text class="spec">{{sns.title}} </text>
+            <text class="sprice">￥{{sns.price}}</text>
+            <view class="cnum">
+              <view class="addCart" data-g="{{id}}" bindtap="tapAddCart" data-index="{{index}}">
+                <image src="{{api}}res/xcx/images/{{color}}icon_in.png"></image>
+              </view>
+              <view class="cnums {{newmap[id.id+'_'+id.sns[index].id].NO>0?'show':''}}">
+                <text class="num">{{newmap[id.id+'_'+id.sns[index].id].NO}}</text>
+                <view class="addCart" data-g="{{id}}" data-index="{{index}}" bindtap="tapDecCart">
+                  <image src="{{api}}res/xcx/images/{{color}}icon_dec.png"></image>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+  <!--底部价格-->
+  <view class="cart">
+    <view class="data" bindtap="{{newmap.amount>0?'showCartDetail':''}}">
+      <view class="icon {{color}}ba_color" a:if="{{!showCartDetail}}">
+        <image src="{{api}}res/xcx/images/icon_cart.png"></image>
+        <view class="count" a:if="{{newmap.total>0}}">{{newmap.total}}</view>
+      </view>
+    </view>
+    <view class="info {{showCartDetail?'changeinfo':''}}" bindtap="{{menu.amount>0?'showCartDetail':''}}">
+      <view class="left {{showCartDetail?'left_width':''}}">
+        <view class="nums">
+          <text a:if="{{newmap.total>0}}">已点{{newmap.total}}个</text>
+          <text a:else>已点0个</text>
+          <text class="{{showCartDetail?'over_width':'overflow'}}">
+          <text a:for="{{menuInfo.gCates}}" a:key="unique" a:if="{{item.num>0}}">{{item.title}}<text class="{{color}}text_color">{{item.num}}</text></text>
+          </text>
+        </view>
+        <view class="total" a:if="{{newmap.amount>0}}">￥{{newmap.amount}}</view>
+      </view>
+      <form report-submit="true" bindsubmit="confirm" a:if="{{isWm==0}}">
+        <button class="submitbutton {{color}}ba_color" formType="submit">确定</button>
+      </form>
+      <form report-submit="true" bindsubmit="{{newmap.amount>=menuInfo.wmLimit?'confirm':''}}" a:if="{{isWm}}">
+        <button class="{{newmap.amount>=menuInfo.wmLimit?color+'ba_color submitbutton':'nobutton'}}" formType="submit">
+          <text a:if="{{newmap.amount>=menuInfo.wmLimit}}">确定</text>
+          <text a:else>￥{{menuInfo.wmLimit}}起送</text>
+        </button>
+      </form>
+    </view>
+  </view>
+  <!--菜单详情-->
+  <view class="cart-detail {{showCartDetail ?'cart-show':''}}">
+    <view class="mask" bindtap="hideCartDetail"></view>
+    <view class="carticon">
+      <image class="bg_gwc" src="{{api}}res/xcx/images/{{color}}bg_gwc.png"></image>
+      <image class="gwc" src="{{api}}res/xcx/images/icon_cart.png"></image>
+      <text>{{newmap.total}}</text>
+    </view>
+    <view class="tabinfo" a:if="{{deskCode}}">
+      <image src="{{api}}res/xcx/images/{{color}}bg_tabnum.png"></image>
+      <view class="nr">NO.
+        <text>{{deskCode}}</text>
+      </view>
+    </view>
+    <scroll-view class="list" scroll-y>
+      <view class="empty">
+        <text>购物车</text>
+        <text catchtap="empty">一键清空</text>
+      </view>
+      <!--外卖点餐-->
+      <view a:for="{{menu.cates}}" a:key="unique" a:for-item="cates" a:for-index="cindex">
+        <view class="item" a:for="{{cates.glist}}" a:key="id" a:if="{{newmap[item.id].NO>0}}">
+          <view class="img">
+            <image src="{{api+item.logo}}"></image>
+          </view>
+          <view class="nr">
+            <view class="name ellipsis">{{item.title}}</view>
+            <view class="total">￥{{newmap[item.id].PR}}
+              <text class="sprice" a:if="{{item.oldPrice}}">￥{{item.oldPrice}}</text>
+            </view>
+            <view class="info" a:for="{{item.sns}}" a:for-item="sns" a:key="unique" a:if="{{newmap[item.id+'_'+sns.id].NO>0}}">
+              <text class="speci">{{sns.title}}</text>
+              <view class="oper">
+                <text class="add {{color}}cba_color" data-g="{{item}}" data-index="{{index}}" bindtap="tapAddCart">+</text>
+                <text class="tnum">{{newmap[item.id+'_'+sns.id].NO}}</text>
+                <text class="reduce {{color}}cba_color" data-g="{{item}}" data-index="{{index}}" bindtap="tapDecCart">-</text>
+              </view>
+            </view>
+            <view class="info" a:if="{{!item.sns}}">
+              <text></text>
+              <view class="oper">
+                <text class="add {{color}}cba_color" data-g="{{item}}" data-index="{{index}}" bindtap="tapAddCart">+</text>
+                <view class="tnum">{{newmap[item.id].NO}}</view>
+                <text class="reduce {{color}}cba_color" data-g="{{item}}" data-index="{{index}}" bindtap="tapDecCart">-</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+  <!--确认点餐-->
+  <view class="confirm-container {{confirmslid ? 'slidrihgt' : ''}}">
+    <scroll-view scroll-y="true" class="scroll-hei">
+      <view class="head {{color}}ba_color">
+        <view class="title">{{menuInfo.storeName}}{{deskCode}}</view>
+        <navigator url="../index/dc?change=1">
+          <view class="Modify">
+            <image src="../../images/icon_edit.png"></image>修改桌号</view>
+        </navigator>
+        <view class="miss {{color}}ctext_color">请仔细检查桌号信息，如有错误请扫描二维码更改</view>
+      </view>
+      <view class="ordermenu">
+        <text>已点菜单</text>
+      </view>
+      <view class="curmenu">
+        <view class="ititle" a:if="{{order.historys}}">
+          本次点菜（￥{{order.nowAmount}}元）
+        </view>
+        <view class="packpage" a:for="{{order.list}}" a:key="unique">
+          <view class="foodimg">
+            <image src="{{api+item.img}}"></image>
+          </view>
+          <view class="foodinfo">
+            <view class="left">
+              <text>{{item.title}}</text>
+              <text class="nr">{{item.sn}}</text>
+            </view>
+            <view class="right">
+              <text>{{item.num}}</text>
+              <text>￥{{item.price}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <!--历史菜单-->
+      <view class="lcontainer">
+        <view class="curmenu">
+          <view class="{{sliding ? 'ltitle':'ltitleup'}}" bindtap="silde" a:if="{{order.historys.length>0}}">历史菜单（￥{{order.historyAmount}}）</view>
+          <view class="{{sliding ? 'slidhide' : 'slidnone'}}">
+            <view class="packpage" a:for="{{order.historys}}" a:key="unique">
+              <view class="foodimg">
+                <image src="{{api+item.img}}"></image>
+              </view>
+              <view class="foodinfo">
+                <view class="left">
+                  <text>{{item.title}}</text>
+                  <text class="nr">{{item.sn}}</text>
+                </view>
+                <view class="right">
+                  <text>{{item.num}}</text>
+                  <text>￥{{item.price}}</text>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="allprice">
+        <text class="gray">总计：</text>{{order.amount}}元
+      </view>
+      <view class="confirminfo">
+        <!--<view>
+        <text>备注</text>
+        <text>不要太甜</text>
+      </view>
+      <view>
+        <text>餐后优惠</text>
+        <text>可获得100元代金卷</text>
+      </view>-->
+        <view bindtap="faslid">
+          <text>备注</text>
+          <text class="invoice"><text a:if="{{order.remark!='undefined'}}">{{order.remark}}</text></text>
+        </view>
+      </view>
+      <view class="ceshi"></view>
+    </scroll-view>
+    <view class="order-ac">
+      <view class="go-back" bindtap="goback">返回</view>
+      <view>
+        <text class="pice">￥{{order.amount}}元</text>
+        <form report-submit="true" bindsubmit="submits">
+          <button class="determine {{color}}ba_color" formType="submit">确认</button>
+        </form>
+      </view>
+    </view>
+  </view>
+
+  <!--发票信息-->
+  <view class="facontainer {{faslid ? 'slidleft' : ''}}">
+    <view class="faheader">
+      <view class="fatitle">备注</view>
+      <textarea placeholder="请输入备注" bindblur="remark" />
+    </view>
+
+    <view class="order-ac">
+      <view class="go-back" bindtap="faback">返回</view>
+      <view>
+        <!--<button  class="determine">确定</button>-->
+      </view>
+    </view>
+  </view>
+
+  <!--点餐完成-->
+  <view class="dccontainer {{dcslid ? 'dcleft' : ''}}">
+    <view class="dcimg">
+      <image src="{{api}}res/xcx/images/norder_finsh.png"></image>
+    </view>
+    <view class="mess">
+      <view>点餐已完成,请耐心等待上菜</view>
+      <view class="notice">你还可以</view>
+      <view class="btn-see {{color}}cba_color" bindtap="ckdd">查看订单</view>
+      <view class="btn-pay {{color}}ba_color" bindtap="ljzf">立即支付</view>
+    </view>
+  </view>
+</view>
+
+<view class="tcontent-bj {{sendShow?'':'hide'}}">
+  <view class="nr">
+    <view class="name">{{sendInfo.cname}}赠送您</view>
+    <view class="heade">总价值
+      <text style="color:#da4e3f">{{sendInfo.couponTotalPrice}}</text> 元优惠券</view>
+    <scroll-view scroll-x="true" class="tinfo" style="{{sendInfo.coupons.length==1?'width:260rpx':''}}">
+      <view class="list {{color}}list" a:for="{{sendInfo.coupons}}" a:key="unique">
+        <view class="container">
+          <text class="tit">{{item.type=='1'?'满减券':'现金券'}}</text>
+          <view class="act" a:if="{{item.full}}">满{{item.full}}
+            <text style="font-size:24rpx;text-align:center">减{{item.value}}</text>
+          </view>
+          <view class="act" a:else>{{item.value}}元</view>
+          <view class="bottom">门店通用</view>
+        </view>
+      </view>
+    </scroll-view>
+    <view class="tnum">X{{sendInfo.coupons.length}}</view>
+    <view class="btn" bindtap="goyhq">查看更多优惠活动</view>
+  </view>
+  <view class="tshut_down" bindtap="shutDown">
+    <image src="../../images/icon_gb.png"></image>关闭</view>
+</view>
+<wxs module="m1">
+  var wmType = function(item) {
+    var wmType = 0;
+    for (var i = 0; i < item.glist.length; i++) {
+      if (item.glist[i].showType == 3||item.glist[i].showType == 1) {
+        wmType = 3;
+      }
+    }
+    return wmType;
+  }
+
+  var dnType = function(item) {
+    var wmType = 0;
+    for (var i = 0; i < item.glist.length; i++) {
+      if (item.glist[i].showType == 2||item.glist[i].showType == 1) {
+        wmType = 2;
+      }
+    }
+    return wmType;
+  } 
+  
+  module.exports.wmType = wmType;
+  module.exports.dnType = dnType;
+
+</wxs>
+<wxs module="m2">
+  var num=0;
+  var tag=function(tabs,index,type){
+  if(index>0){
+      for(var i=0;i<=index;i++){
+        var glist=tabs[i].data.glist;
+        for (var j = 0; j < glist.length; j++) {
+           if(glist[j].showType==type||glist[j].showType==1){
+            num=0;
+            break;
+          }else{
+            num=-1;
+          } 
+        }
+        index+=num;
+      }
+    }
+    return index;
+  }
+  module.exports.tag = tag;  
+</wxs>

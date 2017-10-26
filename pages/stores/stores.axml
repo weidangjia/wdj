@@ -1,0 +1,40 @@
+<!--stores.wxml-->
+<!-- <import src="../template/template.wxml"/> -->
+<!-- <template a:if="{{loading}}" is="loading"/>  -->
+<view class="container">
+<view class="title">
+    <view class="picker city">
+      {{geoCity}}
+    </view>
+    <view class="aniu">
+    <view class="picker switch {{color}}cba_color" onTap="open">
+      切换城市
+    </view>
+    </view>
+</view>
+
+<!--store-->
+<view class="choose {{color}}text_color">
+  可选店铺
+</view>
+<scroll-view class="content-container" scroll-y="">
+ <block a:for="{{stores}}">
+    <view class="details">
+    <navigator url="/pages/index/ydwz?sid={{item.id}}">
+        <view class="img"><image src="{{api}}{{item.logo}}"></image></view>
+    </navigator>
+      <view class="text" data-obj="{{item}}" onTap="selectStore">
+          <view class="name"><text class="maxname">{{item.title}}</text><text class="icon" a:if="{{item.times>0}}">我去过</text></view>
+          <text>{{item.address}}</text>
+          <text>{{item.deskInfo}}</text>
+          <text>距离：{{item.distance}}</text>
+        </view>
+        
+    </view>
+    </block>    
+</scroll-view>
+<view class="footer">
+  <view class="address"><image src="{{api}}res/xcx/images/{{color}}icon_curloca.png"></image><text>当前位置：{{address}}</text></view>
+  <view class="img" onTap="refresh"><image src="{{api}}res/xcx/images/{{color}}icon_fresh.png"></image></view>
+</view>
+</view>

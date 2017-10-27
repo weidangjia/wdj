@@ -1,24 +1,27 @@
 App({
-  data:{
-    "extEnable": true,
-    "extAppid": "wxf6444710f6da188e",
-    "ext": {
-      "cid": "458996",
-      "uid":"858249554318479cb3353a7452c39b70",
-      "fileMode": "oss",
-      "ossPath": "https://img.zhcanting.com",
-      "path": "https://www.zhcanting.com/"
-    }
-  },
-  onLaunch(query) { 
-    // console.log(query)
-  },
-  onShow:function(res){
-    my.getAuthCode({
-      scopes: 'auth_user',
-      success: (res) => {
-        this.data.ext.uid = res.authCode
-      },
+  userInfo2: null,
+  getUserInfo() {
+    return new Promise((resolve, reject) => {
+      if (this.userInfo2) resolve(this.userInfo2);
+
+      my.getAuthCode({
+        success: (authcode) => {
+          my.getAuthUserInfo({
+            scopes: ['auth_user'],
+            success: (res) => {
+              this.userInfo2 = res;
+              resolve(this.userInfo2);
+            },
+            fail: () => {
+              reject({});
+            },
+          });
+        },
+        fail: () => {
+          reject({});
+        },
+      });
     });
-  }
-})
+  },
+
+});

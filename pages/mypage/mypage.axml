@@ -1,8 +1,8 @@
 <!--我的-->
 <view class="container">
-  <view class="userinfo {{color}}ba_color">
-  <view class="img"><image class="userinfo-avatar" src="{{userInfo.headImg}}" background-size="cover"></image></view>    
-  <view class="name">{{userInfo.name}}</view> 
+   <view class="userinfo {{color}}userinfo">
+  <view class="img"><image class="userinfo-avatar" a:if="{{userInfo.headImg}}" src="{{user.avatar}}" background-size="cover"></image></view>    
+    <view class="name">{{userInfo.nickName}}</view> 
 </view> 
 <!--header-->
 <view class="bnav">
@@ -17,8 +17,11 @@
 </view>
    <view class="usermotto">
   </view>
-<view class="xddlogo">
+<view class="xddlogo" a:if="{{logo==1}}">
   <image class="yds" src="../../images/yds.png"></image>
+</view>
+<view class="xddlogo" a:if="{{logo==2}}">
+  <image class="xdd" src="../../images/xdd.png"></image>
 </view>
   <!-- <import src="../tabbar/tabbar.wxml"/>
 <template is="tabbar" data="{{tabbar}}"/> 

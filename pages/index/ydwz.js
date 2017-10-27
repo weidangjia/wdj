@@ -1,9 +1,6 @@
 // pages/index/ydwz.js
 import config from '../../config.js';
-import {post} from '../../config.js';
-import {ossPath} from '../../config.js';
-import {apiPath} from '../../config.js';
-import {sid} from '../../config.js';
+import {post ,ossPath ,apiPath, sid} from '../../config.js';
 Page({
   data:{
         path:apiPath,
@@ -52,7 +49,7 @@ Page({
         data:"blue"
       });
     }
-    // config.navBarColor(my.getStorageSync('color'));
+    config.navBarColor(my.getStorageSync({ key: 'color' }).data);
     this.setData({
       color: my.getStorageSync({key:'color'}).data
     })

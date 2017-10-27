@@ -15,7 +15,7 @@ Page({
           data:'blue'
       });
     }
-    // config.navBarColor(my.getStorageSync('color'));
+    config.navBarColor(my.getStorageSync({ key: 'color' }).data);
     that.setData({
       id: options.id,
       color: my.getStorageSync({key:'color'}).data

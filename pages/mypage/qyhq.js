@@ -109,7 +109,7 @@ Page({
           data:'blue'
       });
     }
-    // config.navBarColor(my.getStorageSync('color'));
+    config.navBarColor(my.getStorageSync({ key: 'color' }).data);
     that.setData({
       order: my.getStorageSync({key:'order'}).data,
       orderId: options.id,

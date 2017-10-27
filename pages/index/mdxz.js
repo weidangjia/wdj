@@ -23,7 +23,7 @@ Page({
         data:'blue'
     });
     }
-    // config.navBarColor(my.getStorageSync('color'));
+    config.navBarColor(my.getStorageSync({ key: 'color' }).data);
     this.setData({
       Path: config.apiPath,
       api: config.ossPath,

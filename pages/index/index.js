@@ -1,5 +1,5 @@
-import { post } from '../../config.js';
-import { ossPath } from '../../config.js';
+
+import {  post, ossPath ,navBarColor } from '../../config.js';
 
 Page({
   data: {
@@ -24,15 +24,12 @@ Page({
   },
   onLoad() {
     var that=this;
-    // my.getAuthCode({
-    //   scopes: 'auth_user',
-    //   success: (res) => {
-    //     console.log(res);
-    //     my.alert({
-    //       content: res.authCode,
-    //     });
-    //   },
-    // });
+    var userInfo=my.getStorageSync({key:'uid'}).data;
+    if(userInfo){
+      this.getdata();
+    }else{
+      that.authCode();
+    }
     my.getSystemInfo({
       success: (res) => {
         that.setData({
@@ -40,7 +37,36 @@ Page({
         })
       }
     })
-    this.getdata();
+    if (!my.getStorageSync({ key: 'color' }).data) {
+      my.setStorageSync({ key: 'color', data: 'blue' });
+    }
+    navBarColor(my.getStorageSync({ key: 'color' }).data);
+    
+  },
+  authCode(){
+    var that=this;
+    my.getAuthCode({
+      scopes: 'auth_user',
+      success: (res) => {
+        console.log(res);
+        post("/wxApi/ali/login",{authcode:res.authCode},function(ret) {
+          if(ret.code==0){
+            my.setStorageSync({key:'uid',data:ret.data.id});
+            my.setStorage({
+            key: 'userInfo', // 缓存数据的 key
+            data: ret.data, // 要缓存的数据
+            success: (res) => {
+              console.log(1);
+              that.getdata();
+            },
+          });
+          }          
+        })
+      },
+      fail:(res)=>{
+        that.authcode();
+      }
+    });
   },
   getdata: function (lat, lng) {
     // 页面加载
@@ -52,10 +78,7 @@ Page({
         sendInfo.couponCanGet = ret.data.couponCanGet;
         sendInfo.couponTotalPrice = ret.data.couponTotalPrice;
         sendInfo.coupons = ret.data.coupons;
-        my.setStorageSync({
-          key:'sendInfo',
-          data:sendInfo
-        });
+        my.setStorageSync({keyi:'sendInfo',data:sendInfo});
         that.setData({
           sendInfo: sendInfo,
           sendShow: true
@@ -108,6 +131,7 @@ Page({
         that.setData({
           muti: ret.data.muti
         })
+
         if (!order) {
           that.setData({
             stores: ret.data.stores,
@@ -362,7 +386,6 @@ Page({
   },
   toMenu:function(){
     var that = this;
-    console.log(that.data)
     var order = that.data.order;
     if(that.data.muti==0&&!order) {
     my.setStorageSync({
@@ -405,4 +428,17 @@ Page({
       url: '../index/mdxz',
     })
   },
+  goMdxq:function(e){
+      var id = e.currentTarget.dataset.id;
+      var order=this.data.order;
+      if(order){
+        my.navigateTo({
+          url: '../index/mdxq?id=' + id + "&deskId=" + order.deskId + "&storeId=" + order.storeId,
+        })
+      }else{
+        my.navigateTo({
+          url: '../index/mdxq?id=' + id
+        })
+      }
+    }
 })

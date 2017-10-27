@@ -1,9 +1,9 @@
-var apiPath = "https://www.zhcanting.com/";
+var apiPath = "http://apptest.udows.com:8089/wdj/";
 const ossPath = "https://img.zhcanting.com/";
 var cid = "458996";
-var uid = "858249554318479cb3353a7452c39b70";
-var sid = "f40dd1e228324a8297c8b6cc22602b60";
-var client = 2;
+var uid = "14b64ca9b06b40d9a5bec836e1e8c4aa";
+var sid = "7cb399660bfd4d41a14777c847ac2b7e";
+var client = 3;
 export default {
     sid,
     apiPath,
@@ -11,7 +11,7 @@ export default {
     post(path, data, success) {
         data.cid = cid;
         data.uid = uid;
-        // data.sid = sid;
+        data.sid = sid;
         my.httpRequest({
             url: apiPath + path,
             method: 'POST',
@@ -52,9 +52,29 @@ export default {
     },
     tost(content){
         my.showToast({
+            type: 'success',
             content: content,
             duration: 3000
         })
+    },
+    //设置导航栏背景色
+    navBarColor(color) {
+        if (color == 'green') {
+            color = '#1ebda7'
+        } else if (color == 'gray') {
+            color = '#303030'
+        } else {
+            color = '#0f96fe'
+        }
+        if (my.setNavigationBar) {
+            my.setNavigationBar({
+                backgroundColor: color,
+            })
+        } else {
+            my.setNavigationBar({
+                backgroundColor: '#303030',
+            })
+        }
     },
     formid(id){
         if (id == 'the formId is a mock one') { return; }
@@ -78,5 +98,18 @@ export default {
                 }
             }
         });
+    },
+    //推送
+    formid(id) {
+      if (id == 'the formId is a mock one') { return; }
+      var openid = my.getStorageSync({key:'openid'}).data;
+      my.httpRequest({
+        url: apiPath + 'wxApi/xcx/pushFormId',
+        data: { openid: openid, formid: id },
+        header: {
+          'content-type': 'application/x-www-form-urlencoded'
+        },
+        method: 'POST',
+      })
     }
 }

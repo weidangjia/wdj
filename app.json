@@ -2,6 +2,8 @@
   "pages": [
     "pages/index/index",
     "pages/mypage/mypage",
+    "pages/index/wddd",
+    "pages/waimai/wmdd",
     "pages/waimai/dzlb",
     "pages/waimai/dzxz",
     "pages/mypage/qyhq",
@@ -13,7 +15,10 @@
     "pages/stores/stores",
     "pages/index/ydwz",
     "pages/index/mdxq",
-    "pages/index/smdc"
+    "pages/index/smdc",
+    "pages/index/dc",
+    "pages/shop/hdsm",
+    "pages/shop/shop"
   ],
   "window": {
     "defaultTitle": "首页",

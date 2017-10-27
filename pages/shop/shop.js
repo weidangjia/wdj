@@ -1,9 +1,8 @@
 // pages/shop/shop.js
-var config = require("../../config.js");
+import { post,ossPath,tost,formid,navBarColor} from '../../config.js';
 Page({
   data: {
-    path: config.resPath,
-    api: config.apiPath,
+    api: ossPath,
     sliding: true,
     confirmslid: false,
     faslid: false,
@@ -21,8 +20,8 @@ Page({
     orderId: '',
     ydId: '',
     menu: '',
-    menutab: 2,
-    storeId: '',
+    menutab: 1,
+    storeId: '7cb399660bfd4d41a14777c847ac2b7e',
     cart: {
       count: 0,
       total: 0,
@@ -50,37 +49,32 @@ Page({
       duration: 500, // 切换时间
       current: 0 // 当前激活的panel
     },
-    loading:true,
-    newmap:{},
+    loading: true,
+    text:{data:'sdfsdfds'},
+    newmap: {},
   },
   //获取数据
   onLoad: function (options) {
-    console.log(options)
     var that = this;
+    console.log(that.options)
     that.data.deskCode = options.deskCode;
     that.data.deskId = options.deskId;
     that.data.ydId = options.ydId;
-    if (!my.getStorageSync({key:"color"}).data) {
-      my.setStorageSync({
-        key:'color',
-        data:'blue'
-      });
+    if (!my.getStorageSync({ key: 'color' }).data) {
+      my.setStorageSync({ key: 'color', data: 'blue' });
     }
-    if (!my.getStorageSync({key:'menuStyle'}).data) {
-      my.setStorageSync({
-        key:'menuStyle',
-        data:'1'
-    });
+    if (!my.getStorageSync({ key: 'menuStyle' }).data) {
+      my.setStorageSync({ key: 'menuStyle', data: '1' }, );
     }
-    // config.navBarColor(my.getStorageSync('color'));
     that.setData({
-      storeId: my.getStorageSync({key:'sid'}).data,
+      storeId: '7cb399660bfd4d41a14777c847ac2b7e',
       deskCode: that.data.deskCode,
       deskId: that.data.deskId,
       ydId: that.data.ydId,
-      color: my.getStorageSync({key:'color'}).data,
-      menutab: my.getStorageSync({key:'menuStyle'}).data
+      color: my.getStorageSync({ key:'color' }).data,
+      menutab: 1
     })
+    navBarColor(that.data.color);
     if (options.isWm) {
       that.setData({
         isWm: options.isWm
@@ -96,53 +90,54 @@ Page({
         tab_config.item_width = window_width / tab_config.tabs.length;
       }
       var length = that.data.text.length * that.data.size;
-      that.setData({ 
-        "window_width": window_width, 
-        "tab_config": tab_config 
-        });
+      that.setData({
+        "window_width": window_width,
+        "tab_config": tab_config
+      });
 
     } catch (e) {
 
     }
-    var newMenu = my.getStorageSync({key:that.data.storeId + 'menu'}).data;
-    if (newMenu){
+    var newMenu = my.getStorageSync({ key: that.data.storeId + 'menu' }).data;
+    if (newMenu) {
       that.recommended(newMenu);
-    }    
+    }
     setTimeout(function () {
       that.setData({
         loading: false
       })
     }, 800)
-    if (that.data.isWm==0){
-      var newmap = my.getStorageSync(that.data.storeId + 'newmap');
-    }else if(that.data.isWm==1){
-      var newmap = my.getStorageSync(that.data.storeId + 'wmNewmap');
+    if (that.data.isWm == 0) {
+      var newmap = my.getStorageSync({ key: that.data.storeId + 'newmap' }).data;
+    } else if (that.data.isWm == 1) {
+      var newmap = my.getStorageSync({ key: that.data.storeId + 'wmNewmap' }).data;
     }
     if (!newmap) {
       newmap = { total: 0, amount: 0 }
     }
     that.setData({
       menu: newMenu,
-      newmap: newmap
+      newmap: newmap,
+      text:newmap
     });
-    // that.loadata();
+    that.loadata(that.data.menu);
   },
-  onShow:function(){
+  onShow: function () {
     this.getYh();
   },
-  category: function (menuInfo){
-    var that=this,menu=that.data.menu,newmap=that.data.newmap;
+  category: function (menuInfo) {
+    var that = this, menu = that.data.menu, newmap = that.data.newmap;
     menu.cates.forEach(function (c, j) {
       c.glist.forEach(function (g, k) {
-        if (newmap[g.id]){        
-        if (newmap[g.id].NO>0) {
-          menuInfo.gCates.forEach(function(m,i){
-            if(g.cateId==m.id){
-              m.num += newmap[g.id].NO;
-              return;
-            }
-          })
-        }
+        if (newmap[g.id]) {
+          if (newmap[g.id].NO > 0) {
+            menuInfo.gCates.forEach(function (m, i) {
+              if (g.cateId == m.id) {
+                m.num += newmap[g.id].NO;
+                return;
+              }
+            })
+          }
         }
       })
     })
@@ -150,114 +145,45 @@ Page({
       menuInfo: menuInfo
     })
   },
-  recommended:function(menu){
-    var menu=menu,that=this,tjList=[],swipes = [],tabs=[],data={glist:''};
-    // 已注释
-    // menu.cates.forEach(function(c,j){
-    //   c.glist.forEach(function(g,k){
-    //     if(g.isTop>0){
-    //       tjList.push(g);
-    //     }
-    //   })
-    // })
-    // data.glist=tjList;
-    // for (var i = 0; i < menu.cates.length; i++) {
-    //   var tj = { id: menu.cates[i].id, title: menu.cates[i].title, data: menu.cates[i]};
-    //   tabs.push(tj);
-    //   swipes.push(i);
-    // }
-    // if (menu.top > 0) {
-    //   var tj = { id: "tj", title: "热门推荐", data: data}
-    //   tabs.unshift(tj);
-    //   swipes.push(i);
-    // }
-    that.setData({
-      tjList: tjList,
-      swipes: swipes,
-      tabs:tabs,
-      menu: menu
-    })
-  },
-  loadata: function () {
+  loadata: function (oldMenu) {
     var that = this;
-    var version = my.getStorageSync(that.data.storeId + 'menu').version;
-    config.post('wxApi/s/menuV3', { version: version!=undefined ? version:'' }, function (ret) {
+    var version = my.getStorageSync({ key: that.data.storeId + 'menu' }).version;
+    post('wxApi/s/menuV3', { version:'' }, function (ret) {
       if (ret.code == 0) {
-      if (that.data.isWm) {
-        that.setData({
-          limit: ret.data.wmLimit
-        })
-      }      
+        if (that.data.isWm) {
+          that.setData({
+            limit: ret.data.wmLimit
+          })
+        }
         that.data.menu = ret.data;
-        if (that.data.menu.cates.length>0){
-        that.setData({
-          menu: that.data.menu,
-          classifySeleted: that.data.menu.cates[0].title
-        })
+        if (that.data.menu.cates.length > 0) {
+          that.setData({
+            menu: that.data.menu,
+            classifySeleted: that.data.menu.cates[0].title
+          })
         }
         setTimeout(function () {
           that.setData({
             loading: false
           })
-        }, 800)
-        var newmap={};
-        my.removeStorageSync(that.data.storeId + 'newmap');
-        my.removeStorageSync(that.data.storeId + 'wmNewmap');
-        my.removeStorageSync(that.data.storeId + 'menu');
-        // newmap.total=0,newmap.amount=0;
-        // ret.data.cates.forEach(function(o,i){
-        //   o.glist.forEach(function(g,j){
-        //     var num=0;
-        //     if (g.hasSn){
-        //       var gnum=0;
-        //       g.sns.forEach(function(s,k){
-        //         if (newmap[g.id + '_' + s.id]){
-        //         if (newmap[g.id+'_'+s.id].NO > 0) {
-        //           num += newmap[g.id + '_' + s.id].NO;
-        //           gnum += newmap[g.id + '_' + s.id].NO;
-        //           newmap.total += newmap[g.id + '_' + s.id].NO;
-        //           newmap.amount = Number((newmap.amount + s.price).toFixed(2));
-        //         }
-        //         }
-        //       })
-        //       newmap[g.id]=gnum;
-        //     }else{
-        //       if (newmap[g.id]){
-        //       if (newmap[g.id].NO>0){
-        //         num = newmap[g.id].NO;
-        //         newmap.total+=newmap[g.id].NO;
-        //         newmap.amount = Number((newmap.amount + g.nowPrice).toFixed(2));            
-        //       }
-        //       }
-        //     }
-        //     if(num>0){
-        //       that.data.menuInfo.gCates.forEach(function (o, i) {
-        //         if (o.id == g.cateId) {
-        //           o.num=num;
-        //           return false;
-        //         }
-        //       });
-        //     }            
-        //   })
-        // })
+        }, 800)        
         my.setStorage({
           key: that.data.storeId + 'menu',
           data: ret.data,
         })
-        that.recommended(ret.data);
-        that.setData({
-          menu:ret.data,
-          newmap:newmap,
-          menuInfo: that.data.menuInfo,
-        })
-      }      
-    },true)
+        // that.recommended(ret.data);
+        console.log(ret.data);
+        that.screen(ret.data,that.data.isWm);
+      }else{
+        that.screen(oldMenu,that.data.isWm);
+      }
+    }, true)
     //分类
-    config.post('wxApi/s/menuInfo', {}, function (ret) {
+    post('wxApi/s/menuInfo', {sid:my.getStorageSync({key:'sid'}).data}, function (ret) {
       if (ret.code == 0) {
         var menuInfo = ret.data;
         var newmap = that.data.newmap;
-        var newMenu = my.getStorageSync(that.data.storeId + 'menu');
+        var newMenu = my.getStorageSync({ key: that.data.storeId + 'menu' }).data;
         menuInfo.gCates.forEach(function (g, i) {
           if (newmap[g.id] > 0) {
             m.num = newmap[g.id];
@@ -271,27 +197,166 @@ Page({
           menuInfo: menuInfo
         })
       }
-    }, true)   
+    }, true)
+  },  
+  getYh: function () {
+    var id = my.getStorageSync({key:'sid'}).data;
+    var that = this;
+    post('wxApi/coupon/store', { id: id }, function (ret) {
+      if (ret.code == 0) {
+        that.setData({
+          couponList: ret.data
+        })
+      }
+    }, true)
+    post('wxApi/coupon/present', {}, function (ret) {
+      if (ret.data.coupons.length > 0) {
+        var sendInfo = {};
+        sendInfo.couponCanGet = ret.data.couponCanGet;
+        sendInfo.couponTotalPrice = ret.data.couponTotalPrice;
+        sendInfo.coupons = ret.data.coupons;
+        sendInfo.cname = ret.data.cname;
+        my.setStorageSync('sendInfo', sendInfo);
+        that.setData({
+          sendInfo: sendInfo,
+          sendShow: true,
+        })
+      }
+    }, true)
+  },
+  recommended: function (menu) {
+    var menu = menu, that = this, tjList = [], swipes = [], tabs = [], data = { glist: '' };
+    menu.cates.forEach(function (c, j) {
+      c.glist.forEach(function (g, k) {
+        if (g.isTop > 0) {
+          tjList.push(g);
+        }
+      })
+    })
+    data.glist = tjList;
+    for (var i = 0; i < menu.cates.length; i++) {
+      var tj = { id: menu.cates[i].id, title: menu.cates[i].title, data: menu.cates[i] };
+      tabs.push(tj);
+      swipes.push(i);
+    }
+    if (menu.top > 0) {
+      var tj = { id: "tj", title: "热门推荐", data: data }
+      tabs.unshift(tj);
+      swipes.push(i);
+    }
+    that.setData({
+      tjList: tjList,
+      swipes: swipes,
+      tabs: tabs,
+      menu: menu
+    })
+  },
+  screen:function(menu,isWm){
+    if(isWm==1){
+      isWm=3;
+    }else{
+      isWm=2;
+    }
+    menu.cates.forEach(function(c,i){
+      c.glist.forEach(function(g,j){
+        if(g.showType==1||g.showType==isWm){
+        }else{
+          c.glist.splice(0,j);
+          menu.top-=1;
+        }
+      })
+    })
+    this.setData({menu:menu});
+    this.recommended(menu);
+  },
+  newmap: function (id, num, sns, price, tcinfo) {
+    var that = this;
+    var key = sns ? (id + "_" + sns) : id;
+    var newmap = that.data.newmap;
+    if (newmap.total == undefined) newmap.total = 0;
+    if (newmap.amount == undefined) newmap.amount = 0;
+    if (newmap[key] == undefined) newmap[key] = { NO: 0, PR: 0 };
+    if (newmap[id] == undefined || newmap[id] == 0) newmap[id] = { NO: 0, PR: 0 };
+    var cnt = newmap[key].NO;
+    cnt = cnt + num;
+    cnt = cnt > 0 ? cnt : 0;
+
+    if (newmap[key].NO != cnt) {
+      newmap[key].NO = cnt;
+      newmap.total = newmap.total + num;
+      if (num > 0) {
+        newmap.amount = Number((newmap.amount + price).toFixed(2));
+        newmap[key].PR = Number((newmap[key].NO * price).toFixed(2));
+        if (sns) {
+          newmap[id].NO += 1;
+          var total = 0;
+          for (var p in newmap) {
+            if (p.startsWith(id + "_")) {
+              total += newmap[p].PR;
+            }
+          }
+          newmap[id].PR = total;
+        } else {
+          newmap[id].PR = Number((newmap[id].NO * price).toFixed(2));
+        }
+
+      } else {
+        newmap.amount = Number((newmap.amount - price).toFixed(2));
+        newmap[key].PR = Number((newmap[key].NO * price).toFixed(2));
+        if (sns) {
+          newmap[id].NO -= 1;
+          newmap[id].PR -= price;
+        } else {
+          newmap[id].PR = Number((newmap[id].NO * price).toFixed(2));
+        }
+      }
+    }
+    if (tcinfo) {
+      tcinfo.num = newmap[id];
+      if (tcinfo.hasSn) {
+        tcinfo.sns.forEach(function (s, i) {
+          if (newmap[tcinfo.id + '_' + s.id]) {
+            if (newmap[tcinfo.id + '_' + s.id].NO > 0) s.num = newmap[tcinfo.id + '_' + s.id].NO;
+          }
+        })
+      }
+    }
+    that.setData({
+      newmap: newmap,
+      tcinfo: tcinfo
+    })
+    if (that.data.isWm == 0) {
+      my.setStorage({
+        key: that.data.storeId + 'newmap',
+        data: newmap,
+      })
+    } else {
+      my.setStorage({
+        key: that.data.storeId + 'wmNewmap',
+        data: newmap,
+      })
+    }
+
   },
   //增加
   tapAddCart: function (e) {
     var that = this;
     var g = e.currentTarget.dataset.g || e.currentTarget.dataset.tcinfo;
-    var index = e.currentTarget.dataset.index;   
-		if(g.num.NO||g.num.NO==0){
-			g.num=g.num.NO;
-		}
+    var index = e.currentTarget.dataset.index;
+    if (g.num.NO || g.num.NO == 0) {
+      g.num = g.num.NO;
+    }
     if (g.total > g.num && (g.max == 0 || g.max > g.num) && g.num < 99) {
       that.data.menu.cates.forEach(function (o, i) {
         if (o.id == g.storeCateId) {
           o.glist.forEach(function (k, j) {
             if (k.id == g.id) {
-              if(!g.sns){
-                that.newmap(k.id,1,null,k.nowPrice);
-              }              
-              if (g.sns) {   
-                  that.newmap(k.id, 1, g.sns[index].id, g.sns[index].price,g);       
-              } 
+              if (!g.sns) {
+                that.newmap(k.id, 1, null, k.nowPrice);
+              }
+              if (g.sns) {
+                that.newmap(k.id, 1, g.sns[index].id, g.sns[index].price, g);
+              }
               return;
             }
           })
@@ -313,75 +378,6 @@ Page({
       })
     }
   },
-  newmap: function (id,num,sns,price,tcinfo){
-    var that = this;    
-    var key = sns?(id+"_"+sns):id;
-    var newmap=that.data.newmap;
-    if(newmap.total == undefined)newmap.total = 0;
-    if (newmap.amount == undefined) newmap.amount = 0;   
-    if (newmap[key] == undefined) newmap[key] = {NO:0,PR:0};
-    if (newmap[id] == undefined || newmap[id] ==0) newmap[id] = { NO: 0, PR: 0 };
-    var cnt = newmap[key].NO;
-    cnt = cnt + num;
-    cnt = cnt > 0 ? cnt : 0;
-
-    if (newmap[key].NO != cnt){
-      newmap[key].NO = cnt;
-      newmap.total = newmap.total + num;
-      if (num > 0) {    
-        newmap.amount = Number((newmap.amount + price).toFixed(2));
-        newmap[key].PR = Number((newmap[key].NO * price).toFixed(2));            
-        if (sns) {
-          newmap[id].NO += 1;
-          var total=0;
-          for (var p in newmap){
-            if(p.startsWith(id+"_")){
-              total+=newmap[p].PR;
-            }
-          }
-          newmap[id].PR=total;
-        } else {
-          newmap[id].PR = Number((newmap[id].NO * price).toFixed(2));
-        }     
-       
-      }else{      
-        newmap.amount = Number((newmap.amount - price).toFixed(2));
-        newmap[key].PR = Number((newmap[key].NO * price).toFixed(2));  
-        if (sns) {
-          newmap[id].NO -= 1;
-          newmap[id].PR -=price;
-        } else {
-          newmap[id].PR = Number((newmap[id].NO * price).toFixed(2));
-        }       
-      }
-    }
-    if(tcinfo){
-      tcinfo.num=newmap[id];
-      if(tcinfo.hasSn){
-        tcinfo.sns.forEach(function(s,i){
-          if (newmap[tcinfo.id + '_' + s.id]){
-          if (newmap[tcinfo.id + '_' + s.id].NO > 0) s.num = newmap[tcinfo.id + '_' + s.id].NO;
-          }
-        })
-      }
-    }
-    that.setData({
-      newmap:newmap,
-      tcinfo: tcinfo
-    })
-    if (that.data.isWm==0){
-      my.setStorage({
-        key: that.data.storeId + 'newmap',
-        data: newmap,
-      })
-    }else{
-      my.setStorage({
-        key: that.data.storeId + 'wmNewmap',
-        data: newmap,
-      })
-    }
-    
-  },
   //减少
   tapDecCart: function (e) {
     var that = this;
@@ -389,24 +385,24 @@ Page({
     var index = e.currentTarget.dataset.index;
     var isreturn = false;
     if (g.sns) {
-        that.data.menu.cates.forEach(function (k, i) {
-          if (k.id == g.storeCateId) {
-            k.glist.forEach(function (o, j) {
-              if (o.id == g.id) {
-                that.newmap(g.id, -1, g.sns[index].id, g.sns[index].price,g);            
-                isreturn = true;
-                return;
-              }
-            })
-          }
-          if (isreturn) return;
-        });
+      that.data.menu.cates.forEach(function (k, i) {
+        if (k.id == g.storeCateId) {
+          k.glist.forEach(function (o, j) {
+            if (o.id == g.id) {
+              that.newmap(g.id, -1, g.sns[index].id, g.sns[index].price, g);
+              isreturn = true;
+              return;
+            }
+          })
+        }
+        if (isreturn) return;
+      });
     } else {
       that.data.menu.cates.forEach(function (o, i) {
         if (o.id == g.storeCateId) {
           o.glist.forEach(function (k, j) {
             if (k.id == g.id) {
-              that.newmap(k.id, -1, null, k.nowPrice);              
+              that.newmap(k.id, -1, null, k.nowPrice);
             }
           })
         }
@@ -431,61 +427,59 @@ Page({
   confirm: function (e) {
     var that = this;
     var array = [];
-    var newmap=that.data.newmap;
+    var newmap = that.data.newmap;
     that.data.menu.cates.forEach(function (p, j) {
       p.glist.forEach(function (o, i) {
-        if (newmap[o.id]){        
-        if (newmap[o.id].NO > 0) {
-          var goods = { id: o.id, hasSn: o.hasSn, num: newmap[o.id].NO};
-          if(o.hasSn==1){
-            var goodsSns=[];
-            var snum=0;
-            o.sns.forEach(function(s,k){
-              if (newmap[o.id + '_' + s.id]){              
-              snum = newmap[o.id + '_' + s.id].NO;
-              snum = snum ? snum : 0;
-              goodsSns.push({ id: s.id, num: snum});
-              }
-            })
-            goods.sns = goodsSns;
+        if (newmap[o.id]) {
+          if (newmap[o.id].NO > 0) {
+            var goods = { id: o.id, hasSn: o.hasSn, num: newmap[o.id].NO };
+            if (o.hasSn == 1) {
+              var goodsSns = [];
+              var snum = 0;
+              o.sns.forEach(function (s, k) {
+                if (newmap[o.id + '_' + s.id]) {
+                  snum = newmap[o.id + '_' + s.id].NO;
+                  snum = snum ? snum : 0;
+                  goodsSns.push({ id: s.id, num: snum });
+                }
+              })
+              goods.sns = goodsSns;
+            }
+            array.push(goods);
           }
-          array.push(goods);
-        }
         }
       })
     });
     var obj = { glist: array };
     var json = JSON.stringify(obj);
-    if (e) {
-      config.formid(e.detail.formId);
-    }
+
     if (that.data.isWm) {
       if (newmap.total > 0) {
 
-        config.post('wxApi/wm/confirm', { jsonStr: json }, function (ret) {
+        post('wxApi/wm/confirm', { jsonStr: json }, function (ret) {
           if (ret.code == 0) {
             my.setStorage({
               key: 'wm',
               data: ret.data,
             })
-            var sid = my.getStorageSync('sid');           
+            var sid = my.getStorageSync('sid');
             my.redirectTo({
               url: '../waimai/qrdc?strname=' + that.data.menuInfo.storeName,
             })
-          } else if(ret.code ==-2) {
+          } else if (ret.code == -2) {
             that.onShow();
-          }else{
-            config.tost(ret.msg);
+          } else {
+            tost(ret.msg);
           }
 
-        },true)
+        }, true)
       } else {
-        config.tost("请点餐！")
+        tost("请点餐！")
       }
     } else {
       if (newmap.total > 0 && newmap.amount > 0) {
         if (that.data.ydId) {
-          config.post("wxApi/o/confirm", { ydId: that.data.ydId, jsonStr: json }, function (ret) {
+          post("wxApi/o/confirm", { ydId: that.data.ydId, jsonStr: json }, function (ret) {
             if (ret.code == 0) {
               that.data.order = ret.data;
               if (!that.data.order.remark) that.data.order.remark = '';
@@ -494,14 +488,14 @@ Page({
                 confirmslid: true,
               })
             } else if (ret.code > 0) {
-              config.tost(ret.msg)
+              tost(ret.msg)
             } else if (ret.code == -3) {
-              config.tost(ret.msg);
+              tost(ret.msg);
               my.navigateTo({
                 url: '../index/dc',
               })
             }
-          },true)
+          }, true)
         } else {
           if (that.data.deskId == null || that.data.deskId == '') {
             my.navigateTo({
@@ -509,7 +503,7 @@ Page({
             })
             return;
           }
-          config.post("wxApi/o/confirm", { deskId: that.data.deskId, jsonStr: json }, function (ret) {
+          post("wxApi/o/confirm", { deskId: that.data.deskId, jsonStr: json }, function (ret) {
             if (ret.code == 0) {
               that.data.order = ret.data;
               if (!that.data.order.remark) that.data.order.remark = '';
@@ -517,9 +511,9 @@ Page({
                 order: that.data.order,
                 confirmslid: true,
               })
-              var sid = my.getStorageSync('sid');
+              var sid = my.getStorageSync({key:'sid'}).data;
             } else if (ret.code > 0) {
-              config.tost(ret.msg);
+              tost(ret.msg);
               if (ret.msg != '您已经有一个正在进行的订单') {
                 setTimeout(function () {
                   my.navigateTo({
@@ -528,12 +522,12 @@ Page({
                 }, 1000)
               }
             } else if (ret.code == -2) {
-              config.tost(ret.msg);
+              tost(ret.msg);
             }
-          },true)
+          }, true)
         }
       } else {
-        config.tost('请点菜');
+        tost('请点菜');
       }
     }
   },
@@ -566,33 +560,33 @@ Page({
     });
   },
   //滚动事件
-  // onGoodsScroll: function (e) {
-  //   if (e.detail.scrollTop > 150 && !this.data.scrollDown) {
-  //     this.setData({
-  //       scrollDown: true
-  //     });
-  //   } else if (e.detail.scrollTop < 150 && this.data.scrollDown) {
-  //     this.setData({
-  //       scrollDown: false
-  //     });
-  //   }
+  // // onGoodsScroll: function (e) {
+  // //   if (e.detail.scrollTop > 150 && !this.data.scrollDown) {
+  // //     this.setData({
+  // //       scrollDown: true
+  // //     });
+  // //   } else if (e.detail.scrollTop < 150 && this.data.scrollDown) {
+  // //     this.setData({
+  // //       scrollDown: false
+  // //     });
+  // //   }
 
-  //   var scale = e.detail.scrollWidth / 585,
-  //     scrollTop = e.detail.scrollTop / scale,
-  //     h = 0,
-  //     classifySeleted,
-  //     len = this.data.menu.cates.length;
-  //   this.data.menu.cates.forEach(function 　(classify, i) {
-  //     var _h = classify.glist.length * (257) + 62;
-  //     if (scrollTop >= h - 100 / scale) {
-  //       classifySeleted = classify.title;
-  //     }
-  //     h += _h;
-  //   })
-  //   this.setData({
-  //     classifySeleted: classifySeleted
-  //   });
-  // },
+  // //   var scale = e.detail.scrollWidth / 585,
+  // //     scrollTop = e.detail.scrollTop / scale,
+  // //     h = 0,
+  // //     classifySeleted,
+  // //     len = this.data.menu.cates.length;
+  // //   this.data.menu.cates.forEach(function 　(classify, i) {
+  // //     var _h = classify.glist.length * (257) + 62;
+  // //     if (scrollTop >= h - 100 / scale) {
+  // //       classifySeleted = classify.title;
+  // //     }
+  // //     h += _h;
+  // //   })
+  // //   this.setData({
+  // //     classifySeleted: classifySeleted
+  // //   });
+  // // },
   tapClassify: function (e) {
     var id = e.currentTarget.dataset.id;
     this.setData({
@@ -604,31 +598,6 @@ Page({
         classifySeleted: id
       });
     }, 10);
-  },
-  getYh: function () {
-    var id=my.getStorageSync('sid');
-    var that = this;
-    config.post('wxApi/coupon/store', { id: id }, function (ret) {
-      if (ret.code == 0) {
-        that.setData({
-          couponList: ret.data
-        })
-      }
-    },true)
-    config.post('wxApi/coupon/present', {}, function (ret) {
-      if (ret.data.coupons.length > 0) {
-        var sendInfo = {};
-        sendInfo.couponCanGet = ret.data.couponCanGet;
-        sendInfo.couponTotalPrice = ret.data.couponTotalPrice;
-        sendInfo.coupons = ret.data.coupons;
-        sendInfo.cname = ret.data.cname;
-        my.setStorageSync('sendInfo', sendInfo);
-        that.setData({
-          sendInfo: sendInfo,
-          sendShow: true,
-        })
-      }
-    }, true)
   },
   showCartDetail: function () {
     this.setData({
@@ -645,13 +614,14 @@ Page({
       sliding: !this.data.sliding
     })
   },
-  // //确认点餐
+  //确认点餐
   submits: function (e) {
-    config.formid(e.detail.formId);
+    console.log(e);
+    formid(e.detail.formId);
     var that = this;
-    var newmap=that.data.newmap;
+    var newmap = that.data.newmap;
     if (that.data.isWm == 0) {
-      my.removeStorageSync(that.data.storeId + 'newmap');
+      my.removeStorageSync({key:that.data.storeId + 'newmap'});
     } else if (that.data.isWm == 1) {
       my.removeStorageSync(that.data.storeId + 'wmNewmap');
     }
@@ -659,41 +629,41 @@ Page({
       var obj = { list: that.data.order.list };
       var json = JSON.stringify(obj);
       if (that.data.ydId) {
-        config.post("/wxApi/o/add", { ydId: that.data.ydId, remark: that.data.order.remark, jsonStr: json }, function (ret) {
+        post("/wxApi/o/add", { ydId: that.data.ydId, remark: that.data.order.remark, jsonStr: json }, function (ret) {
           if (ret.code == 0) {
             that.data.orderId = ret.msg;
             that.setData({
               dcslid: true,
               orderId: ret.msg
             })
-          }else if(ret.code=-2){
-            config.tost(ret.msg);
+          } else if (ret.code = -2) {
+            tost(ret.msg);
             that.onShow();
           } else {
-            config.tost(ret.msg);
+            tost(ret.msg);
           }
-        },true);
+        }, true);
       } else {
-        config.post("/wxApi/o/add", { deskId: that.data.deskId, remark: that.data.order.remark, jsonStr: json }, function (ret) {
+        post("/wxApi/o/add", { deskId: that.data.deskId, remark: that.data.order.remark, jsonStr: json }, function (ret) {
           if (ret.code == 0) {
             that.data.orderId = ret.msg;
-            if (that.data.menuInfo.mode==2){
+            if (that.data.menuInfo.mode == 2) {
               my.redirectTo({
                 url: '../index/zf?id=' + that.data.orderId,
               })
-            }else{
+            } else {
               that.setData({
                 dcslid: true,
                 orderId: ret.msg
               })
-            }           
+            }
           } else if (ret.code = -2) {
-            config.tost(ret.msg);
+            tost(ret.msg);
             that.onShow();
           } else {
-            config.tost(ret.msg);
+            tost(ret.msg);
           }
-        },true);
+        }, true);
       }
     }
   },
@@ -772,20 +742,20 @@ Page({
     let that = this;
   },
   tcshow: function (e) {
-    var that=this;
-    var newmap=that.data.newmap;
-    var obj = e.currentTarget.dataset.g;   
-    if (obj.hasSn){
-      obj.sns.forEach(function(s,j){
-        if (newmap[obj.id+'_'+s.id]>0){
+    var that = this;
+    var newmap = that.data.newmap;
+    var obj = e.currentTarget.dataset.g;
+    if (obj.hasSn) {
+      obj.sns.forEach(function (s, j) {
+        if (newmap[obj.id + '_' + s.id] > 0) {
           s.num = newmap[obj.id + '_' + s.id] > 0;
-          }
-        })
-      }else{
-        if (newmap[obj.id] > 0) {
-          obj.num = newmap[obj.id]
         }
-      }      
+      })
+    } else {
+      if (newmap[obj.id] > 0) {
+        obj.num = newmap[obj.id]
+      }
+    }
     var tcimgs = obj.imgs.split(",");
     that.setData({
       tcinfo: obj,
@@ -819,25 +789,38 @@ Page({
       url: '../mypage/qyhq',
     })
   },
-  empty:function(){
-    this.data.newmap={};
-    this.data.menuInfo.gCates={};
-    if(this.data.isWm==0){
+  empty: function () {
+    this.data.newmap = {};
+    this.data.menuInfo.gCates = {};
+    if (this.data.isWm == 0) {
       my.removeStorage({
         key: this.data.storeId + 'newmap',
         success: function (res) { },
       })
-    }else if(isWm==1){
+    } else if (isWm == 1) {
       my.removeStorage({
         key: this.data.storeId + 'wmNewmap',
         success: function (res) { },
       })
-    this.setData({
-      newmap:this.data.newmap,
-      menuInfo: this.data.menuInfo,
-      showCartDetail:false
-    })
+      this.setData({
+        newmap: this.data.newmap,
+        menuInfo: this.data.menuInfo,
+        showCartDetail: false
+      })
     }
   },
+  goDetail: function () {
+    var deskId = this.data.deskId;
+    var storeId = this.data.storeId;
+    if (deskId && storeId) {
+      my.redirectTo({
+        url: '../index/mdxq?id=' + storeId + "&deskId=" + deskId + "&storeId=" + storeId,
+      })
+    } else {
+      my.redirectTo({
+        url: '../index/mdxq?id=' + storeId
+      })
+    }
+  }
 });
 

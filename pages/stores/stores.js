@@ -25,7 +25,7 @@ Page({
         data:'blue'
       });
     }
-
+    config.navBarColor(my.getStorageSync({ key: 'color' }).data);
     that.setData({
       froms:options.from
     })
@@ -66,7 +66,6 @@ Page({
         that.setData({
           stores: ret.data
         })
-        console.log(ret.data)
       } else {
         my.alert({
           title: ret.msg, // alert 框的标题
@@ -126,7 +125,7 @@ Page({
   },
   toStore:function(id){
     my.navigateTo({
-      url: '../index/mdxq?sid='+id,
+      url: '../index/mdxq?id='+id,
     })
   },
   selectStore:function(e){
@@ -146,10 +145,12 @@ Page({
         data:id
       });
       my.navigateTo({
-        url: '../shop/shop',
+        url: '../shop/shop?isWm=0',
       })
+      console.log('shop')
     } else {
       that.toStore(id);
+      console.log(id)
     }
   }
 })

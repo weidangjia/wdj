@@ -1,6 +1,7 @@
 page {
   height: 100%;
   overflow: hidden;
+  background: #f2f2f2;
 }
 .container {
   height: 100%;
@@ -11,28 +12,64 @@ page {
   position: relative;
   color: #000;
   transition: all 0.6s ease-in-out;
-  height: 234rpx;
+  height: 230rpx;
   overflow: hidden;
 }
-.dheader image{
-  position: absolute;
-  top: 0;
-  left: 0;
+.dheader .content{
+  height: 150rpx;
+  display: flex;
+  padding:  0 23rpx;
+  justify-content: space-between;
+  font-size: 14px;
+  color: #fff;
+}
+.dheader .content .img{
+  width: 140rpx;
+  height: 140rpx;
+  background: #000;
+}
+.dheader .content .img image{
   width: 100%;
   height: 100%;
-  z-index: 1;
 }
-
-.dheader view{
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  padding:11rpx 17.5rpx;
-  background-color: rgba(0,0,0,0.7); 
-  z-index: 22;
-  width: 100%;
-  font-size: 13px;
+.dheader .content .nr{
+  width: 540rpx;
+  display: flex;
+  flex-direction: column;
+}
+.dheader .name{
+  font-size: 16px;
+  font-weight: bold;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  padding-right: 50rpx;
+  background: url('https://img.zhcanting.com/res/xcx/images/dc_arrow.png') right center no-repeat;
+  background-size:18rpx; 
+  margin-bottom: 23rpx;
+}
+.dheader .small{
+  font-size: 12px;
+}
+.dheader .last{
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.dheader .info{
+  font-size: 15px;
   color: #fff;
+  line-height: 80rpx;
+  background: url('https://img.zhcanting.com/res/xcx/images/hui.png') 23rpx center no-repeat;
+  background-size: 45rpx;
+   padding-left: 80rpx;
+}
+.dheader .info::before{
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 80rpx;
+  background:-webkit-gradient(linear, 0 0, 0 bottom, from(transparent), to(rgba(0, 0, 0, 0.1)));  
 }
 .over_width{
   white-space:nowrap;
@@ -44,7 +81,7 @@ page {
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
-  max-width: 230rpx;
+  max-width: 250rpx;
 }
 .content-container {
   display: -webkit-flex;
@@ -54,7 +91,7 @@ page {
   padding-bottom: 100rpx;
 }
 .classify-container {
-  width: 230rpx;
+  width: 180rpx;
   background: #f8f8f8;
   height:860rpx;
 }
@@ -142,6 +179,7 @@ page {
   background: #ffffff;
   height:860rpx;
   margin-bottom: 120rpx;
+  width: 570rpx;
 }
 .goods-container .title {
   margin: 23.5rpx 0 0 23.5rpx;
@@ -387,9 +425,9 @@ page {
 }
 .carticon text{
   position:absolute;
-  left:40rpx;
-  top:-5rpx;
-  font-size:15px;
+  left:35rpx;
+  bottom:7px;
+  font-size:12px;
   line-height:40rpx;
   padding:0 12rpx;
   color:#fff;
@@ -425,38 +463,49 @@ page {
   color: #fff;
 }
 .cart {
-  position: absolute;
+  position: fixed;
   left: 0;
+  right: 0;
   bottom: 0;
-  width: 100%;
   height: 114rpx;
   background: #fff;
-  border-top: 1px solid #dee8ff;
   z-index: 999;
+  background: #474749;
+  color: #fff;
+  border-left: 5px solid #575758;
 }
-.cart .data {
+.cart .data_bj{
+  width: 123rpx;
+  height: 123rpx;
   position: absolute;
   left: 15rpx;
   top: -20rpx;
+  background: url('https://img.zhcanting.com/res/xcx/images/icon_cart_bj.png') left center no-repeat;
+  background-size: 123rpx;
+}
+.cart .data {
+  position: absolute;
+  left: 10rpx;
+  top: 10rpx;
 }
 .cart .data .icon {
-  width: 123rpx;
-  height: 123rpx;
+  width: 103rpx;
+  height: 103rpx;
   border-radius: 50%;
   position: relative;
 }
 .cart .data .icon image {
   position: absolute;
-  left: 25rpx;
-  top: 38rpx;
-  width: 38px;
-  height: 30px;
+  left: 17rpx;
+  top: 26rpx;
+  width: 35px;
+  height: 28px;
 }
 .cart .data .icon .count {
   position:absolute;
-  left:45rpx;
-  top:-5rpx;
-  font-size:15px;
+  left:28rpx;
+  bottom:3rpx;
+  font-size:12px;
   line-height:40rpx;
   padding:0 12rpx;
   color:#fff;
@@ -472,17 +521,16 @@ page {
   padding-left: 15rpx;
 }
 .cart .total {
-  color: #f45044;
   font-size: 18px;
   margin-right: 10rpx;
   overflow: hidden;
-  white-space: normal;
+  white-space: nowrap;
   text-overflow:ellipsis;  
 }
 .cart .info{
   position: absolute;
   left: 130rpx;
-  right: 25rpx;
+  right: 0rpx;
   display: -webkit-flex;
   display: flex;
   height: 100%;
@@ -491,8 +539,8 @@ page {
   -webkit-align-items: center;
           align-items: center;
 }
-.cart .info .left{
-  width: 430rpx;
+.cart .info .left{  
+  width: 485rpx;
   display: -webkit-flex;
   display: flex;
   -webkit-justify-content:space-between;
@@ -501,33 +549,36 @@ page {
           align-items: center;
 }
 .cart .info .left_width{
-  width: 620rpx;
+  width: 605rpx;
 }
 .cart .changeinfo{
   left: 10rpx;
 }
 .cart .submitbutton {
-  width:160rpx;
-  height: 64.5rpx;
-  font-size: 14px;
-  line-height: 64.5rpx;
-  border-radius: 32.25rpx;
+  width:190rpx;
+  height:114rpx;
+  font-size: 16px;
+  line-height: 114rpx;
+  border-radius: 0;
   border: none;
   color: #fff;
   text-align: center;
   margin-left: 0;
 }
+.cart .not{
+  background: #a0a0a0;
+}
 .cart .nobutton{
-  width:160rpx;
-  height: 64.5rpx;
-  font-size: 12px;
-  line-height: 64.5rpx;
-  border-radius: 32.25rpx;
+  width:190rpx;
+  height:114rpx;
+  font-size: 16px;
+  line-height: 114rpx;
+  border-radius: 0;
   border: none;
-  background: #7b7b7b;
   color: #fff;
   text-align: center;
   margin-left: 0;
+  background: #a0a0a0;
 }
 .cart button[disabled]{
   border: none;
@@ -556,11 +607,18 @@ page {
   font-size: 16px;
   display: -webkit-flex;
   display: flex;
-  -webkit-justify-content: center;
-          justify-content: center;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
   -webkit-align-items: center;
           align-items: center;
   height: auto;
+}
+.confirm-container .title text{
+  width: 540rpx;
+  overflow: hidden;
+  white-space:nowrap;
+  text-overflow: ellipsis;
+  text-align: left;
 }
 .confirm-container .Modify{
   font-size: 14px;
@@ -572,6 +630,9 @@ page {
   -webkit-justify-content: center;
           justify-content: center;
   color: #fff;
+  padding-right: 40rpx;
+  background: url('https://img.zhcanting.com/res/xcx/images/dc_arrow.png') right center no-repeat;
+  background-size: 14rpx 24rpx;
 }
 .confirm-container .Modify image{
   width: 28rpx;
@@ -579,11 +640,12 @@ page {
   margin-right: 10rpx;
 }
 .confirm-container .miss{
-  margin: 23.5rpx;
+  margin: 35rpx 0 45rpx;
   line-height: 54rpx;
   border-radius: 27rpx;
   font-size: 12px;
-  background: rgba(0,0,0,0.2);
+  color: #fff;
+  background: rgba(255,255,255,0.2);
 }
 .ordermenu{
   padding: 15rpx 23.5rpx 20rpx;
@@ -600,23 +662,22 @@ page {
 .lcontainer{
   background: #f8f8f8;
 }
- .curmenu{
-  background: #f7f7f7;
-} 
 .curmenu .ititle{
-    font-size: 14px;
-    line-height: 50rpx;
-    padding: 11.75rpx 23.5rpx 11.75rpx 75rpx;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 50rpx;
+  padding: 11.75rpx 23.5rpx 11.75rpx 75rpx;
   background:#fff url('https://img.zhcanting.com/res/xcx/images/icon_curmenu.png') 23.5rpx center no-repeat;
   background-size: 32.8rpx 37.5rpx;
+  margin-top: 10rpx;
+  margin-bottom: 20rpx;
 }
 .packpage{
-  padding: 23.5rpx;
+  padding: 0 23.5rpx 30rpx;
   display: -webkit-flex;
   display: flex;
   -webkit-flex-direction: row;
           flex-direction: row;
-  background: #fff;
 }
 .packpage .foodimg{
     -webkit-flex: 2;
@@ -630,8 +691,7 @@ page {
   height: 100%;
 }
 .packpage .foodinfo{
-  -webkit-flex: 9;
-          flex: 9;
+  width: 100%;
   display: -webkit-flex;
   display: flex;
   -webkit-justify-content: space-between;
@@ -643,19 +703,33 @@ page {
   font-size: 15px;
   line-height: 45rpx;
 }
+.foodinfo .left{
+  min-width: 235rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
 .foodinfo .nr{
-  color: #888;
+  color: #fff;
   font-size: 14px;
+  padding:0 25rpx;
+  text-align: center; 
+  border-radius: 22rpx;
 }
 .foodinfo .right{
-  text-align: right;
+  min-width: 200rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 .foodinfo .right text:first-child{
   font-size: 14px;
-  color: #aaa;
+  color: #262626;
 }
 .foodinfo .right text:last-child{
   color: #ff4f39;
+  font-size: 16px;
+  font-weight: bold;
 }
 .foodinfo .taste{
   margin-left: 1px;
@@ -675,19 +749,19 @@ page {
             animation: slidown .5s linear both;
 }
 .ltitle{
-    color: #aaa;
-    font-size:14px;
+  color: #aaa;
+  font-size:15px;
   height: 50rpx;
-    padding: 11.75rpx 23.5rpx 11.75rpx 23.5rpx;
-  background:#fff url('https://img.zhcanting.com/res/xcx/images/order_down.png') 700rpx center no-repeat;
+  margin: 0 23rpx;
+  background:#fff url('https://img.zhcanting.com/res/xcx/images/order_down.png') right center no-repeat;
   background-size: 28rpx 14rpx;
 }
 .ltitleup{
-    color: #aaa;
-    font-size: 14px;
+  color: #aaa;
+  font-size: 15px;
   height: 50rpx;
-    padding: 11.75rpx 23.5rpx 11.75rpx 23.5rpx;
-  background:#fff url('https://img.zhcanting.com/res/xcx/images/order_up.png') 700rpx center no-repeat;
+  margin: 0 23rpx;
+  background:#fff url('https://img.zhcanting.com/res/xcx/images/order_up.png') right center no-repeat;
   background-size: 28rpx 14rpx;
 }
 .slidnone{
@@ -697,30 +771,29 @@ page {
 }
 .allprice {    
     background: #fff;
-    border-bottom: 1px solid #e7e7e7;
-    font-size: 15px;
+    font-size: 16px;
+    font-weight: bold;
     color: #ff4f39;
     text-align: right;
     line-height: 46.8rpx;
     padding: 20rpx 23.5rpx;
-    position: relative;
+    display: flex;
+    justify-content: space-between;
 }
-.allprice::after{
-  content: "";
-  width: 725rpx;
-  height: 1px;
-  position: absolute;
-  left: 25rpx;
-  top: 0;
-  background: #e7e7e7;
-}
-.allprice .gray{
+.allprice text:first-child{
+  font-size: 20px;
   color: #262626;
+  font-weight: bold;
 }
 .confirminfo{
-  margin-top: 23.5rpx;
+  border-top: 23rpx solid #f8f8f8;
   padding-left: 23.5rpx;
   background: #fff;
+}
+.confirminfo .qtitlle{
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 10rpx;
 }
 .confirminfo view{
   -webkit-flex: 12;
@@ -761,7 +834,6 @@ page {
     background: #fff;
     height: 115rpx;
     line-height: 63rpx;
-    padding: 25rpx 23.5rpx;
     border-top: 1px solid #DCDCDC;
     box-sizing: border-box;
 }
@@ -770,20 +842,35 @@ page {
   display: flex;
   -webkit-justify-content: space-between;
           justify-content: space-between;
+  align-items: center;
   font-size:16px;   
+  background: #474749;
+  border-left: 5rpx solid #575758;
 }
-.go-back{
+/* .go-back{
   background:#fff url('https://img.zhcanting.com/res/xcx/images/order_back.png') left center no-repeat;
   background-size: 15.2rpx 29.2rpx;
   padding-left: 35rpx;
+} */
+.order-ac .totle{
+  color: #fff;
+  font-size: 15px;
+  font-weight: bold;
+  margin-left: 23rpx;
 }
 .determine{
   font-size: 14px;
   color: #fff;
   padding: 0 45rpx;
-  border-radius: 63rpx;
+  height: 112rpx;
+  line-height: 112rpx;
   overflow: hidden;
   display: inline-block;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  z-index: 999;
+  border-radius:0;
 }
 .pice{
   font-size: 16px;
@@ -797,7 +884,12 @@ page {
   -webkit-transform:  translateX(0%);
           transform:  translateX(0%);
 }
-
+.backs{
+  background: url('https://img.zhcanting.com/res/xcx/images/order_back.png') left center no-repeat;
+  background-size: 15.2rpx 29.2rpx;
+  padding-left: 35rpx;
+  color: #fff;
+}
 .facontainer{
   height: 100%;
   background: #f8f8f8;
@@ -900,6 +992,7 @@ page {
   font-size:13px;
   color: #262626;
   height:70rpx;
+  background: #fff;
 }
 .tab-bar .tab {
   display: inline-block;
@@ -979,7 +1072,8 @@ page {
   height: 30rpx;
 }
 .tcontent .logo{
-  padding: 15rpx;
+  margin: 23rpx;
+  width: 100%;
   height: 340rpx;
   overflow: hidden;
   display: -webkit-flex;
@@ -991,9 +1085,12 @@ page {
   height: 100%;
 }
 .tcimgs{
+  width: 100%;
   height: 340rpx;
+  overflow: hidden;
 }
 .tcimgs image{
+  width: 100%;
   height: 340rpx !important;
 }
 
@@ -1506,5 +1603,24 @@ page {
   text-align: center;
   font-size: 16px;
 }
-
-
+.foodlist{
+  margin: 23rpx;
+  background: #fff;
+  overflow: hidden;
+}
+.foodlist .title{
+  margin: 0 23rpx;
+  color: #262626;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 80rpx;
+  border-bottom: 4rpx solid #f2f2f2;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+.line{
+  margin-left: 23rpx;
+  height: 1rpx;
+  background: #dcdcdc;
+}

@@ -1,6 +1,6 @@
 <!--pages/waimai/dzxz.wxml-->
-<!-- <import src="../template/template.wxml"/>
-<template wx:if="{{loading}}" is="loading"/>  -->
+<import src="../template/template.axml"/>
+<template a:if="{{loading}}" is="loading"/>
 <view class="container" a:if="{{state==0}}">
   <view class="contact">
     <view class="text">联系人</view>

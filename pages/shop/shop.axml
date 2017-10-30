@@ -520,7 +520,7 @@
   <view class="facontainer {{faslid ? 'slidleft' : ''}}">
     <view class="faheader">
       <view class="fatitle">备注</view>
-      <textarea placeholder="请输入备注" bindblur="remark" />
+      <textarea placeholder="请输入备注" onBlur="remark" />
     </view>
 
     <view class="order-ac">

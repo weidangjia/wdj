@@ -1,6 +1,6 @@
 <!--pages/mypage/qyhq.wxml-->
-<!-- <import src="../template/template.wxml"/>
-<template wx:if="{{loading}}" is="loading"/>  -->
+<import src="../template/template.axml"/>
+<template a:if="{{loading}}" is="loading"/>
 <image class="top" src="{{api}}res/xcx/images/yhq_bj.png" />
 <view style="height:36rpx;widht:100%"></view>
 <view class="facontainer1 {{lishow ? 'slidleft' : ''}}">

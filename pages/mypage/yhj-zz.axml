@@ -1,6 +1,6 @@
 <!--pages/mypage/yhj-zz.wxml-->
-<!-- <import src="../template/template.wxml" />
-<template wx:if="{{loading}}" is="loading" /> -->
+<import src="../template/template.axml"/>
+<template a:if="{{loading}}" is="loading"/>
 <view class="recWraper {{color}}recWraper">
   <view class="deco"></view>
   <view class="arrowBg"></view>

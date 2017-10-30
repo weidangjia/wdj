@@ -1,6 +1,6 @@
 
-<!-- <import src="../template/template.wxml"/>
-<template wx:if="{{loading}}" is="loading"/>  -->
+<import src="../template/template.axml"/>
+<template a:if="{{loading}}" is="loading"/>
 <!--门店选择.wxml-->
 <view class="container">
   <view class="title">
@@ -48,16 +48,16 @@
           </view> 
         </view>
       </view>
-      <form report-submit="true" data-index="{{index}}" onSubmit="lineUp">
-        <button a:if="{{item.queues.length>0&&item.queue==1}}" class="line-up {{color}}ba_color" formType="submit">立即排队</button>
+        <form report-submit="true" data-index="{{index}}" onSubmit="lineUp">
+        <button  a:if="{{stores.queues.length>0&&stores.queue==1}}" class="line-up {{color}}ba_color" formType="submit">立即排队</button>
       </form>
       </view>
-        <view class="line-up" data-index="{{index}}" onTap="lineUp">立即排队</view>
+        <!-- <view class="line-up" data-index="{{index}}" onTap="lineUp">立即排队</view> -->
       </view>
     </view>
     <view class="footer">
       <view class="address"><image src="{{api}}res/xcx/images/{{color}}icon_curloca.png"></image><text>当前位置：{{address}}</text></view>
-      <view class="img" bindtap="refresh"><image src="{{api}}res/xcx/images/{{color}}icon_fresh.png"></image></view>
+      <view class="img" onTap="refresh"><image src="{{api}}res/xcx/images/{{color}}icon_fresh.png"></image></view>
     </view>
   </view>
 </view>

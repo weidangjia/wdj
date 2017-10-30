@@ -1,6 +1,6 @@
 <!--我的订单.wxml-->
-<!-- <import src="../template/template.wxml"/>
-<template wx:if="{{loadShow}}" is="loading"/>  -->
+<import src="../template/template.axml"/>
+<template a:if="{{loading}}" is="loading"/>
 <scroll-view scroll-y style="height:{{winHeight}}px" onScrolltolower="getMore" onTouchend="end">
 <view class="sw">
 <view class="swiper-tab {{color}}order-tab">

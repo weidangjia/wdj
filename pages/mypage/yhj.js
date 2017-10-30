@@ -2,7 +2,7 @@
 var config = require("../../config.js");
 Page( {  
   data: {  
-    api:config.ossPath,
+    api:config.apiPath,
     winWidth: 0,  
     winHeight: 0,  
     currentTab: 0,  
@@ -14,12 +14,9 @@ Page( {
   onLoad: function() {  
     var that = this;  
     if (!my.getStorageSync({key:'color'}).data) {
-      my.setStorageSync({
-          key:'color',
-          data:'blue'
-      });
+      my.setStorageSync({key:'color',data: 'blue'});
     }
-    config.navBarColor(my.getStorageSync({ key: 'color' }).data);
+    config.navBarColor(my.getStorageSync({key:'color'}).data);
     that.setData({
       color: my.getStorageSync({key:'color'}).data
     })

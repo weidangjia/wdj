@@ -20,7 +20,6 @@ Page({
     })  
     config.post("/wxApi/u/info", {}, function (ret) {
       if (ret.code == 0) {
-        console.log(ret);
         that.setData({
           obj: ret.data
         })

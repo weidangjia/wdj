@@ -1,6 +1,6 @@
 <!--index.wxml-->
-<!-- <import src="../template/template.wxml"/>
-<template wx:if="{{loading}}" is="loading"/>  -->
+<import src="../template/template.axml"/>
+<template a:if="{{loading}}" is="loading"/>
 <view>
   <view class="res">
     <view class="resimg">

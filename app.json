@@ -1,28 +1,33 @@
 {
   "pages": [
-    "pages/index/index",
-    "pages/mypage/mypage",
-    "pages/index/wddd",
-    "pages/waimai/wmdd",
-    "pages/waimai/dzlb",
-    "pages/waimai/dzxz",
-    "pages/mypage/qyhq",
-    "pages/mypage/yhj-zz",
-    "pages/mypage/yhj",
-    "pages/mypage/hyk",
+    "pages/index/index",  
     "pages/index/mdxz",
     "pages/index/ddxq",
-    "pages/stores/stores",
     "pages/index/ydwz",
     "pages/index/mdxq",
     "pages/index/smdc",
     "pages/index/dc",
+    "pages/index/wddd",
+    
+    
+    "pages/waimai/dzlb",       
+    "pages/waimai/qrdc",  
+    "pages/waimai/wmdd",    
+    "pages/waimai/dzxz",   
+    
+
+    "pages/stores/stores",   
+    "pages/mypage/mypage",
+    "pages/mypage/qyhq",
+    "pages/mypage/yhj-zz",
+    "pages/mypage/yhj",
+    "pages/mypage/hyk",
+   
     "pages/shop/hdsm",
     "pages/shop/shop"
   ],
   "window": {
-    "defaultTitle": "首页",
-    "pullRefresh":"YES"
+    "defaultTitle": "首页"
   },
   "tabBar": {
     "textColor": "#000",

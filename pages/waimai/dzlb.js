@@ -1,5 +1,5 @@
 // pages/waimai/dzlb.js
-var config = require("../../config.js");
+import config from '../../config.js';
 Page({
   data: {
   api: config.ossPath,
@@ -23,8 +23,9 @@ Page({
         from: options.from
       })
     }
+    this.getdata();
   },  
-  onShow:function(){
+  getdata:function(){
     var that = this;
     if (!my.getStorageSync({key:'color'}).data) {
       my.setStorageSync({
@@ -41,14 +42,11 @@ Page({
       config.post('wxApi/addr/listByGeo', {}, function (ret) {
         if (ret.code == 0) {
           that.setData({
-            dzlist: ret.data
-          })
-        }
-        setTimeout(function () {
-          that.setData({
+            dzlist: ret.data,
             loading: false
           })
-        }, 500)
+          console.log(that.data.loading);
+        }
       },true)
     } else {
       config.post('wxApi/addr/list', {}, function (ret) {

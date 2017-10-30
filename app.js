@@ -1,5 +1,8 @@
+var qqmapsdk;
+
 App({
   userInfo2: null,
+  onauthorsuccess:undefined,
   getUserInfo() {
     return new Promise((resolve, reject) => {
       if (this.userInfo2) resolve(this.userInfo2);

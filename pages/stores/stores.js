@@ -1,37 +1,37 @@
 
 import config from '../../config.js';
-import {ossPath} from '../../config.js';
+import { ossPath } from '../../config.js';
 Page({
   data: {
-    Path:config.apiPath,
+    Path: config.apiPath,
     api: ossPath,
     geoCity: "",
     nowCity: { title: '', code: '' },
-    stores:'',
+    stores: '',
     index: 0,
-    froms:'',
-    citys:[],
-    allct:'',
+    froms: '',
+    citys: [],
+    allct: '',
     loading: true,
-    color:'blue'
+    color: 'blue'
   },
-  onLoad: function (options){
+  onLoad: function (options) {
     console.log(options)
-    var that=this;
-    var ct=[];
-    if (!my.getStorageSync({key:'color'}).data) {
+    var that = this;
+    var ct = [];
+    if (!my.getStorageSync({ key: 'color' }).data) {
       my.setStorageSync({
-        key:'color',
-        data:'blue'
+        key: 'color',
+        data: 'blue'
       });
     }
     config.navBarColor(my.getStorageSync({ key: 'color' }).data);
     that.setData({
-      froms:options.from
+      froms: options.from
     })
 
     // 获取城市
-    config.post("/wxApi/c/citys", { }, function (ret) {
+    config.post("/wxApi/c/citys", {}, function (ret) {
       if (ret.code == 0) {
         if (ret.data.length > 0) {
           for (var i = 0; i < ret.data.length; i++) {
@@ -39,7 +39,7 @@ Page({
           }
           that.setData({
             citys: ct,
-            allct:ret.data
+            allct: ret.data
           })
           if (that.data.nowCity.code == '') {
             that.setData({
@@ -55,12 +55,15 @@ Page({
         }, 500)
         that.load();
       }
-    },true);  
+    }, true);
   },
-  load: function() {
-    var that=this;
+  load: function () {
+    var that = this;
     // 获取页面数据
-    config.post("/wxApi/c/stores", { lat: '31.811226', lng: '119.974062' }, function (ret) {
+    config.post("/wxApi/c/stores", {
+      lat: my.getStorageSync({ key: 'lat' }).data, lng: my.getStorageSync({ key: 'lng' }).data,
+      cityCode: that.data.nowCity.code
+    }, function (ret) {
       if (ret.code == 0) {
         that.data.stores = ret.data;
         that.setData({
@@ -71,12 +74,12 @@ Page({
           title: ret.msg, // alert 框的标题
         });
       }
-    },true);
+    }, true);
     that.setData({
       // address: my.getStorageSync('address')
     })
   },
-  open: function() {
+  open: function () {
     var that = this;
     my.showActionSheet({
       items: that.data.citys,
@@ -92,57 +95,59 @@ Page({
       }
     });
   },
-  refresh:function(){
-    my.showLoading({
-      content:"定位中"
-  })
+  refresh: function () {
     var that = this;
     var lat, lng;
+    my.showToast({
+      type: 'success',
+      content: '刷新成功',
+      duration: 2000,
+    });
     // 获取经纬度
     my.getLocation({
-      type:2,
-      success:(res)=> {
-        my.hideLoading();
+      type: 2,
+      success: (res) => {
         // my.setStorageSync('address', res.result.address);
         // my.setStorageSync('city', res.result.address_component.city);
         lat = res.latitude;
         lng = res.longitude;
         // 经纬度加入缓存
         my.setStorageSync({
-          key:'Location',
-          data:{
-            "lat":lat,
-            "lng":lng
-          }
+          key: 'lat',
+          data: lat
         })
+        my.setStorageSync({
+          key: 'lng',
+          data: lng
+        })
+
         that.load();
       },
       fail() {
-        my.hideLoading();
         my.alert({ title: '定位失败' });
       },
     })
   },
-  toStore:function(id){
+  toStore: function (id) {
     my.navigateTo({
-      url: '../index/mdxq?id='+id,
+      url: '../index/mdxq?id=' + id,
     })
   },
-  selectStore:function(e){
+  selectStore: function (e) {
     var that = this;
     var id = e.currentTarget.dataset.obj.id;
     if (that.data.froms == 'yd') {
       my.setStorageSync({
-        key:"sid",
-        data:id
+        key: "sid",
+        data: id
       });
       my.navigateTo({
         url: '/pages/index/ydwz?sid=' + id,
       })
     } else if (that.data.froms == 'dc') {
       my.setStorageSync({
-        key:"sid",
-        data:id
+        key: "sid",
+        data: id
       });
       my.navigateTo({
         url: '../shop/shop?isWm=0',

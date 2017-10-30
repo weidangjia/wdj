@@ -1,6 +1,6 @@
 
-import {  post, ossPath ,navBarColor } from '../../config.js';
-
+import {  post, ossPath ,navBarColor,concat } from '../../config.js';
+var app = getApp();
 Page({
   data: {
     api: ossPath,
@@ -24,10 +24,12 @@ Page({
   },
   onLoad() {
     var that=this;
-    var userInfo=my.getStorageSync({key:'uid'}).data;
-    if(userInfo){
-      this.getdata();
+    var uid=my.getStorageSync({key:'uid'}).data;
+    if(uid){
+      that.load();
+      that.theme();      
     }else{
+      console.log(that);      
       that.authCode();
     }
     my.getSystemInfo({
@@ -40,24 +42,36 @@ Page({
     if (!my.getStorageSync({ key: 'color' }).data) {
       my.setStorageSync({ key: 'color', data: 'blue' });
     }
-    navBarColor(my.getStorageSync({ key: 'color' }).data);
-    
+    navBarColor(my.getStorageSync({ key:'color'}).data);
+      //根据经纬度获取首页数据
+      // if (my.getStorageSync({key:'lat'}).data){
+      //   let lat=my.getStorageSync({key:'lat'}).data;
+      //   let lng = my.getStorageSync({key:'lng'}).data
+      //   that.getdata(lat,lng);
+      // }else{
+      //   that.getdata('0','0');
+      //   that.setData({
+      //     state:0
+      //   })
+      // }           
+      that.setData({
+        logo: my.getStorageSync({key:'logo'}).data
+      })
   },
   authCode(){
     var that=this;
     my.getAuthCode({
       scopes: 'auth_user',
       success: (res) => {
-        console.log(res);
-        post("/wxApi/ali/login",{authcode:res.authCode},function(ret) {
+        post("wxApi/ali/login",{authcode:res.authCode},function(ret) {
           if(ret.code==0){
             my.setStorageSync({key:'uid',data:ret.data.id});
             my.setStorage({
             key: 'userInfo', // 缓存数据的 key
             data: ret.data, // 要缓存的数据
             success: (res) => {
-              console.log(1);
               that.getdata();
+              that.theme();              
             },
           });
           }          
@@ -71,7 +85,7 @@ Page({
   getdata: function (lat, lng) {
     // 页面加载
     var that = this;
-    post("/wxApi/c/index", { lat: '31.811226', lng: '119.974062' }, function (ret) {
+    post("wxApi/c/index", { lat:my.getStorageSync({key:'lat'}).data, lng:my.getStorageSync({key:'lng'}).data}, function (ret) {
 
       if (ret.data.coupons.length > 0) {
         var sendInfo = {};
@@ -176,7 +190,7 @@ Page({
   },
   theme() {
     var that = this;
-    post("/wxApi/c/theme", {}, function (ret) {
+    post("wxApi/c/theme", {}, function (ret) {
       if (ret.code == 0) {
         var btnArry = [];
         var alias = [];
@@ -298,7 +312,7 @@ Page({
         if (!my.getStorageSync({ key: 'color' })) {
           my.setStorageSync({ key: 'color', data: 'blue' });
         }
-        // config.navBarColor(my.getStorageSync('color'));
+        navBarColor(my.getStorageSync({key:'color'}).data);
         that.setData({
           btnNum: ret.data.btnDc + ret.data.btnPd + ret.data.btnWm + ret.data.btnYd,
           btnArry: btnArry,
@@ -308,32 +322,37 @@ Page({
       }
     }, true)
   },
-  load: function (self) {
-    // var that = self;
-    // that.setData({
-    //   loading: true
-    // })
-    // if(!my.getStorageSync('uid')){  //如果已经登录 设置监听授权信息 否则 不监听直接获取位置
-    //   app.onauthorsuccess=function(){
-    //     that.getdata('0', '0');
-    //     that.load(self);
-    //   }
-    //   return;
-    // }else{
-    //   app.onauthorsuccess=undefined;
-    // }
-    // app.getaddress({
-    //   successlocation:function(res){
-    //     that.setData({
-    //       lat: res.latitude,
-    //       lng: res.longitude
-    //     })
-    //     that.setData({
-    //       state: 1
-    //     })
-    //     that.getdata(that.data.lat, that.data.lng);
-    //   }
-    // })
+  load: function () {
+    var that = this;
+     my.getLocation({
+       type:3,
+      success(res) {
+        console.log(res);
+        my.setStorageSync({key:'lat',data:res.latitude});
+        my.setStorageSync({key:'lng',data:res.longitude});
+        if(res.street){
+        var address=res.city+res.district+res.streetNumber.street+res.streetNumber.number;    
+        my.setStorage({
+          key: 'address', // 缓存数据的 key
+          data: address, // 要缓存的数据
+        });      
+        }else{
+            my.setStorage({
+          key: 'address', // 缓存数据的 key
+          data: '常州市新北区太湖东路9-2号', // 要缓存的数据
+        }); 
+      }
+      that.setData({
+          lat: res.latitude,
+          lng: res.longitude,
+           state: 1
+        })
+        that.getdata(res.latitude, res.longitude);
+      },
+      fail() {
+        my.alert({ title: '定位失败' });
+      },
+    })
   },
   up:function(){
     this.setData({
@@ -402,7 +421,7 @@ Page({
     }else if (order && order.state != 3) {
         my.setStorageSync({
           key:'sid',
-          'sid': order.storeId
+          data: order.storeId
         })
         if (order.state == 0) {
           my.navigateTo({

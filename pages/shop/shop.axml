@@ -383,7 +383,7 @@
       <form a:elif="{{isWm==0}}">
         <button class="submitbutton not">确定</button>
       </form>
-      <form report-submit="true" onSubmit="{{newmap.amount>=menuInfo.wmLimit?'confirm':''}}" a:if="{{isWm}}">
+      <form report-submit="true" onSubmit="{{newmap.amount>=menuInfo.wmLimit?'confirm':''}}" a:if="{{isWm==1}}">
         <button class="{{newmap.amount>=menuInfo.wmLimit?color+'sba_color submitbutton':'nobutton'}}" formType="submit">
           <text a:if="{{newmap.amount>=menuInfo.wmLimit}}">确定</text>
           <text a:else>￥{{menuInfo.wmLimit}}起送</text>

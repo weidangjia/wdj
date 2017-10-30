@@ -1,6 +1,6 @@
 <!--stores.wxml-->
-<!-- <import src="../template/template.wxml"/> -->
-<!-- <template a:if="{{loading}}" is="loading"/>  -->
+<!-- <import src="../template/template.axml"/>
+ <template a:if="{{loading}}" is="loading"/>  -->
 <view class="container">
 <view class="title">
     <view class="picker city">

@@ -68,7 +68,7 @@
 <view class="chooseAdre {{cShow?'cShow':''}}">
 <view class="dheader {{color}}ba_color">
   <view class="address">常州</view>
-  <view class="search"><input style="border: 0;background: transparent;color:#fff;" onInput="search" placeholder-style="color:#fff"  placeholder="请输入地址" /></view>
+  <view class="search"><input  style="border: 0;background: transparent;color:#fff;" onInput="search" placeholder-style="color:#fff"  placeholder="请输入地址" /></view>
 </view>
 <scroll-view scroll-y style="height:1000rpx;background:#fff">
 <view class="content">

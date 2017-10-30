@@ -1,17 +1,18 @@
 var apiPath = "http://apptest.udows.com:8089/wdj/";
 const ossPath = "https://img.zhcanting.com/";
 var cid = "458996";
-var uid = "14b64ca9b06b40d9a5bec836e1e8c4aa";
-var sid = "7cb399660bfd4d41a14777c847ac2b7e";
 var client = 3;
 export default {
-    sid,
     apiPath,
     ossPath,//图片服务器
-    post(path, data, success) {
+    post(path, data, success) { 
+        if(my.getStorageSync({key:'uid'}).data){
+            data.uid = my.getStorageSync({key:'uid'}).data;           
+        }    
+        if(my.getStorageSync({key:'sid'}).data){
+            data.sid = my.getStorageSync({key:'sid'}).data;            
+        }    
         data.cid = cid;
-        data.uid = uid;
-        data.sid = sid;
         my.httpRequest({
             url: apiPath + path,
             method: 'POST',
@@ -111,5 +112,5 @@ export default {
         },
         method: 'POST',
       })
-    }
+    },
 }

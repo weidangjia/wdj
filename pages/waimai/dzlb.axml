@@ -1,6 +1,5 @@
-<!--pages/waimai/dzlb.wxml-->
-<!-- <import src="../template/template.wxml"/>
-<template wx:if="{{loading}}" is="loading"/>  -->
+<import src="../template/template.axml"/>
+<template a:if="{{loading}}" is="loading"/> 
 <view class="content">
   <view class="list" a:for="{{dzlist}}" a:key="unique"  a:if="{{byGeo==''}}">
     <view class="left" data-obj="{{item}}" onTap="select">

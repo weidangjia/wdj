@@ -1,4 +1,3 @@
-// pages/shop/shop.js
 import { post,ossPath,tost,formid,navBarColor} from '../../config.js';
 Page({
   data: {
@@ -56,7 +55,6 @@ Page({
   //获取数据
   onLoad: function (options) {
     var that = this;
-    console.log(that.options)
     that.data.deskCode = options.deskCode;
     that.data.deskId = options.deskId;
     that.data.ydId = options.ydId;
@@ -180,6 +178,7 @@ Page({
     }, true)
     //分类
     post('wxApi/s/menuInfo', {sid:my.getStorageSync({key:'sid'}).data}, function (ret) {
+      console.log(ret);
       if (ret.code == 0) {
         var menuInfo = ret.data;
         var newmap = that.data.newmap;
@@ -462,7 +461,7 @@ Page({
               key: 'wm',
               data: ret.data,
             })
-            var sid = my.getStorageSync('sid');
+            var sid = my.getStorageSync({key:'sid'}).data;
             my.redirectTo({
               url: '../waimai/qrdc?strname=' + that.data.menuInfo.storeName,
             })

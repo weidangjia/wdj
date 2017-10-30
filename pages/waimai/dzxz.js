@@ -1,7 +1,5 @@
 // pages/waimai/dzxz.js
-var config = require("../../config.js");
-// var QQMapWX = require("../../qqmap-wx-jssdk.min.js");
-// var qqmapsdk;
+import config from '../../config.js';
 Page({
   data: {
     path: config.resPath,
@@ -30,9 +28,6 @@ Page({
   },
   onLoad: function (options) {
     var that=this;
-    // qqmapsdk = new QQMapWX({
-    //   key: 'YWZBZ-5MFCP-WRSDO-LAWMH-GFZRT-WUFST'
-    // });
     that.setData({
       state: options.state
     })
@@ -55,8 +50,8 @@ Page({
     }else{
       that.locat(my.getStorageSync({key:'address'}).data);
       that.data.info.address = my.getStorageSync({key:'address'}).data;
-      that.data.info.lat = my.getStorageSync('lat');
-      that.data.info.lng = my.getStorageSync('lng');
+      that.data.info.lat = my.getStorageSync({key:'lat'}).data;
+      that.data.info.lng = my.getStorageSync({key:'lng'}).data;
       that.data.info.sex = that.data.sele;
       that.setData({
         info: that.data.info,
@@ -74,26 +69,16 @@ Page({
     my.getLocation({
       type:3,
       success(res) {
-          that.setData({
-          address: res.pois,
-        })
+        console.log(res);
+       that.setData({
+         address:res.pois
+       })
       },
       fail() {
-        my.hideLoading();
         my.alert({ title: '定位失败' });
       },
     })
     
-    // qqmapsdk.getSuggestion({
-    //   keyword: val,
-    //   region: my.getStorageSync('city'),
-    //   success: function (res) {
-    //     that.setData({
-    //       address: res.data,
-    //     })
-    //     console.log(res.data)
-    //   },
-    // });
   },
   search:function(e){
     var val=e.detail.value;

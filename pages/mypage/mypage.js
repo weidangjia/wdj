@@ -14,6 +14,7 @@ Page({
         user,
       }),
     );
+    console.log(this)
 
   },
   onShow: function () {

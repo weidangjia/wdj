@@ -459,5 +459,17 @@ Page({
           url: '../index/mdxq?id=' + id
         })
       }
-    }
+  },
+  takeOut:function(){
+    var that=this;
+    if(that.data.muti==0){
+      my.navigateTo({
+        url: '../shop/shop?isWm=1',
+      })
+    }else{
+      my.navigateTo({
+        url: '../waimai/dplb'
+      })
+    }      
+  }
 })

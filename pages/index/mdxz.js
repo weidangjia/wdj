@@ -17,7 +17,6 @@ Page({
     loading:true
   },
   onShow:function(){
-    var that = this;
     if (!my.getStorageSync({key:"color"}).data) {
       my.setStorageSync({
         key:"color",
@@ -32,13 +31,6 @@ Page({
       color: my.getStorageSync({key:"color"}).data
     })
     this.citys();
-
-    if (that.data.geoCity == '') {
-      that.setData({
-        geoCity: my.getStorageSync({key:'geoCity'}).data
-      })
-    }
-    
   },
   citys:function(){
     var that=this;
@@ -59,8 +51,6 @@ Page({
               nowCity: ret.data[0],
               geoCity: ret.data[0].title
             })
-            my.setStorageSync({key:'geoCity',data:ret.data[0].title})
-            // console.log(that.data.geoCity)
           that.onLoad();
           }
         }        
@@ -86,9 +76,7 @@ Page({
          loading: false
        })
      }, 500)
-    },true);
-    
-    
+   },true);
   },  
   open: function () {
     var that = this;
@@ -96,12 +84,11 @@ Page({
       items: that.data.city,
       success: function (res) {
         if (!res.cancel) {
-          // console.log(res.index)
+          // console.log(res.tapIndex)
           that.setData({
-            geoCity: that.data.city[res.index],
+            geoCity: that.data.city[res.tapIndex],
             nowCity:res,
           })
-          my.setStorageSync({key:'geoCity',data:that.data.city[res.index]})
           that.onLoad();
         }
       }

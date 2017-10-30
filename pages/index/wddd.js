@@ -4,7 +4,7 @@ var app = getApp()
 Page( {  
   data: {
     path: config.resPath,
-    api: config.ossPath, 
+    api: config.apiPath, 
     scroll:true, 
     winWidth: 0,  
     winHeight: 0,

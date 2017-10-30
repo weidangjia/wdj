@@ -49,6 +49,7 @@ Page({
           btnDc: ret.data.btnDc,
           btnWm: ret.data.btnWm
         })
+        console.log(that.data)
         if (ret.code == 0) {
           that.data.imgs = ret.data.imgs.split(",");
           that.setData({

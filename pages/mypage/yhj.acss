@@ -3,7 +3,6 @@ image{width: 100%}
 page{
   background: #f5f5f5;
 }
-
 .swiper-tab{  
     display: flex;
     align-items: center;

@@ -2,8 +2,8 @@
 <!--订单详情.wxml-->
 <!--<scroll-view scroll-y class="tt">-->
 <!--预定订单详情-->
-<import src="../template/template.axml"/>
-<template a:if="{{loading}}" is="loading"/>
+<!-- <import src="../template/template.wxml"/>
+<template wx:if="{{loading}}" is="loading"/>  -->
 <view class="cheader {{color}}ba_color" a:if="{{order.state == 0 && order.bookState == 1}}">
  <view class="name" onTap="gostore">
  {{store.name+order.deskCode}}
@@ -12,7 +12,7 @@
     <form report-submit="true" onSubmit="ydcancel">
     <button  class="header-left" formType="submit">取消订单</button>
   </form>
-  <!--<view class="header-left" onTap="ydcancel">取消订单</view>-->
+  <!--<view class="header-left" bindtap="ydcancel">取消订单</view>-->
   <view class="header-right" onTap="wydd">我已到店</view>
   </view>
 </view>
@@ -161,7 +161,7 @@
 
 <view class="title">
 <text>已点</text>
-<!-- <text onTap="sildlist">{{slishow ? "收起列表":"展开列表"}}</text> 
+<!-- <text bindtap="sildlist">{{slishow ? "收起列表":"展开列表"}}</text> 
 </view>
 
 <view class="menu-container {{slishow ? 'slidup' : ''}}">

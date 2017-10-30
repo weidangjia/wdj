@@ -1,9 +1,7 @@
-
 var apiPath = "http://apptest.udows.com:8089/wdj/";
 const ossPath = "https://img.zhcanting.com/";
 var cid = "458996";
 var client = 3;
-
 export default {
     apiPath,
     ossPath,//图片服务器

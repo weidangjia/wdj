@@ -4,11 +4,11 @@ var app = getApp()
 Page({
   data: {
     path: config.resPath,
-    api: config.ossPath,
+    api: config.apiPath,
     scroll: false,
     winWidth: 0,
     winHeight: 0,
-    loading: true,
+    loading: false,
     currentTab: 0,
     list: [],
     page: 1,
@@ -36,7 +36,6 @@ Page({
         });
       }
     });
-    
   },
   onShow: function () {
     this.setData({
@@ -67,8 +66,7 @@ Page({
       setTimeout(function () {
         my.hideLoading();
         that.setData({
-          loadShow: false,
-          loading:false
+          loadShow: false
         })
       }, 500)
     },true)

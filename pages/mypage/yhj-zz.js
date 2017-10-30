@@ -2,7 +2,7 @@
 var config = require("../../config.js");
 Page({
   data: {
-    api:config.ossPath,
+    api:config.apiPath,
     obj:[],
     id:'',
     loading:true

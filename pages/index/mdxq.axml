@@ -1,6 +1,6 @@
 <!--门店详情页面-->
-<import src="../template/template.axml"/>
-<template a:if="{{loading}}" is="loading"/>
+<!-- <import src="../template/template.wxml"/>
+<template wx:if="{{loading}}" is="loading"/>  -->
 <view class="container">
 <swiper indicator-dots="{{indicatorDots}}" vertical="{{vertical}}"   autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" style="width:100%;height:468.75rpx;">
     <block a:for="{{imgs}}" a:key="unique">

@@ -26,19 +26,5 @@ App({
       });
     });
   },
-  getaddress:function () {
-    my.getLocation({
-      success(res) {
-        my.hideLoading();
-        my.setStorageSync({key:'lat',data:res.latitude})
-        my.setStorageSync({key:'lng',data:res.longitude})
-      },
-      fail() {
-        my.setStorageSync({key:'lat',data:0})
-        my.setStorageSync({key:'lng',data:0})
-        my.alert({ title: '定位失败' });
-      },
-    })
-  }
 
 });

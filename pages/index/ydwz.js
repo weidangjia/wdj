@@ -18,7 +18,8 @@ Page({
         path:{},
         loading:true,
         sid:sid,
-        servicesItems:[]
+        servicesItems:[],
+        a1:['a','b','c']
   },
   onLoad:function(options){
     var that=this;
@@ -92,16 +93,11 @@ Page({
           title: ret.msg
         });
       }
-      
       setTimeout(function () {
         that.setData({
           loading: false
         })
-        console.log(1);
-        console.log(that.data)
-      }, 300)
-
-      
+      }, 500)
     },true)
   },
   loadDesks(){
@@ -117,6 +113,7 @@ Page({
         that.setData({
           desks: that.data.desks
         })
+        console.log(that.data.desks)
       }
     });
   },

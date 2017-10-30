@@ -9,7 +9,7 @@
 <view class="arrowBg"></view>
 <swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{winHeight - 31}}px" onChange="bindChange">
 
-  <swiper-item>
+  <swiper-item style="height:{{winHeight - 31}}px">
     <!-- 满减券 -->
   <view class="loading" a:if="{{loading}}">
     <image src="../../images/hope.gif"></image>
@@ -57,7 +57,7 @@
   </swiper-item>
 
   <!-- 代金券 -->
-  <swiper-item>
+  <swiper-item style="height:{{winHeight - 31}}px">
   <scroll-view style="height:100%;padding-bottom: 75rpx;" scroll-y="true">
     <view class="container">
       <view class="list" a:if="{{xjList.length>0}}" a:for="{{xjList}}" a:key="unique">

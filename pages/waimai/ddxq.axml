@@ -1,0 +1,122 @@
+<!--pages/waimai/qrdc.wxml-->
+<import src="../template/template.axml" />
+<template a:if="{{loading}}" is="loading" />
+<!-- <view class="cheader {{color}}ba_color">
+  <view>{{order.userAddress}}</view>
+  <view class="name">{{order.userName}} {{order.userPhone}}</view>
+</view> -->
+<view class="fheader">
+  <view class="logo"><image src="{{api+store.logo}}"></image>
+  </view>
+    <view class='title' onTap="gostore">{{store.name}}</view>
+    <!--订单状态-->
+    <view>
+      <view a:if="{{order.state==-1}}" class="h1">商家拒单</view>
+      <view a:if="{{order.state==0}}" class="h1">订单已取消</view>
+      <view a:if="{{order.state==2}}" class="h1">订单已支付</view>
+      <view a:if="{{order.state==3}}" class="h1">商家已接单</view>
+      <view a:if="{{order.state==4}}" class="h1">订单已完成</view>
+    </view> 
+    <view class="address" onTap="phone">
+      <view class="text">{{store.address}}</view>
+      <view class="icon"></view>
+    </view>
+    <view class="footer">感谢您光临{{store.name}}，期待您的再次到来</view>
+</view>
+<view class="list">
+  <view class="stitle">{{store.name}}</view>
+  <view class="block">
+    <view a:for="{{order.glist}}" a:key="*this">
+      <text>{{item.title}}</text>
+      <text class='right'>x{{item.num}}<text class="price">￥ {{item.price}}</text></text>
+    </view>
+    <view>
+      <text>配送费</text>
+      <text class="{{color}}text_color"><text>{{order.expressAmount}}</text>元</text>
+    </view>
+  </view>
+  <view class='line' a:if="{{order.mjInfo}}"></view>
+  <view class="block" a:if="{{order.mjInfo}}">
+    <view>
+      <text>满减券</text>
+      <text class="{{color}}text_color">{{order.mjInfo}}</text>
+    </view>
+  </view>
+  <view class='line' a:if="{{order.djInfo}}"></view>
+  <view class="block" a:if="{{order.djInfo}}">
+    <view>
+      <text>代金券</text>
+      <text class="{{color}}cbtn {{color}}text_color cbtn">{{order.djInfo}}</text>
+    </view>
+  </view>
+  <view class="total">
+    <text>总计</text>
+    <text class='price'>￥ {{order.goodsAmount}}</text>
+  </view>
+</view>
+
+<view class="info">
+  <view class="h1">订单信息</view>
+  <view class="nr">
+    <text>订单编号</text>
+    <text class="gray">{{order.code}}</text>
+  </view>
+
+  <view class="nr">
+    <text>下单时间</text>
+    <text class="gray">{{order.time}}</text>
+  </view>
+  <view class="nr" a:if="{{order.bookTime}}">
+    <text>订单形式</text>
+    <view class='cloum'>
+      <text class="gray">{{order.bookTime}}</text>
+    </view>
+  </view>
+  <view class="nr" a:if="{{order.invoiceHead}}">
+    <text>发票信息</text>
+    <text class="gray">{{order.invoiceHead}}</text>
+  </view>
+</view>
+
+<view class="info">
+  <view class="h1">配送信息</view>
+  <view class="nr">
+    <text>收货地址</text>
+    <text class="gray">{{order.userAddress}}</text>
+  </view>
+
+  <view class="nr">
+    <text>收货人</text>
+    <text class="gray">{{order.userName}} {{order.userPhone}}</text>
+  </view>
+  <view class="nr" a:if="{{order.remark}}">
+    <text>备注</text>
+    <text class="gray">{{order.remark}}</text>
+  </view>
+  <view class="nr" a:if="{{order.userNum}}">
+    <text>人数</text>
+    <text class="gray">{{order.userNum}}</text>
+  </view>
+</view>
+
+<view class="nr" a:if="{{order.orderDadaStatus>=1}}">
+  <text>配送状态</text>
+  <text class="{{color}}text_color" a:if="{{order.orderDadaStatus==1}}">待接单</text>
+  <text class="{{color}}text_color" a:if="{{order.orderDadaStatus==2}}">待取货</text>
+  <text class="{{color}}text_color" a:if="{{order.orderDadaStatus==2}}">配送中</text>
+  <text class="{{color}}text_color" a:if="{{order.orderDadaStatus==3}}">已完成</text>
+  <text class="{{color}}text_color" a:if="{{order.orderDadaStatus==4}}">已取消</text>
+</view>
+
+<view class="wmfooter">
+  <!-- <view class="back" bindtap="xzbak">返回</view> -->
+  <view class="cancel" a:if="{{order.state==-1}}">商家未接单</view>
+  <view class="cancel" a:if="{{order.state==0}}">订单已取消</view>
+  <view class="dotime" a:if="{{order.state==1}}" onTap="gozf">去支付(剩{{count}})
+  </view>
+  <view class="{{color}}ba_color wmcanl" a:if="{{order.state==1}}" onTap="cancel">取消订单</view>
+  <view class="hasPay" a:if="{{order.state==2}}">￥{{order.hasPayAmount}}已支付</view>
+  <view class="hasPick" a:if="{{order.state==3}}">商家已接单</view>
+  <view class="hascom" a:if="{{order.state==4}}">订单已完成</view>
+</view>
+<view style="height:120rpx"></view>

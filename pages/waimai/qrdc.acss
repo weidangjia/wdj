@@ -1,0 +1,577 @@
+/* pages/waimai/qrdc.wxss */
+image{width: 100%}  
+page{
+  height: 100%;
+  background: #f2f2f2;
+}
+.header{
+  height: 130rpx;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  -webkit-justify-content: center;
+          justify-content: center;
+  -webkit-align-items: center;
+          align-items: center;
+  color: #fff;
+  background-size: 20rpx 31rpx;
+  font-size: 16px;
+  line-height:50rpx;
+}
+.header view{
+  max-width: 660rpx;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.current{
+  padding-left: 35rpx;
+  background: url(https://img.zhcanting.com/res/xcx/images/wm_locab.png) left center no-repeat;
+  background-size: 21rpx 28rpx;
+}
+.time-content{
+  background: #fff;
+}
+.time-tit{
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0 23rpx;
+  border-bottom: 1px solid #e3e3e3;
+  line-height: 78rpx;
+}
+.time{
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content:space-between;
+          justify-content:space-between;
+  -webkit-align-items: center;
+          align-items: center;
+  height: 90rpx;
+  padding: 0 24rpx;
+  font-size: 16px;
+}
+.time .arrow{
+  background: url(https://img.zhcanting.com/res/xcx/images/go_store.png) right center no-repeat;
+  background-size: 18rpx 28rpx;
+  font-size: 15px;
+  color: #aaaaaa;
+  padding-right: 40rpx;
+}
+.titl{
+  height: 85rpx;
+  line-height: 85rpx;
+  text-align: left;
+  font-size: 16px;
+  background: url(https://img.zhcanting.com/res/xcx/images/snum_menu.png) 24rpx center no-repeat;
+  background-size: 36rpx 34rpx;
+  padding-left: 76rpx;
+  overflow: hidden; 
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.menu{
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: row;
+          justify-content: row;
+  margin-left: 24rpx;
+  padding: 22rpx 24rpx 22rpx 0;
+  border-bottom: 1px solid #ececec;
+}
+.menu:last-child{
+  border: none;
+}
+.menu image{
+  width: 130rpx;
+  height: 130rpx;
+}
+.menu .info{
+  width: 560rpx;
+  margin-left: 10rpx;
+}
+.menu .tit{
+  font-size: 15px;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  margin-bottom: 10rpx;
+}
+.menu .num{
+  color: #aaa;
+  font-size: 14px;
+}
+.menu .detail{
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  font-size: 14px;
+  color: #888;
+}
+.price{
+  font-size: 16px;
+  color: #ff4f39;
+}
+/* .nr{
+  display: -webkit-flex;
+  display: flex;
+  margin-left: 24rpx;
+  border-bottom: 1px solid #ececec;
+  height: 85rpx;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-justify-content:space-between;
+          justify-content:space-between;
+  font-size: 16px;
+  padding-right: 24rpx;
+} */
+.mj{
+  color: #8ea8ff;
+}
+.mj text{
+  color: #aaa;
+}
+.dj{
+  background:url(https://img.zhcanting.com/res/xcx/images/go_store.png) right center no-repeat;
+  background-size:18rpx 28rpx;
+  padding-right: 40rpx;
+}
+.dj text{
+  background: #8ea8ff url(https://img.zhcanting.com/res/xcx/images/gou_n.png) 10rpx center no-repeat;
+  padding: 5rpx 20rpx 5rpx 55rpx;
+  border-radius: 30rpx;
+  color: #fff;
+  background-size: 35rpx 25rpx;
+}
+/* .total{
+  background: #8ea8ff;
+  padding: 24rpx;
+} */
+.line{
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: space-between;
+          justify-content: space-between;
+  color: #fff;
+  font-size: 16px;
+}
+.line:first-child{
+  margin-bottom: 10rpx;
+}
+.nr .gray,.lastnr .gray{
+  color: #aaa;
+  font-family: "Microsoft Yahei";
+  text-align: right;
+  border:none;
+}
+.nr input,.lastnr input{
+  color: #aaa;
+  width: 450rpx;
+  text-align: right;
+  border:none;
+}
+.lastnr{
+  display: -webkit-flex;
+  display: flex;
+  padding-left: 24rpx;
+  border-bottom: 1px solid #ececec;
+  height: 85rpx;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-justify-content:space-between;
+          justify-content:space-between;
+  font-size: 16px;
+  padding-right: 24rpx;
+}
+.fprice {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  -webkit-align-items: center;
+          align-items: center;
+  line-height: 115rpx;
+}
+
+.fprice text{
+  color: #ff4f39;
+  font-size: 17px;
+  padding-right: 15rpx;
+}
+/***送餐时间***/
+.zan-dialog__mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.4);
+  display: none;
+}
+.zan-dialog__container {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: white;
+  -webkit-transform: translateY(150%);
+          transform: translateY(150%);
+  transition: all 0.4s ease;
+  z-index: 999;
+}
+.zan-dialog--show .zan-dialog__container {
+  -webkit-transform: translateY(0);
+          transform: translateY(0);
+}
+.zan-dialog--show .zan-dialog__mask {
+  display: block;
+}
+.title{
+  color:#aaa;
+font-size:16px;
+padding:23.5rpx;
+
+}
+.close{
+    background:url('https://img.zhcanting.com/res/xcx/images/icon_close.png') right center no-repeat;
+    background-size: 30.5rpx;
+    width: 30.5rpx;
+    height: 30.5rpx;
+    float: right;
+    margin-top: 5rpx;
+}
+.title text{
+    background:url('https://img.zhcanting.com/res/xcx/images/icon_time.png') left center no-repeat;
+    background-size: 40rpx;
+    padding-left: 55rpx;
+}
+.tabTit{background: #fafafa;}
+.tabTit .active{
+    background:#faf0db url('https://img.zhcanting.com/res/xcx/images/icon_choose.png') right 20rpx center no-repeat;
+    background-size:66.7rpx 46.8rpx;
+     }
+@-webkit-keyframes slidown{
+    from{
+        -webkit-transform:  translateY(100%);
+                transform:  translateY(100%);
+    }
+    to{
+        -webkit-transform:  translateY(0%);
+                transform:  translateY(0%);
+    }
+}
+@keyframes slidown{
+    from{
+        -webkit-transform:  translateY(100%);
+                transform:  translateY(100%);
+    }
+    to{
+        -webkit-transform:  translateY(0%);
+                transform:  translateY(0%);
+    }
+}
+.times .nr1{
+    width: 100%;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+            flex-direction: row;
+    border-bottom: 11.7rpx solid #8ea8ff;
+}
+.times .year{
+    background: #fafafa;
+    -webkit-flex: 8;
+            flex: 8;
+    border-left: 1px solid #ececec;
+    height: 610rpx;
+}
+.times .year .tabTit>text{
+    display: block;
+    line-height: 75.5rpx;
+    text-align: left;
+    height: 75.5rpx;
+    font-size: 16px;
+    border-top: 1px solid #ececec;
+    padding-left: 20rpx;
+}
+.times .day{
+    -webkit-flex: 4;
+            flex: 4;
+    background: #fafafa;
+    height: 610rpx;
+}
+.times .day text{
+    display: block;
+    line-height: 75.5rpx;
+    text-align: center;
+    height: 75.5rpx;
+    font-size: 16px;
+    border-bottom: 1px solid #ececec;
+}
+.times .day .daytitle{
+    height: 65rpx;
+    line-height: 65rpx;
+    background: #8ea8ff;
+    color: #fff;
+}
+.times .selectrue{
+    background:#faf0db url('https://img.zhcanting.com/res/xcx/images/icon_choose.png') 40rpx center no-repeat;
+    background-size:66.7rpx 46.8rpx; 
+}
+.pes{
+  font-size: 16px;
+  color: #888888;
+}
+.dccontainer{
+  height: 100%;
+  background: #f8f8f8;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  -webkit-transform:  translateX(100%);
+          transform:  translateX(100%);
+   transition: all 0.4s ease;
+}
+.dcleft{
+  -webkit-transform:  translateX(0%);
+          transform:  translateX(0%);
+}
+.dcimg{
+  width: 206rpx;
+    height: 210rpx;
+    padding-top: 180rpx;
+    margin: 0 auto;
+}
+.dcimg image{
+  width: 100%;
+  height: 100%;
+}
+.mess{
+    padding-top: 47rpx;
+    text-align: center;
+    font-size: 16px;
+  color: #262626;
+}
+.mess .notice{
+  padding-top: 10rpx;
+}
+.mess .btn-see{
+  width: 255rpx;
+    height: 63rpx;
+    display: inline-block;
+    text-align: center;
+    line-height: 63rpx;
+    color: #fff;
+    margin: 23.5rpx;
+  border-radius: 31.5rpx;
+  background: #ff5555;
+}
+.mess .btn-pay{
+  width: 255rpx;
+    height: 63rpx;
+    display: inline-block;
+    text-align: center;
+    line-height: 63rpx;
+    color: #fff;
+    margin: 23.5rpx;
+  border-radius: 31.5rpx;
+  background: #5379ff;
+}
+.dcleft{
+  -webkit-transform:  translateX(0%);
+          transform:  translateX(0%);
+}
+.list{
+  margin: 23rpx;
+  background: #fff;
+}
+.list .stitle{
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 80rpx;
+  border-bottom: 4rpx solid #f2f2f2;
+  background: url('https://img.zhcanting.com/res/xcx/images/ddxq_zd.png') 23rpx center no-repeat;
+  background-size: 32rpx 36rpx;
+  padding-left: 70rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.list .block{
+  padding: 33rpx 23rpx 33rpx 0;
+  margin-left: 23rpx;
+  font-size: 15px;
+}
+.list .block view{
+  display: flex;
+  justify-content: space-between;
+}
+.list .block view{
+  margin-bottom: 30rpx;
+}
+.list .block view:last-child{
+  margin-bottom: 0;
+}
+.list .line{
+  margin-left:23rpx;
+  height: 1px;
+  background: #f2f2f2;
+}
+.list .right{
+  display: block;
+  width: 210rpx;
+  position: relative;
+}
+.list .block .price{
+  font-size: 16px;
+  color: #ff4f39;
+  font-weight: bold;
+  position: absolute;
+  right: 0;
+}
+.list .blod{
+  font-weight: bold;
+}
+.list .total{
+  line-height: 105rpx;
+  margin: 0 23rpx;
+  display: flex;
+  justify-content: space-between;
+  border-top: 4rpx solid #f2f2f2;
+}
+.list .total{
+  font-size: 20px;
+  font-weight: bold;  
+}
+.list .total .price{
+  font-size: 16px;
+  color: #ff4f39;
+}
+.info{
+    background: #fff;     
+    margin: 23rpx;
+    padding-bottom: 15rpx;
+}
+.info .cloum{
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+}
+.info .h1{
+  padding: 23.5rpx 23.5rpx 10rpx;
+  font-size: 16px;
+  font-weight: bold;
+}
+.info .nr{
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: space-between;
+            justify-content: space-between;
+    font-size: 16px;
+    -webkit-align-items: center;
+            align-items: center;
+    border-bottom: 1px solid #e7e7e7;
+    margin-left: 23.5rpx;
+    padding:20rpx 23.5rpx 20rpx 0;
+}
+.info .nr:last-child{
+    border: none;
+}
+.amount{
+  font-size: 15px;
+}
+.user-phone{
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+  padding: 20rpx 23rpx 20rpx 0;
+  margin-left: 23rpx;
+  border-bottom: 1px solid #dcdcdc;
+}
+.user-phone button{
+  font-size: 14px;
+  text-align: center;
+  width: 240rpx;
+  line-height: 50rpx;
+  height: 50rpx;
+  color: #fff;
+  margin: 0;
+  border:none;
+}
+.way{
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 15rpx 0;
+  margin: 0 23rpx;
+  border-bottom: 1px solid #dcdcdc;
+}
+.way2{
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 15rpx 23rpx;
+  border-bottom: 1px solid #dcdcdc;
+}
+.way1{
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 15rpx 23rpx;
+  border-top: 23rpx solid #f2f2f2;
+  border-bottom: 1px  solid #dcdcdc;
+}
+.select{
+  width: 40rpx;
+  height: 40rpx;
+  background:url('https://img.zhcanting.com/res/xcx/images/way_n.png') no-repeat;
+  background-size: cover; 
+}
+.select-h{
+  width: 40rpx;
+  height: 40rpx;
+  background:url('https://img.zhcanting.com/res/xcx/images/way_h.png') no-repeat;
+  background-size: cover; 
+}
+.dinfo{
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  padding-left: 23rpx;
+  border-bottom: 1px solid #dcdcdc;
+}
+.detail{
+  line-height: 60rpx;
+}
+.address{
+  font-size: 15px;
+  font-weight: bold;
+}
+.dinfo .name{
+  color: #888;
+  margin-bottom: 10rpx;
+}
+.dinfo .invite{
+  display: flex;
+  justify-content: space-between;
+  line-height: 70rpx;
+  border-top:1px solid #dcdcdc; 
+  padding-right: 23rpx;
+}
+.dinfo .prompt{
+  color: #ff4f39;
+  font-size: 10px;
+  margin-bottom: 10rpx;
+}
+.dinfo .arrow{
+  background: url(https://img.zhcanting.com/res/xcx/images/go_store.png) right center no-repeat;
+  background-size: 18rpx 28rpx;
+  padding-right: 40rpx;
+}

@@ -1,0 +1,114 @@
+<!--pages/waimai/qrdc.wxml-->
+<import src="../template/template.axml"/>
+<template a:if="{{loading}}" is="loading"/> 
+<navigator url="../waimai/dzlb?byGeo=1">
+<view class="header {{color}}header">
+  <text class="current" a:if="{{seadd==''}}">当前定位：</text>
+  <view a:if="{{seadd==''}}">{{address}}</view>
+  <view a:else>{{seadd.address}}{{seadd.remark}}</view>
+  <view class="name">{{seadd.name}}<text a:if="{{seadd.sex==1}}">(先生)</text><text a:if="{{seadd.sex==2}}">(女士)</text> {{seadd.phone}}</view>
+</view>
+</navigator>
+<view style='background:#fff;'>
+<view class='user-phone' a:if="{{!phone}}"><text>手机号码</text><button open-type="getPhoneNumber" class="{{color}}ba_color" bindgetphonenumber="phone">点击自动获取</button></view>
+<view class="{{select==1?'way':'way2'}}" data-index="1" onTap='way'><text>商家配送</text><view  class="select {{select==1?'select-h':''}}"></view></view>
+<view class="time" a:if="{{select==1}}" onTap="toggletime">
+  <text>送达时间</text>
+  <text class="arrow">[预计{{time}}]送达</text>
+</view>
+<view class='way1' data-index="2" onTap="way"><text>到店自取</text><view   class="select {{select==2?'select-h':''}}"></view></view>
+<view class="dinfo" a:if="{{select==2}}">
+  <text class='detail'>详细地址</text>
+  <text class='address'>{{obj.address}}</text>
+  <text class='name'>{{strname}}</text>
+  <view class='invite'><text>自取电话</text><text>{{phone}}</text></view>
+  <view class='invite' onTap="toggletime"><text>自取时间</text><text class="arrow">{{time}}</text></view>
+  <text class='prompt'>请您在{{time}}之前到店自取商品，如果超时请提前与商家沟通，否 则商家有权丢弃该商品并拒绝退款。</text>
+</view>
+</view>
+<!-- <view class="titl">{{strname}}</view> -->
+<view class="list">
+  <view class="stitle">{{strname}}</view>
+  <view class="block">
+    <view a:for="{{obj.list}}"><text>{{item.title}}</text><text class='right'>x{{item.num}}<text class="price">￥ {{item.price}}</text></text></view>
+    <view>
+      <text>配送费</text>
+      <text class='right'>
+      <text class="price">￥ {{obj.expressAmount}}</text>
+      </text>
+    </view>
+  </view>
+  <view class="total">
+    <text>总计</text>
+    <text class='price'>￥ {{obj.amount}}</text>
+  </view>
+</view>
+<!--<view class="nr">
+  <text>满减券</text>
+  <text class="mj">满500减50<text>[不计抵用券]</text></text>
+</view>
+<view class="nr">
+  <text>代金券</text>
+  <text class="dj"><text>已抵用10元</text></text>
+</view>
+<view class="total">
+  <view class="line">
+   <text>总计：100元</text>
+   <text>已优惠：9元</text>
+  </view>
+  <view class="line">
+    <text></text>
+    <text>待支付：199元</text>
+  </view>
+</view>-->
+<view class="info">
+<view class="h1">其他</view>
+<view class="nr">
+<text>人数</text>
+<input placeholder-class="gray" value="1" type="number" bindinput="userNum" />
+</view>
+
+<view class="nr">
+<text>备注</text>
+<input placeholder-class="gray" placeholder="请输入备注" bindinput="remark" />
+</view>
+<view class="nr">
+<text>索要发票</text>
+<input placeholder-class="gray" placeholder="请输入发票信息" bindinput="invoiceHead" /></view>
+
+</view>
+ <!-- <view class="nr">
+  <text>人数</text>
+  <input placeholder-class="gray" value="1" type="number" bindinput="userNum" />
+</view>
+<view class="nr">
+  <text>备注</text>
+  <input placeholder-class="gray" placeholder="请输入备注" bindinput="remark" />
+</view>
+<view class="lastnr">
+  <text>索要发票</text>
+  <input placeholder-class="gray" placeholder="请输入发票信息" bindinput="invoiceHead" />
+</view>  -->
+<view style="height:120rpx"></view>
+<view class="wmfooter">
+  <view class="amount" onTap="back">总计：{{obj.amount}}元</view>
+  <view class="fprice"><view class="add {{color}}ba_color" onTap="sub">确认</view></view>
+</view>
+
+<!--用餐时间-->
+<view class="zan-dialog {{ showtime ? 'zan-dialog--show' : '' }}">
+  <view class="zan-dialog__mask" onTap="toggletime" />
+  <view class="zan-dialog__container times">
+    <view class="title">
+      <text>选择送达时间</text>
+      <view onTap="timeclose" class="close"></view>
+    </view>
+    <view class="nr1">
+    <scroll-view class="year"  scroll-y="true">
+      <view class="tabTit">
+        <text class="{{active == index?' active':''}}" a:for="{{obj.periods}}" data-index="{{index}}"  onTap="filterTab">{{item}}<text class="pes">({{obj.expressAmount}}配送费)</text></text>
+      </view>
+      </scroll-view>
+    </view>
+  </view>
+</view>

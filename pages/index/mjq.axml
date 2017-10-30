@@ -1,0 +1,52 @@
+<!--pages/index/mjq.wxml-->
+<!--满减券-->
+<import src="../template/template.axml"/>
+<template a:if="{{loading}}" is="loading"/>
+<image class="top" src="{{api}}res/xcx/images/yhq_bj.png"></image>
+<view class="facontainer1 {{lishow ? 'slidleft' : ''}}">
+  <view class="judbox" a:if="{{mjList.length>0}}" onTap="liselec" data-type="1" data-id="">
+    <text>不使用任何现金券</text>
+    <text class="rad_h"></text>
+  </view>
+  <scroll-view scroll-y="true" class="scroll">
+    <view class="container">
+      <view class="list" a:for="{{mjList}}" a:key="unique" onTap="liselec" data-index="{{index}}" data-type="1" data-id="{{item.id}}">
+    <view class="box">
+      <image src="{{api}}res/xcx/images/newcoupon_bg.png"></image>
+      <view class="info">
+        <view class="time" a:if="{{item.storeName}}">
+          {{item.storeName}}
+        </view>
+        <view a:else>
+          门店通用
+        </view>
+        <view class="limit {{color}}text_color">
+          <text>满{{item.full}}</text>减{{item.value}}
+        </view>
+      </view>
+      <view class="binfo">
+        <text class="tit">满减券</text>
+        <view class="btn">
+          <text class="{{color}}ba_color">不计代金券</text>
+          <text class="{{color}}ba_color" a:if="{{item.useType=='1'}}">通用</text>
+          <text class="{{color}}ba_color" a:if="{{item.useType=='2'}}">仅堂食</text>
+          <text class="{{color}}ba_color" a:if="{{item.useType=='3'}}">仅外卖</text>
+        </view>
+        <text class="date">{{item.date}}</text>
+        <text class="name">{{item.time}}有效</text>
+      </view>
+      <view class="send">
+        <view class="btn-give"></view>
+        <view class="btn-send {{color}}text_color {{color}}btn-send" onTap="give" data-id="{{item.uCouponId}}">转赠</view>
+      </view>
+        <view class="{{order.mjId==item.id? color+'liselec liselec':''}}">
+        </view>
+    </view>
+  </view>
+      <view class="coudefalut" a:if="{{mjList.length == 0}}">
+        <view class="picintro"></view>
+        <text>暂无数据</text>
+      </view>
+    </view>
+  </scroll-view>
+</view>

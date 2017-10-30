@@ -1,0 +1,52 @@
+<!--pages/index/djq.wxml-->
+<import src="../template/template.axml"/>
+<template a:if="{{loading}}" is="loading"/>
+<!--代金券-->
+<image class="top" src="{{api}}res/xcx/images/yhq_bj.png"></image>
+<view class="facontainer1">
+  <scroll-view scroll-y="true" class="scroll">
+    <view class="judbox" onTap="liselec" data-type="2" data-id="" a:if="{{djList.length> 0}}">
+      <text>不使用任何现金券</text>
+      <text class="rad_h"></text>
+    </view>
+    <view class="container1">
+      <view class="list" a:for="{{djList}}" a:key="unique" onTap="liselec" data-type="2" data-id="{{item.id}}" data-index="{{index}}">
+        <view class="box">
+          <image src="{{api}}res/xcx/images/newcoupon_bg.png"></image>
+          <view class="info">
+            <view class="time" a:if="{{item.storeName}}">
+              {{item.storeName}}
+            </view>
+            <view a:else>
+              门店通用
+            </view>
+            <view class="limit {{color}}text_color">
+              <text>{{item.value}}</text>元
+            </view>
+          </view>
+          <view class="binfo">
+            <text class="tit">代金券</text>
+            <view class="btn">
+              <!-- <text class="{{color}}ba_color">不计代金券</text> -->
+              <text  a:if="{{item.useType=='1'}}">通用</text>
+              <text  a:if="{{item.useType=='2'}}">仅堂食</text>
+              <text  a:if="{{item.useType=='3'}}">仅外卖</text>
+            </view>
+            <text class="date">{{item.date}}</text>
+            <text class="name">{{item.time}}有效</text>
+          </view>
+          <view class="send">
+            <view class="btn-give"></view>
+            <view class="btn-send {{color}}text_color {{color}}btn-send" onTap="give" data-id="{{item.uCouponId}}">转赠</view>
+          </view>
+          <view data-id="{{item.id}}" class="{{order.djId==item.id? color+'liselec liselec':''}}">
+          </view>
+        </view>
+      </view>
+      <view class="coudefalut" a:if="{{djList.length == 0}}">
+        <view class="picintro"></view>
+        <text>暂无数据</text>
+      </view>
+    </view>
+  </scroll-view>
+</view>

@@ -10,7 +10,7 @@
 </view>
 </navigator>
 <view style='background:#fff;'>
-<view class='user-phone' a:if="{{!phone}}"><text>手机号码</text><button open-type="getPhoneNumber" class="{{color}}ba_color" bindgetphonenumber="phone">点击自动获取</button></view>
+<view class='user-phone' a:if="{{!phone}}"><text>手机号码</text><input class="phone" maxlength="11" placeholder="请输入手机号" type="number" onInput="phone"  /></view>
 <view class="{{select==1?'way':'way2'}}" data-index="1" onTap='way'><text>商家配送</text><view  class="select {{select==1?'select-h':''}}"></view></view>
 <view class="time" a:if="{{select==1}}" onTap="toggletime">
   <text>送达时间</text>

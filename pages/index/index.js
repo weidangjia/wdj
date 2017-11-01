@@ -27,9 +27,8 @@ Page({
     var uid=my.getStorageSync({key:'uid'}).data;
     if(uid){
       that.load();
-      that.theme();      
+      that.theme();  
     }else{
-      console.log(that);      
       that.authCode();
     }
     my.getSystemInfo({
@@ -70,7 +69,7 @@ Page({
             key: 'userInfo', // 缓存数据的 key
             data: ret.data, // 要缓存的数据
             success: (res) => {
-              that.getdata();
+              that.load();
               that.theme();              
             },
           });
@@ -184,7 +183,10 @@ Page({
         }
       }
       //停止下拉刷新
-      my.stopPullDownRefresh()
+      setTimeout(function(){
+        my.stopPullDownRefresh()
+      },1000)
+      
     })
 
   },
@@ -325,11 +327,12 @@ Page({
   load: function () {
     var that = this;
      my.getLocation({
-       type:3,
+       type:2,
       success(res) {
-        console.log(res);
-        my.setStorageSync({key:'lat',data:res.latitude});
-        my.setStorageSync({key:'lng',data:res.longitude});
+        // my.setStorageSync({key:'lat',data:res.latitude});
+        // my.setStorageSync({key:'lng',data:res.longitude});
+        my.setStorageSync({key:'lat',data:'31.811226'});
+        my.setStorageSync({key:'lng',data:'119.974062'});
         if(res.street){
         var address=res.city+res.district+res.streetNumber.street+res.streetNumber.number;    
         my.setStorage({
@@ -365,14 +368,12 @@ Page({
     }) 
   },
   shutDown:function(){
-    console.log(11);
     my.removeStorageSync({key:'sendInfo'});
     this.setData({
       sendShow:false
     })
   },
   shutDown1:function(){
-    console.log(111);
     this.setData({
       robShow:false
     })
@@ -391,7 +392,7 @@ Page({
   },
   onPullDownRefresh() {
     // 页面被下拉
-    this.getdata();
+    this.load();
   },
   goYd:function(){
     var that = this;

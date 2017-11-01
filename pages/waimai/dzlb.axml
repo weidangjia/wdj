@@ -1,43 +1,55 @@
 <import src="../template/template.axml"/>
-<template a:if="{{loading}}" is="loading"/> 
+<template a:if="{{loading}}" is="loading"/>
 <view class="content">
-  <view class="list" a:for="{{dzlist}}" a:key="unique"  a:if="{{byGeo==''}}">
+  <view class="list" a:for="{{dzlist}}" a:if="{{byGeo==''}}">
     <view class="left" data-obj="{{item}}" onTap="select">
       <view class="info">
-      <text class="name">{{item.name}}</text>
-      <text>{{item.phone}}</text>
+        <text class="name">{{item.name}}</text>
+        <text>{{item.phone}}</text>
       </view>
-      <view class="address"><text a:if="{{item.isDefault==1}}">[默认]</text>{{item.address+' '+item.remark}}</view>
+      <view class="address">
+        <text a:if="{{item.isDefault==1}}">[默认]</text>{{item.address+' '+item.remark}}
+      </view>
     </view>
     <view class="right" data-info="{{item}}" onTap="godz">
-        <image src="/images/wm_dz.png"></image>
+      <image src="/images/wm_dz.png"></image>
     </view>
   </view>
-<view a:if="byGeo">
-  <view class="list" a:for="{{dzlist}}" a:key="unique" a:if="{{item.useful==1}}">
-    <view class="left" data-obj="{{item}}" onTap="select">
-      <view class="info">
-      <text class="name">{{item.name}}</text>
-      <text>{{item.phone}}</text>
+  <view a:if="{{byGeo==1}}">
+    <view a:for="{{dzlist}}">
+      <view class="list" a:if="{{item.useful==1}}">
+      <view class="left" data-obj="{{item}}" onTap="select">
+        <view class="info">
+          <text class="name">{{item.name}}</text>
+          <text>{{item.phone}}</text>
+        </view>
+        <view class="address">
+          <text a:if="{{item.isDefault==1}}">[默认]</text>{{item.address+' '+item.remark}}
+        </view>
       </view>
-      <view class="address"><text a:if="{{item.isDefault==1}}">[默认]</text>{{item.address+' '+item.remark}}</view>
-    </view>
-    <view class="right" data-info="{{item}}" onTap="godz">
+      <view class="right" data-info="{{item}}" onTap="godz">
         <image src="/images/wm_dz.png"></image>
-    </view>
-  </view>
-  <view class="list beyond" a:for="{{dzlist}}" a:key="unique" a:if="{{item.useful==0}}">
-    <view class="left">
-      <view class="info">
-      <text class="name">{{item.name}}<text>[超出配送范围]</text></text>
-      <text>{{item.phone}}</text>
       </view>
-      <view class="address"><text a:if="{{item.isDefault==1}}">[默认]</text>{{item.address+' '+item.remark}}</view>
+   </view>
     </view>
-    <view class="right" data-info="{{item}}" onTap="godz">
+    <view a:for="{{dzlist}}" >
+      <view class="list beyond" a:if="{{item.useful==0}}">
+      <view class="left">
+        <view class="info">
+          <text class="name">{{item.name}}
+            <text>[超出配送范围]</text>
+          </text>
+          <text>{{item.phone}}</text>
+        </view>
+        <view class="address">
+          <text a:if="{{item.isDefault==1}}">[默认]</text>{{item.address+' '+item.remark}}
+        </view>
+      </view>
+      <view class="right" data-info="{{item}}" onTap="godz">
         <image src="/images/wm_dz.png"></image>
+      </view>
     </view>
-  </view>
+    </view>
   </view>
 </view>
 <view class="noadderss" a:if="{{dzlist==''}}">

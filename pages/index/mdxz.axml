@@ -57,7 +57,7 @@
     </view>
     <view class="footer">
       <view class="address"><image src="{{api}}res/xcx/images/{{color}}icon_curloca.png"></image><text>当前位置：{{address}}</text></view>
-      <view class="img" bindtap="refresh"><image src="{{api}}res/xcx/images/{{color}}icon_fresh.png"></image></view>
+      <view class="img" onTap="refresh"><image src="{{api}}res/xcx/images/{{color}}icon_fresh.png"></image></view>
     </view>
   </view>
 </view>

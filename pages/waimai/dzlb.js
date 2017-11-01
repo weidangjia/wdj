@@ -16,7 +16,7 @@ Page({
      })
     }else if(options.byGeo){
       this.setData({
-        byGeo:'1'
+        byGeo:1
       })
     } else if (options.from){
       this.setData({
@@ -38,6 +38,7 @@ Page({
       state:true,
       color: my.getStorageSync({key:'color'}).data
     })
+    console.log(that.data.byGeo)
     if (that.data.byGeo) {
       config.post('wxApi/addr/listByGeo', {}, function (ret) {
         if (ret.code == 0) {
@@ -45,7 +46,7 @@ Page({
             dzlist: ret.data,
             loading: false
           })
-          console.log(that.data.loading);
+          console.log(that.data.dzlist);
         }
       },true)
     } else {

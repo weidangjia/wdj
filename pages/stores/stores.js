@@ -76,7 +76,7 @@ Page({
       }
     }, true);
     that.setData({
-      // address: my.getStorageSync('address')
+      address: my.getStorageSync({key:'address'}).data
     })
   },
   open: function () {
@@ -105,23 +105,30 @@ Page({
     });
     // 获取经纬度
     my.getLocation({
-      type: 2,
-      success: (res) => {
-        // my.setStorageSync('address', res.result.address);
-        // my.setStorageSync('city', res.result.address_component.city);
-        lat = res.latitude;
-        lng = res.longitude;
-        // 经纬度加入缓存
-        my.setStorageSync({
-          key: 'lat',
-          data: lat
+       type:2,
+      success(res) {
+        // my.setStorageSync({key:'lat',data:res.latitude});
+        // my.setStorageSync({key:'lng',data:res.longitude});
+        my.setStorageSync({key:'lat',data:'31.811226'});
+        my.setStorageSync({key:'lng',data:'119.974062'});
+        if(res.street){
+        var address=res.city+res.district+res.streetNumber.street+res.streetNumber.number;    
+        my.setStorage({
+          key: 'address', // 缓存数据的 key
+          data: address, // 要缓存的数据
+        });      
+        }else{
+            my.setStorage({
+          key: 'address', // 缓存数据的 key
+          data: '常州市新北区太湖东路9-2号', // 要缓存的数据
+        }); 
+      }
+      that.setData({
+          lat: res.latitude,
+          lng: res.longitude,
+           state: 1
         })
-        my.setStorageSync({
-          key: 'lng',
-          data: lng
-        })
-
-        that.load();
+         that.load();
       },
       fail() {
         my.alert({ title: '定位失败' });

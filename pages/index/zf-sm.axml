@@ -1,0 +1,11 @@
+<!--pages/index/zf-syd.wxml-->
+<view class="paysuccess">
+  <image src="{{api}}res/xcx/images/{{color}}resu_scan.png"></image>
+    <view class="main">
+        <view class="smpic"><image src="{{api}}res/xcx/images/scan_person.png"></image></view>
+    </view>
+    <view class="pictext">
+        <text>已经为您通知服务员</text>
+        <text>请耐心等待服务人员前来服务</text>
+    </view>
+</view>

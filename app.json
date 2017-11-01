@@ -1,7 +1,12 @@
 {
   "pages": [
-
-    "pages/index/index",
+    
+    "pages/index/index",           
+    
+    "pages/waimai/qrdc", 
+    "pages/waimai/dzlb",
+    
+    "pages/index/zf",    
     "pages/index/wddd",
     "pages/index/mdxz",
     "pages/index/ddxq",
@@ -11,13 +16,15 @@
     "pages/index/dc",
     "pages/index/mjq",
     "pages/index/djq",
+    "pages/index/zf-sm",
+    "pages/index/zf-syd",
+    "pages/index/zf-wc",
 
     "pages/waimai/dplb",
     "pages/waimai/wmdd",
-    "pages/waimai/dzlb",
     "pages/waimai/dzxz",
+    "pages/waimai/zf",
     "pages/waimai/ddxq",
-    "pages/waimai/qrdc",
 
 
     "pages/mypage/qyhq",

@@ -1,0 +1,151 @@
+
+<!--支付.wxml-->
+<import src="../template/template.axml"/>
+<template a:if="{{loading}}" is="loading"/> 
+<view class="confirminfo">
+  <view class="info">
+    <text>订单编号</text>
+    <text class="gray">{{order.code}}</text>
+  </view>
+  <view class="info">
+    <text>下单时间</text>
+    <text class="gray">{{order.time}}</text>
+  </view>
+  <view class="info" a:if="{{order.isBook ==1}}">
+    <text>订单形式<text class="deta">预定</text>
+    </text>
+    <text class="gray">{{order.bookTime}}</text>
+  </view>
+  <view class="info" a:if="{{order.deskAmount > 0}}">
+    <text>餐位费</text>
+    <text class="gray"><text class="red">{{order.deskAmount}}</text>元</text>
+  </view>
+  <view class="info">
+    <text>菜品小计</text>
+    <text class="red">{{order.goodsAmount}}元</text>
+  </view>
+  <view class="info" a:if="{{order.otherAmount > 0}}">
+    <text>其他</text>
+    <text class="red">{{order.otherAmount}}元</text>
+  </view>
+  <view class="info" onTap="goDj" data-type="2">
+    <text>代金券</text>
+    <text class="arrow">
+      <text class="{{color}}cbtn cbtn" a:if="{{order.djId!='noDj'&&order.djId}}">已抵用{{order.djInfo}}元</text>
+    </text>
+  </view>
+  <view class="info">
+    <text>可参与满减</text>
+    <text class="red">{{order.canMjAmount}}元</text>
+  </view>
+  <view class="info" onTap="goMj" data-type="1">
+    <text>满减券</text>
+    <text class="arrow"><text class="{{color}}ctext_color">{{order.mjInfo}}</text></text>
+  </view>
+  <view class="info" a:if="{{order.youhuiType != 0}}">
+    <text>商家优惠</text>
+    <text class="{{color}}ctext_color">{{order.youhuiInfo}}</text>
+  </view>
+  <view class="info" a:if="{{order.refundAmount>0}}">
+    <text>减免</text>
+    <text class="red">{{order.refundAmount}}元</text>
+  </view>
+  <view class="info" a:if="{{order.hasPayAmount>0}}">
+    <text>已支付</text>
+    <text class="red">{{order.hasPayAmount}}元</text>
+  </view>
+</view>
+<view class="confirminfo">
+  <view class="info" onTap="faslid">
+    <text>索要发票</text>
+    <text class="gray arrow">{{order.invoiceHead}}</text>
+  </view>
+  <view class="info">
+    <text>餐后优惠</text>
+    <text class="gray">{{order.afterRule}}</text>
+  </view>
+  <view class="info means">
+    <view class="smean way1 {{Seleted==1?color+'bk_color active':''}}" data-index="1" onTap="tapClassify" a:if="{{order.qrPay == 1}}">
+      <text>扫码支付</text>
+    </view>
+    <view class="smean way2 {{Seleted==2?color+'bk_color active':''}}" data-index="2" onTap="tapClassify" a:if="{{order.sytPay == 1}}">
+      <text>收银台支付</text>
+    </view>
+    <!-- <view class="smean way3 {{Seleted==3?color+'bk_color active':''}}" data-index="3" onTap="tapClassify" a:if="{{order.aliPay == 1}}">
+      <text>支付宝支付</text>
+    </view> -->
+    <view class="smean way3 {{Seleted==4?color+'bk_color active':''}}" data-index="4" onTap="tapClassify" a:if="{{order.wxPay == 1}}">
+      <text>支付宝支付</text>
+    </view>
+    <view class="smean way2 {{Seleted==5?color+'bk_color active':''}}" data-index="6" onTap="tapClassify" a:elif="{{order.aliPay == 0}}">
+      <text>店内支付</text>
+    </view>
+    <view class="smean way5 {{Seleted==6?color+'bk_color active':''}}" data-index="5" onTap="tapClassify" a:if="{{order.unionPay == 1}}">
+      <text>银联支付</text>
+    </view>
+  </view>
+</view>
+<view class="height"></view>
+<view class="order-ac">
+  <view class="go-back" onTap="goBack">返回</view>
+    <form a:if="{{order.needPayAmount>0}}" onSubmit="pay">
+    <button class="determine {{color}}ba_color" formType="submit">还需支付（{{order.needPayAmount}}元）</button>
+  </form>
+  <view a:else class="cancel">已支付{{order.hasPayAmount}}元</view>
+  <!--<view onTap="pay">
+    <text class="determine">还需支付（{{order.needPayAmount}}元）</text>
+  </view>-->
+</view>
+
+<!--满减券-->
+<view class="facontainer1 {{lishow ? 'slidleft' : ''}}">
+  <view class="judbox" a:if="{{mjList.length>0}}" onTap="liselec" data-type="1" data-id="">
+    <text>不使用任何现金券</text>
+    <text class="rad_n"></text>
+  </view>
+  <scroll-view scroll-y="true" class="scroll">
+  <view class="container">
+    <view class="list" a:for="{{mjList}}" onTap="liselec" data-index="{{index}}" data-type="1" data-id="{{item.id}}">
+      <view class="box liselec">
+        <view class="minfo">
+          <view class="time">
+            <text>{{item.time}}有效</text>
+            <text>优惠券</text>
+          </view>
+          <view class="limit">
+            <text>满{{item.full}}</text>减{{item.value}}
+          </view>
+          <view class="ybtn">
+            <text>不计代金券</text>
+          </view>
+          <view class="binfo">
+            <text class="name">{{order.storeName}}</text>
+            <text class="date">{{item.date}}</text>
+          </view>
+        </view>
+        <view class="btn-give">
+        </view>
+      </view>
+      <view class="{{liselec==index?'liselec':''}}">
+      </view>
+    </view>
+     <view class="coudefalut" a:if="{{mjList.length == 0}}">
+    <view class="picintro"></view>
+    <text>暂无数据</text>
+    </view>
+  </view>
+
+<view class="order-ac {{faslid ?'':'fashow'}}">
+    <view class="go-back" onTap="liback">返回</view>
+  </view>
+  </scroll-view>
+</view>
+<!--发票信息-->
+<view class="fabj {{faslid ? 'fashow' : ''}}">
+<view class="facontainer {{faslid ? 'slidleft' : ''}}">
+  <view class="faheader">
+    <view class="fatitle"><text onTap="faback">取消</text><text class="{{color}}ctext_color" onTap="fpcom">确认</text></view>
+    <textarea bindinput="invoiceHead" placeholder="请输入开票信息" />
+  </view>
+</view>
+</view>

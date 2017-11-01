@@ -484,6 +484,11 @@ padding:23.5rpx;
 .amount{
   font-size: 15px;
 }
+.phone{
+  text-align: right;
+  border: none;
+  font-size: 16px;
+}
 .user-phone{
   display: flex;
   justify-content: space-between;

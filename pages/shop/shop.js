@@ -452,7 +452,7 @@ Page({
     var obj = { glist: array };
     var json = JSON.stringify(obj);
 
-    if (that.data.isWm) {
+    if (that.data.isWm==1) {
       if (newmap.total > 0) {
 
         post('wxApi/wm/confirm', { jsonStr: json }, function (ret) {

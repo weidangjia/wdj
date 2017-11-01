@@ -67,12 +67,23 @@ Page({
   locat:function(val){
     var that=this;
     my.getLocation({
-      type:3,
+      type:2,
       success(res) {
-        console.log(res);
        that.setData({
-         address:res.pois
-       })
+         city:res.city
+        })
+      my.httpRequest({
+      url: 'http://apis.map.qq.com/ws/place/v1/suggestion',
+      method:'get',
+      data:{
+        region:that.data.city,
+        keyword:val,
+        key:'YWZBZ-5MFCP-WRSDO-LAWMH-GFZRT-WUFST'
+      },
+      success: (res) => {
+        that.setData({address:res.data.data});
+      },
+    });
       },
       fail() {
         my.alert({ title: '定位失败' });
@@ -82,7 +93,8 @@ Page({
   },
   search:function(e){
     var val=e.detail.value;
-    this.locat(val);
+    var that=this;
+    that.locat(val);
   },
   sele:function(e){
     var se = e.currentTarget.dataset.se;

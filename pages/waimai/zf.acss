@@ -458,10 +458,10 @@ page{
           flex-direction:row;
   font-size: 28rpx;
   color: #ff4f39;
-  padding-top: 20rpx;
+  /* padding-top: 10rpx; */
 }
 .pay text{
   display:inline-block;
   padding-right: 30rpx;
-  padding-top: 5rpx;
+  /* padding-top: 5rpx; */
 }

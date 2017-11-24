@@ -52,6 +52,7 @@ Page({
               geoCity: ret.data[0].title
             })
             that.onLoad();
+            console.log(that.data)
           }
         }
       }

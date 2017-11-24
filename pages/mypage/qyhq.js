@@ -75,7 +75,11 @@ function fill_zero_prefix(num) {
 }
 Page({
   data: {
-    api: config.ossPath,
+    api: config.apiPath,
+    ossPath:config.ossPath,
+    winWidth: 0,
+    winHeight: 0,
+    currentTab: 0,  
     order: '',
     count: [],
     list:'',
@@ -83,7 +87,7 @@ Page({
     from: '',
     isstop: true,
     total_micro_second: [],
-    loading:true,
+    loading:true
   },
   onShow:function(){
     var that=this;
@@ -95,6 +99,14 @@ Page({
       that.load();
       add(that);                    
     }
+    my.getSystemInfo({
+      success: function (res) {
+        that.setData({
+          winWidth: res.windowWidth,
+          winHeight: res.windowHeight
+        });
+      }
+    }); 
   },
   onUnload: function () {
     this.setData({
@@ -104,12 +116,9 @@ Page({
   onLoad: function (options) {
     var that = this;
     if (!my.getStorageSync({key:'color'}).data) {
-      my.setStorageSync({
-          key:'color',
-          data:'blue'
-      });
+      my.setStorageSync({key:'color',data: 'blue'});
     }
-    config.navBarColor(my.getStorageSync({ key: 'color' }).data);
+    config.navBarColor(my.getStorageSync({key:'color'}).data);
     that.setData({
       order: my.getStorageSync({key:'order'}).data,
       orderId: options.id,
@@ -119,7 +128,7 @@ Page({
   load:function(){
     var that=this;
     //抢购活动列表
-    config.post('wxApi/coupon/all',{},function(ret){
+    config.post('wxApi/coupon/all', { apiVersion:1},function(ret){
       if(ret.code==0){
         that.setData({
           list:ret.data
@@ -146,43 +155,79 @@ Page({
   },
   get:function(e){
     var that=this;
+    var id=0;
+    if(e.from=='button'){
+      
+      id = e.target.dataset.id;
+    }else{
+      id = e.currentTarget.dataset.id;
+    }
     //领取优惠券
-    var id = e.currentTarget.dataset.id;
+    
     config.post('wxApi/coupon/get', { actId:id},function(ret){
       var isAdd = false;      
       if(ret.code==0){
         if (ret.data){
-          my.requestPayment({
-            'timeStamp': ret.data.timeStamp,
-            'nonceStr': ret.data.nonceStr,
-            'package': ret.data.package,
-            'signType': ret.data.signType,
-            'paySign': ret.data.paySign,
+          my.tradePay({
+            'orderStr': ret.data.orderStr,
             'success': function (res) {
-              config.tost("领取成功！");
-              that.onShow();
+              console.log(ret);
+              that.load();
+              config.tost("领取成功！");             
             },
           })
-        }     
-        config.tost("领取成功！");
-        that.load();
+        }
+        console.log(ret);
+        that.load();  
+        if(ret.data!=null){
+          config.tost("领取成功！");          
+        }      
       }else{
         config.alert(ret.msg);
       }
     },true)
   },
+  sharing:function (e) {
+      console.log(e)
+      // my.setStorageSync({key:'datasetInfo',data:e.target.dataset.info})
+      // my.setStorageSync({key:'datasetImg',data:e.target.dataset.img})
+      my.setStorageSync({key:'datasetE',data:e})
+      
+  },
   onShareAppMessage: function () {
+    var that=this;
+    var e = my.getStorageSync({key:'datasetE'}).data
     //转发
     var obj = my.getStorageSync({key:'userInfo'}).data;
+    var title = e.target.dataset.info == null ? '' : e.target.dataset.info;
+    console.log(title);
     return {
-      title: obj.nickName + '赠送您优惠券，手快有，手慢无！',
-      path: 'pages/index/index',
+      title: title,
+      path: 'pages/mypage/share?img='+e.target.dataset.img,
+      imageUrl: that.data.api + e.target.dataset.img,
       success: function (res) {
-        
+        config.tost("分享成功");  
+        that.get(e);
       },
       fail: function (res) {
         // 转发失败
       }
     }
   },
+  swichNav: function (e) {
+
+    var that = this;
+    if (this.data.currentTab === e.target.dataset.current) {
+      return false;
+    } else {
+      that.setData({
+        currentTab: e.target.dataset.current
+      })
+    }
+  },
+  bindChange: function (e) {
+    var that = this;
+    that.setData({ currentTab: e.detail.current });
+
+  },  
 })

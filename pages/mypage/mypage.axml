@@ -1,7 +1,7 @@
 <!--我的-->
 <view class="container">
    <view class="userinfo {{color}}userinfo">
-  <view class="img"><image class="userinfo-avatar" a:if="{{userInfo.headImg}}" src="{{user.avatar}}" background-size="cover"></image></view>    
+  <view class="img"><image class="userinfo-avatar" a:if="{{userInfo.headImg}}" src="{{api+userInfo.headImg}}" background-size="cover"></image></view>    
     <view class="name">{{userInfo.nickName}}</view> 
 </view> 
 <!--header-->

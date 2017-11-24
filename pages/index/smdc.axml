@@ -7,7 +7,7 @@
     <view><image class="arrow" src="{{api}}res/xcx/images/code_arrow.png"></image></view>
     <view><image class="tb" src="{{api}}res/xcx/images/code_step3.png"></image><text>下单</text></view>
     </view>
-    <view class="aniu {{color}}cba_color" bindtap="saom">
+    <view class="aniu {{color}}cba_color" onTap="saom">
     <text>{{aliasQr}}</text>
     </view>
 </view>

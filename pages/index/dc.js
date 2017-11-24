@@ -35,19 +35,9 @@ Page({
     my.scan({
       success: (res) => {
         if (res.code) {
-          //扫码参数获取
-          id = res.code.split('=')[1];
-        } else if (res.result) {
-
-          id = res.result.split('_')[1];
-        } else {
-          tost("二维码不存在");
-        }  
-        console.log(res);
-        if (id) {
           //订单进入扫描
           if(that.data.from){
-            post("/wxApi/d/getXcxDesk", { id: id }, function (ret) {
+            post("/wxApi/d/getAliDesk",  { qr: res.code } , function (ret) {
               if (ret.code == 0) {
                 if (my.getStorageSync({key:'sid'}).data != ret.data.storeId) {
                   that.storeId(ret.data);
@@ -65,7 +55,7 @@ Page({
               }
             },true);
           }else if (that.data.change==1){
-            post("/wxApi/d/getXcxDesk", { id: id }, function (ret) {
+            post("/wxApi/d/getAliDesk", { qr:res.code }, function (ret) {
               if (ret.code == 0) {
                 if (my.getStorageSync({key:'sid'}).data != ret.data.storeId) {
                   tost('餐桌号不合法');
@@ -94,7 +84,7 @@ Page({
               }
             },true);
           }else{
-          post("/wxApi/d/getXcxDesk", { id:id }, function (ret) {
+          post("/wxApi/d/getAliDesk",  { qr: res.code }, function (ret) {
             if (ret.code == 0) {
               console.log(ret);
               if (my.getStorageSync({key:'sid'}).data != ret.data.storeId){

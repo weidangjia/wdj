@@ -174,7 +174,7 @@ page{
 }
 .time .title text{
     background:url('https://img.zhcanting.com/res/xcx/images/icon_time.png') left center no-repeat;
-    background-size: 45rpx;
+    background-size: 38rpx;
     padding-left: 55rpx;
 }
 .seat .title text{
@@ -375,6 +375,8 @@ page{
     cursor: pointer;
     display: inline-block;
     zoom: 1; 
+    height:72rpx;
+    line-height:72rpx;
 }
 .inpts {
     border:0;

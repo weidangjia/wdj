@@ -17,13 +17,30 @@ App({
             },
             fail: () => {
               reject({});
+              zf()
             },
           });
         },
         fail: () => {
           reject({});
+          zf()
         },
       });
+
+      function zf() {
+        my.getAuthUserInfo({
+            scopes: ['auth_user'],
+            success: (res) => {
+              this.userInfo2 = res;
+              resolve(this.userInfo2);
+            },
+            fail: () => {
+              reject({});
+              zf()
+            },
+          });
+      }
+
     });
   },
 

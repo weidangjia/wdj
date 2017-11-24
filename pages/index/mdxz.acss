@@ -11,9 +11,9 @@ page{
   font-family: "Microsoft Yahei";
   background: #fff;
 }
-.content-container{
+/* .content-container{
   padding-bottom: 112rpx;
-}
+} */
 .content-container>view{
   border-top: 1px solid #dcdcdc;
   margin-left: 23.5rpx;

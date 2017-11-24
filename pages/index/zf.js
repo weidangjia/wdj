@@ -25,10 +25,12 @@ Page({
       my.setStorageSync({ key: 'color', data: 'blue' });
     }
     config.navBarColor(my.getStorageSync({ key: 'color' }).data);
+
     // if(options.id){
     // that.data.orderId=options.id;
+
     that.setData({
-      orderId: 'efc6362545114465aa28727a52587953'
+      orderId:my.getStorageSync({ key: 'orderId' }).data
     })
     // }
     that.setData({
@@ -37,7 +39,8 @@ Page({
   },
   onShow: function () {
     var that = this;
-    //支付订单信息
+    console.log(that.data.orderId)
+    // 支付订单信息that.data.orderId
     config.post("/wxApi/o/payInfo", { id: that.data.orderId }, function (ret) {
       console.log(ret);
       if (ret.code == 0) {
@@ -168,7 +171,7 @@ Page({
         
         if (ret.code == 0) {
           my.tradePay({
-            orderStr: 'myOrderStr', //完整的支付参数拼接成的字符串，从服务端获取
+            orderStr: ret.data, //完整的支付参数拼接成的字符串，从服务端获取
             success: (res) => {
               my.alert({
                 content: JSON.stringify(res),

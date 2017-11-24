@@ -2,7 +2,10 @@
   image{width: 100%}  
 .swiper-item{
   width: 100%;
-  height: 100%;
+  height: 468rpx;
+}
+.a-swiper {
+  /* height:100% !important; */
 }
 .total{
   padding: 23.5rpx 23.5rpx 23.5rpx 0;

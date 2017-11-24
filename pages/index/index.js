@@ -68,11 +68,9 @@ Page({
             my.setStorage({
             key: 'userInfo', // 缓存数据的 key
             data: ret.data, // 要缓存的数据
-            success: (res) => {
-              that.load();
-              that.theme();              
-            },
           });
+          that.load();
+      that.theme();  
           }          
         })
       },
@@ -91,7 +89,7 @@ Page({
         sendInfo.couponCanGet = ret.data.couponCanGet;
         sendInfo.couponTotalPrice = ret.data.couponTotalPrice;
         sendInfo.coupons = ret.data.coupons;
-        my.setStorageSync({keyi:'sendInfo',data:sendInfo});
+        my.setStorageSync({key:'sendInfo',data:sendInfo});
         that.setData({
           sendInfo: sendInfo,
           sendShow: true
@@ -329,22 +327,29 @@ Page({
      my.getLocation({
        type:2,
       success(res) {
-        // my.setStorageSync({key:'lat',data:res.latitude});
-        // my.setStorageSync({key:'lng',data:res.longitude});
-        my.setStorageSync({key:'lat',data:'31.811226'});
-        my.setStorageSync({key:'lng',data:'119.974062'});
-        if(res.street){
+        console.log(res)
+        my.setStorageSync({key:'lat',data:res.latitude});
+        my.setStorageSync({key:'lng',data:res.longitude});
+
+        // my.setStorageSync({key:'lat',data:'31.811226'});
+        // my.setStorageSync({key:'lng',data:'119.974062'});
         var address=res.city+res.district+res.streetNumber.street+res.streetNumber.number;    
-        my.setStorage({
-          key: 'address', // 缓存数据的 key
-          data: address, // 要缓存的数据
-        });      
-        }else{
-            my.setStorage({
-          key: 'address', // 缓存数据的 key
-          data: '常州市新北区太湖东路9-2号', // 要缓存的数据
-        }); 
-      }
+          my.setStorage({
+            key: 'address', // 缓存数据的 key
+            data: address, // 要缓存的数据
+          });
+      //   if(res.street){
+      //   var address=res.city+res.district+res.streetNumber.street+res.streetNumber.number;    
+      //   my.setStorage({
+      //     key: 'address', // 缓存数据的 key
+      //     data: address, // 要缓存的数据
+      //   });      
+      //   }else{
+      //       my.setStorage({
+      //       key: 'address', // 缓存数据的 key
+      //       data: '常州市新北区太湖东路9-2号', // 要缓存的数据
+      //   }); 
+      // }
       that.setData({
           lat: res.latitude,
           lng: res.longitude,

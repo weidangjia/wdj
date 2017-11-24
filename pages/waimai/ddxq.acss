@@ -274,6 +274,7 @@ image{width: 100%}
     color: #35b220;
     display: inline-block;
     padding-left: 35rpx;
+    padding-right:35rpx;
     zoom: 1; 
     background: url('https://img.zhcanting.com/res/xcx/images/wm_yzf.png') left center no-repeat;
     background-size:25rpx 18rpx;

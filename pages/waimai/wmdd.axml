@@ -31,7 +31,7 @@
           预约时间：{{item.bookTime}}
         </view>
         <view class="line">
-          <text>{{item.storeName}}<text class="{{item.deskName=='尚未到店'?'not':'blue'}}">{{item.deskName}}</text></text>
+          <text class="name">{{item.storeName}}<text class="{{item.deskName=='尚未到店'?'not':'blue'}}">{{item.deskName}}</text></text>
           <text>总额</text>
         </view>
         <view class="line">
@@ -51,7 +51,7 @@
       </view>
     </view>
 </view>
-  <!-- 我的订单-已完成 -->
+<!-- 我的订单-已完成 -->
     <view class="ongoing {{currentTab==1?'':'hide'}}">
       <view class="list" a:for="{{list}}" a:key="unique" a:if="{{item.state!=1}}">
       <navigator url="../waimai/ddxq?id={{item.id}}&qxshow=true">
@@ -60,7 +60,7 @@
           <text>{{item.time}}</text>
         </view>
         <view class="line">
-          <text>{{item.storeName}}<text class="blue not">{{item.deskName}}</text></text>
+          <text class="name">{{item.storeName}}<text class="blue not">{{item.deskName}}</text></text>
           <text>总额</text>
         </view>
         <view class="line">

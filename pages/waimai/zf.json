@@ -1,1 +1,5 @@
-{"navigationBarTitleText": "支付"}
+{
+  "defaultTitle":"支付",
+  "backgroundTextStyle": "dark",
+  "enablePullDownRefresh": true
+}

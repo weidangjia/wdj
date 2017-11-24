@@ -26,13 +26,13 @@
     <text>配送费</text>
     <text class="red">{{order.expressAmount}}元</text>
   </view>
-  <view class="info" bindtap="goDj" data-type="2">
+  <view class="info" onTap="goDj" data-type="2">
     <text>代金券</text>
     <text class="arrow">
       <text class="{{color}}cbtn cbtn" a:if="{{order.djId!='noDj'&&order.djId}}">已抵用{{order.djInfo}}元</text>
     </text>
   </view>
-  <view class="info" bindtap="goMj" data-type="1">
+  <view class="info" onTap="goMj" data-type="1">
     <text>满减券</text>
     <text class="arrow"><text class="{{color}}ctext_color">{{order.mjInfo}}</text></text>
   </view>
@@ -44,32 +44,32 @@
     <text>已支付</text>
     <text class="red">{{order.hasPayAmount}}元</text>
   </view>
-  <view class="info" bindtap="faslid">
+  <view class="info" onTap="faslid">
     <text>发票信息</text>
     <text class="gray arrow">{{order.invoiceHead}}</text>
   </view>
 </view>
 <view class="height"></view>
 <view class="order-ac">
-  <view class="go-back" bindtap="goBack">返回</view>
+  <view class="go-back" onTap="goBack">返回</view>
   <view class="pay" a:if="{{order.state==1}}">
   <text>剩余时间 {{count}}</text>
-    <form a:if="{{order.wxPay==1}}" report-submit="true" bindsubmit="pay">
+    <form a:if="{{order.wxPay==1}}" report-submit="true" onSubmit="pay">
     <button class="dermine {{color}}dermine" formType="submit">支付（{{order.needPayAmount}}元）</button>
   </form>
-  <form a:elif="{{order.wxPay==0}}" report-submit="true" bindsubmit="offline">
+  <form a:elif="{{order.wxPay==0}}" report-submit="true" onSubmit="offline">
     <button class="dermines {{color}}dermines" formType="submit">确认下单 </button>
   </form>
   </view>
     <view class="nodermine" a:if="{{order.state==0}}" >支付（{{order.needPayAmount}}元）</view>
-    <view class="add {{color}}ba_color" a:if="{{order.state<0}}">已取消</view>
+    <view class="dermines {{color}}ba_color" a:if="{{order.state<0}}">已取消</view>
 </view>
 
 <!--发票信息-->
 <view class="fabj {{faslid ? 'fashow' : ''}}">
 <view class="facontainer {{faslid ? 'slidleft' : ''}}">
   <view class="faheader">
-    <view class="fatitle"><text bindtap="faback">取消</text><text class="{{color}}text_color" bindtap="fpcom">确认</text></view>
+    <view class="fatitle"><text onTap="faback">取消</text><text class="{{color}}text_color" onTap="fpcom">确认</text></view>
     <textarea bindinput="invoiceHead" placeholder="请输入开票信息" />
   </view>
 </view>

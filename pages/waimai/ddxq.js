@@ -121,7 +121,7 @@ Page({
   },
   cancel:function(){
     var that = this;
-    my.showModal({
+    my.confirm({
       title: '',
       content: '确定要取消预订吗？',
       success: function (res) {
@@ -150,7 +150,7 @@ Page({
   //拨号
   phone: function () {
     my.makePhoneCall({
-      phoneNumber: this.data.store.phone, //仅为示例，并非真实的电话号码
+      number: this.data.store.phone, //仅为示例，并非真实的电话号码
     })
   },
 })

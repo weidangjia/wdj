@@ -10,15 +10,12 @@ function count_down(that) {
   });
   if (that.data.total_micro_second <= 1) {
     // timeout则跳出递归
-    that.data.order.state=-1;
+    that.data.order.state = -1;
     that.setData({
       count: '',
-      order:that.data.order
+      order: that.data.order
     })
-    my.removeStorage({
-      key: '',
-    })
-    that.load();
+    that.onLoad();
     return;
   }
   setTimeout(function () {
@@ -54,7 +51,7 @@ function fill_zero_prefix(num) {
 
 Page({
   data: {
-    api:config.ossPath,
+    api: config.ossPath,
     faslid: false,
     rad: false,
     liselec: -1,
@@ -67,18 +64,18 @@ Page({
     types: '1',
     fainfo: '',
     state: '1',
-    total_micro_second : 0,
-    isstop : true,
-    loading:true
+    total_micro_second: 0,
+    isstop: true,
+    loading: true
   },
   onLoad: function (options) {
     var that = this;
-    if (!my.getStorageSync({key:'color'}).data) {
-      my.setStorageSync({key:'color',data:'blue'});
+    if (!my.getStorageSync({ key: 'color' }).data) {
+      my.setStorageSync({ key: 'color', data: 'blue' });
     }
-    config.navBarColor(my.getStorageSync({key:'color'}).data);
+    config.navBarColor(my.getStorageSync({ key: 'color' }).data);
     that.setData({
-      color: my.getStorageSync({key:'color'}).data
+      color: my.getStorageSync({ key: 'color' }).data
     });
     if (options.id) {
       that.data.orderId = options.id;
@@ -86,7 +83,7 @@ Page({
         orderId: options.id
       })
     }
-  },    
+  },
   onUnload: function () {
     this.setData({
       isstop: true
@@ -103,13 +100,13 @@ Page({
     config.post("/wxApi/wm/payInfo", { id: that.data.orderId }, function (ret) {
       my.hideLoading();
       if (ret.code == 0) {
-        if (that.data.fainfo){
-          ret.data.invoiceHead=that.data.fainfo;
-        }        
+        if (that.data.fainfo) {
+          ret.data.invoiceHead = that.data.fainfo;
+        }
         that.setData({
           order: ret.data,
         })
-        my.setStorageSync({key:'sid',data:ret.data.storeId});
+        my.setStorageSync({ key: 'sid', data: ret.data.storeId });
         if (ret.data.diff > 0) {
           // my.setStorage({
           //   key: 'diff',
@@ -118,14 +115,14 @@ Page({
           that.setData({
             total_micro_second: ret.data.diff
           })
-          if(that.data.isstop){
+          if (that.data.isstop) {
             that.setData({
               isstop: false
             })
-             count_down(that);
+            count_down(that);
           }
         }
-      }else{
+      } else {
         config.tost(ret.msg);
       }
       setTimeout(function () {
@@ -133,7 +130,7 @@ Page({
           loading: false
         })
       }, 500)
-    },true);
+    }, true);
   },
   faslid: function () {
     this.setData({
@@ -141,15 +138,15 @@ Page({
     })
   },
   goDj: function () {
-    my.setStorageSync('order', this.data.order);
+    my.setStorageSync({key:'order',data:this.data.order});
     my.navigateTo({
-      url: '../index/djq?id='+this.data.orderId+'&from=wm' ,
+      url: '../index/djq?id=' + this.data.orderId + '&from=wm',
     })
   },
   goMj: function () {
     my.setStorageSync('order', this.data.order);
     my.navigateTo({
-      url: '../index/mjq?id='+this.data.orderId + '&from=wm',
+      url: '../index/mjq?id=' + this.data.orderId + '&from=wm',
     })
   },
   faback: function () {
@@ -203,27 +200,30 @@ Page({
   },
   pay: function (e) {
     var that = this;
-    config.post('wxApi/wm/payByXcx', { id: that.data.orderId }, function (ret) {
-        config.formid(e.detail.formId);
-        if (ret.code == 0) {
-          my.requestPayment({
-            'timeStamp': ret.data.timeStamp,
-            'nonceStr': ret.data.nonceStr,
-            'package': ret.data.package,
-            'signType': ret.data.signType,
-            'paySign': ret.data.paySign,
-            'success': function (res) {
-              config.tost("支付成功");
-              my.redirectTo({
-                url: '../waimai/ddxq?id=' + that.data.orderId,
-              })
-            },
-          })
-        }
-      },true)
+
+    config.post('wxApi/wm/payByAli', { id: that.data.orderId }, function (ret) {
+      config.formid(e.detail.formId);
+      // console.log(ret.msg)
+      if (ret.code == 0) {
+       
+        my.tradePay({
+          orderStr: ret.msg, //完整的支付参数拼接成的字符串，从服务端获取
+          success: (res) => {
+            my.navigateTo({
+              url:'../waimai/ddxq?id='+ that.data.orderId
+            })
+          },
+          fail: (res) => {
+            my.alert({
+              content: JSON.stringify(res),
+            });
+          }
+        });
+      }
+    }, true)
   },
-  offline:function(e){
-    var that=this;
+  offline: function (e) {
+    var that = this;
     config.post('wxApi/wm/payByOffline', { id: that.data.orderId }, function (ret) {
       console.log(ret);
       config.formid(e.detail.formId);
@@ -231,7 +231,7 @@ Page({
         my.redirectTo({
           url: '../waimai/ddxq?id=' + that.data.orderId,
         })
-      }else{
+      } else {
         config.tost(ret.msg);
       }
     }, true)

@@ -20,7 +20,7 @@ Page({
     ydId: '',
     menu: '',
     menutab: 1,
-    storeId: '7cb399660bfd4d41a14777c847ac2b7e',
+    storeId: '',
     cart: {
       count: 0,
       total: 0,
@@ -65,7 +65,7 @@ Page({
       my.setStorageSync({ key: 'menuStyle', data: '1' }, );
     }
     that.setData({
-      storeId: '7cb399660bfd4d41a14777c847ac2b7e',
+      storeId: my.getStorageSync({ key:'sid' }).data,
       deskCode: that.data.deskCode,
       deskId: that.data.deskId,
       ydId: that.data.ydId,
@@ -105,10 +105,11 @@ Page({
         loading: false
       })
     }, 800)
+    var newmap;
     if (that.data.isWm == 0) {
-      var newmap = my.getStorageSync({ key: that.data.storeId + 'newmap' }).data;
+      newmap= my.getStorageSync({ key: that.data.storeId + 'newmap' }).data;
     } else if (that.data.isWm == 1) {
-      var newmap = my.getStorageSync({ key: that.data.storeId + 'wmNewmap' }).data;
+       newmap = my.getStorageSync({ key: that.data.storeId + 'wmNewmap' }).data;
     }
     if (!newmap) {
       newmap = { total: 0, amount: 0 }
@@ -635,6 +636,11 @@ Page({
               dcslid: true,
               orderId: ret.msg
             })
+            my.setStorage({
+              key: 'orderId',
+              data: ret.msg
+            })
+
           } else if (ret.code = -2) {
             tost(ret.msg);
             that.onShow();
@@ -646,6 +652,10 @@ Page({
         post("/wxApi/o/add", { deskId: that.data.deskId, remark: that.data.order.remark, jsonStr: json }, function (ret) {
           if (ret.code == 0) {
             that.data.orderId = ret.msg;
+            my.setStorage({
+              key: 'orderId',
+              data: ret.msg
+            })
             if (that.data.menuInfo.mode == 2) {
               my.redirectTo({
                 url: '../index/zf?id=' + that.data.orderId,
@@ -790,23 +800,23 @@ Page({
   },
   empty: function () {
     this.data.newmap = {};
-    this.data.menuInfo.gCates = {};
+    this.data.menuInfo.gCates = '';
+    console.log(this.data.menuInfo);
     if (this.data.isWm == 0) {
       my.removeStorage({
         key: this.data.storeId + 'newmap',
         success: function (res) { },
       })
-    } else if (isWm == 1) {
+    } else if (this.data.isWm == 1) {
       my.removeStorage({
         key: this.data.storeId + 'wmNewmap',
-        success: function (res) { },
-      })
-      this.setData({
-        newmap: this.data.newmap,
-        menuInfo: this.data.menuInfo,
-        showCartDetail: false
       })
     }
+    this.setData({
+        newmap: this.data.newmap,
+        menuInfo: this.data.menuInfo,
+        showCartDetail:false
+      })
   },
   goDetail: function () {
     var deskId = this.data.deskId;

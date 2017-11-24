@@ -64,7 +64,7 @@ input{
 /*ddxq*/
 .blueorder{ background: #0f96fe  url('https://img.zhcanting.com/res/xcx/images/snum_menu.png') 30rpx center no-repeat;}
 /*wmzf*/
-.bluedermine{background: #0f96fe  url('http://img.zhcanting.com/res/xcx/images/wm_wx.png') 25rpx center no-repeat;} 
+.bluedermine{background: #0f96fe  url('http://img.zhcanting.com/res/xcx/images/icon_ali.png') 25rpx center no-repeat;} 
 /*yhj*/
 .bluedbtn-give{background:#0f96fe  url('http://img.zhcanting.com/res/xcx/images/cash_gift.png') 45rpx center no-repeat; }
 /*辅色*/
@@ -162,7 +162,7 @@ input{
 /*ddxq*/
 .greenorder{ background: #1ebda7  url('https://img.zhcanting.com/res/xcx/images/snum_menu.png') 45rpx center no-repeat;}
 /*wmzf*/
-.greendermine{background: #1ebda7  url('http://img.zhcanting.com/res/xcx/images/wm_wx.png') 25rpx center no-repeat;} 
+.greendermine{background: #1ebda7  url('http://img.zhcanting.com/res/xcx/images/icon_ali.png') 25rpx center no-repeat;} 
 /*yhj*/
 .greendbtn-give{background:#1ebda7  url('http://img.zhcanting.com/res/xcx/images/cash_gift.png') 45rpx center no-repeat; }
 /*辅色*/
@@ -262,7 +262,7 @@ input{
 /*ddxq*/
 .grayorder{ background: #303030  url('https://img.zhcanting.com/res/xcx/images/snum_menu.png') 45rpx center no-repeat;}
 /*wmzf*/
-.graydermine{background: #303030  url('http://img.zhcanting.com/res/xcx/images/wm_wx.png') 25rpx center no-repeat;} 
+.graydermine{background: #303030  url('http://img.zhcanting.com/res/xcx/images/icon_ali.png') 25rpx center no-repeat;} 
 /*yhj*/
 .graydbtn-give{background:#303030  url('http://img.zhcanting.com/res/xcx/images/cash_gift.png') 45rpx center no-repeat; }
 /*辅色*/

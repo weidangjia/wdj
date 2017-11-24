@@ -4,42 +4,40 @@ var config = require("../../config.js");
 Page({
   data: {
     path: config.resPath,
-    api: config.apiPath,
-    userInfo:'',
+    api: config.ossPath,
+    userInfo: '',
   },
-  onLoad:function(){
-    app.getUserInfo().then(
-
-      user => this.setData({
-        user,
-      }),
-    );
-    console.log(this)
-
+  onLoad: function () {
+    if (my.getStorageSync({ key: 'userInfo' }).data) {
+      this.setData({
+        userInfo: my.getStorageSync({ key: 'userInfo' }).data,
+      })
+    }
+    console.log(this.data.userInfo);
   },
   onShow: function () {
     var that = this;
-    if (!my.getStorageSync({key:'color'}).data) {
-      my.setStorageSync({key:'color',data:'blue'});
+    if (!my.getStorageSync({ key: 'color' }).data) {
+      my.setStorageSync({ key: 'color', data: 'blue' });
     }
     config.navBarColor(my.getStorageSync({ key: 'color' }).data);
     that.setData({
-      userInfo: my.getStorageSync({key:'userInfo'}).data,
-      logo: my.getStorageSync({key:'logo'}).data,
-      color:my.getStorageSync({key:'color'}).data
-    })      
+      userInfo: my.getStorageSync({ key: 'userInfo' }).data,
+      logo: my.getStorageSync({ key: 'logo' }).data,
+      color: my.getStorageSync({ key: 'color' }).data
+    })
   },
-  distr:function(){
+  distr: function () {
     my.navigateTo({
       url: '../waimai/dzlb?from=my',
     })
   },
-  goToMypage:function(){
+  goToMypage: function () {
     my.navigateTo({
       url: '../shop/shop'
     })
   },
-  goToYhj:function(){
+  goToYhj: function () {
     my.navigateTo({
       url: '../mypage/yhj'
     })

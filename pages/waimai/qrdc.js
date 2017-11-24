@@ -174,22 +174,23 @@ Page({
     var that = this;
     var phone=my.getStorageSync({key:'userPhone'}).data;
     that.setData({phone:phone});
-    if (config.isphone(phone) == '2'&&phone!='') {
+    if(!phone){
+      config.tost('请输入手机号')
+    }
+    else if (config.isphone(phone) == '2'&&phone!='') {
       my.showToast({
         type: 'fail',
         content: '手机号码格式不正确！',
         duration: 2000,
       });
-    }else if(!phone){
-      config.tost('请输入手机号')
-    }else if(config.isphone(phone)==1&&my.getStorageSync({key:'isGetPhone'}).data!=2){
+    } else if(config.isphone(phone)==1&&my.getStorageSync({key:'isGetPhone'}).data!=2){
       config.post('wxApi/ali/updatePhone', {phone:phone},function(ret){
                if(ret.code==0){
                   my.setStorageSync({key:'isGetPhone',data:2});
                }
             })
     }
-    if (typeof (that.data.time) == 'undefined') {
+    else if (typeof (that.data.time) == 'undefined') {
       config.tost('商家停止接单了');
       return;
     } else {

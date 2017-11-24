@@ -373,7 +373,7 @@
           <text a:else>已点0个</text>
           <text class="{{showCartDetail?'over_width':'overflow'}}">
           <text a:for="{{menuInfo.gCates}}"><text a:if="{{item.num>0}}">{{item.title}}<text class="{{color}}text_color">{{item.num}}</text></text>
-          </text></text>
+        </text></text>
         </view>
         <view class="total" a:if="{{newmap.amount>0}}">￥{{newmap.amount}}</view>
       </view>
@@ -408,7 +408,7 @@
     <scroll-view class="list" scroll-y>
       <view class="empty">
         <text>购物车</text>
-        <text catchtap="empty">一键清空</text>
+        <text onTap="empty">一键清空</text>
       </view>
       <view a:for="{{menu.cates}}"  a:for-item="cates" a:for-index="cindex">
         <view  a:for="{{cates.glist}}">

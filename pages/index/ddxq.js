@@ -24,9 +24,13 @@ Page({
       orderId: options.id,
       color: my.getStorageSync({key:'color'}).data
     });
+
     //获取订单数据
     config.post('wxApi/o/order', { id: that.data.orderId},function(ret){
+      console.log(that.data.orderId)
       if(ret.code==0){
+        
+
         that.data.store = ret.data.store;
         that.data.order = ret.data.order;
         that.setData({

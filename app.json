@@ -1,11 +1,8 @@
 {
   "pages": [
     
-    "pages/index/index",           
-    
-    "pages/waimai/qrdc", 
-    "pages/waimai/dzlb",
-    
+
+    "pages/index/index",        
     "pages/index/zf",    
     "pages/index/wddd",
     "pages/index/mdxz",
@@ -19,12 +16,16 @@
     "pages/index/zf-sm",
     "pages/index/zf-syd",
     "pages/index/zf-wc",
+    "pages/index/scan",
 
     "pages/waimai/dplb",
-    "pages/waimai/wmdd",
     "pages/waimai/dzxz",
     "pages/waimai/zf",
     "pages/waimai/ddxq",
+    "pages/waimai/dzlb",
+    "pages/waimai/wmdd",    
+    "pages/waimai/qrdc", 
+    
 
 
     "pages/mypage/qyhq",
@@ -39,7 +40,8 @@
 
   ],
   "window": {
-    "defaultTitle": "首页"
+    "defaultTitle": "首页",
+    "pullRefresh": false
   },
   "tabBar": {
     "textColor": "#000",

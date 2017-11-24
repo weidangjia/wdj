@@ -53,6 +53,13 @@ page{
     margin-right: 23.5rpx;
     line-height: 50rpx;
 }
+.line .name{
+    max-width: 580rpx;
+    display:block;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
 .hide{
   display: none;
 }

@@ -35,6 +35,6 @@
 }
 .aniu text{
     background: url('https://img.zhcanting.com/res/xcx/images/code_icon.png') left center no-repeat;
-    background-size: 49rpx 45rpx;
+    background-size: 45rpx 39rpx;
     padding-left: 80rpx;
 }

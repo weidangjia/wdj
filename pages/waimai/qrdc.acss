@@ -244,7 +244,7 @@ padding:23.5rpx;
 }
 .title text{
     background:url('https://img.zhcanting.com/res/xcx/images/icon_time.png') left center no-repeat;
-    background-size: 40rpx;
+    background-size: 38rpx;
     padding-left: 55rpx;
 }
 .tabTit{background: #fafafa;}

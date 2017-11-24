@@ -33,6 +33,8 @@ Page({
     // 获取城市
     config.post("/wxApi/c/citys", {}, function (ret) {
       if (ret.code == 0) {
+        console.log(ret)
+        
         if (ret.data.length > 0) {
           for (var i = 0; i < ret.data.length; i++) {
             ct.push(ret.data[i].title);
@@ -46,6 +48,7 @@ Page({
               nowCity: ret.data[0],
               geoCity: ret.data[0].title
             })
+            console.log(that.data)
           }
         }
         setTimeout(function () {
@@ -107,22 +110,29 @@ Page({
     my.getLocation({
        type:2,
       success(res) {
-        // my.setStorageSync({key:'lat',data:res.latitude});
-        // my.setStorageSync({key:'lng',data:res.longitude});
-        my.setStorageSync({key:'lat',data:'31.811226'});
-        my.setStorageSync({key:'lng',data:'119.974062'});
-        if(res.street){
+        my.setStorageSync({key:'lat',data:res.latitude});
+        my.setStorageSync({key:'lng',data:res.longitude});
+        // my.setStorageSync({key:'lat',data:'31.811226'});
+        // my.setStorageSync({key:'lng',data:'119.974062'});
+        console.log(res)
         var address=res.city+res.district+res.streetNumber.street+res.streetNumber.number;    
-        my.setStorage({
-          key: 'address', // 缓存数据的 key
-          data: address, // 要缓存的数据
-        });      
-        }else{
-            my.setStorage({
-          key: 'address', // 缓存数据的 key
-          data: '常州市新北区太湖东路9-2号', // 要缓存的数据
-        }); 
-      }
+          my.setStorage({
+            key: 'address', // 缓存数据的 key
+            data: address, // 要缓存的数据
+          });
+        // if(res.street){
+        //   var address=res.city+res.district+res.streetNumber.street+res.streetNumber.number;    
+        //   my.setStorage({
+        //     key: 'address', // 缓存数据的 key
+        //     data: address, // 要缓存的数据
+        //   });      
+        // }else{
+        //     my.setStorage({
+        //     key: 'address', // 缓存数据的 key
+        //     data: '常州市新北区太湖东路9-2号', // 要缓存的数据
+        //   }
+        // ); 
+      // }
       that.setData({
           lat: res.latitude,
           lng: res.longitude,

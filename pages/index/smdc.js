@@ -33,25 +33,16 @@ Page({
   saom: function () { 
     var id;
     var that=this;   
-      my.scanCode({
-        success: (res) => {
-          console.log(res);
-          if (res.path){ 
-            id = res.path.split('=')[1];
-          } else if (res.result){
-            
-            id = res.result.split('_')[1];
-          }else{
-            config.tost("二维码不存在");
-          }          
-          if (id) {
+      my.scan({
+        success: (res) => {     
+          if (res) {
             setTimeout(function () {
               my.switchTab({
                 url: '../index/index',
               })
             }, 200) 
             setTimeout(function () {
-            config.post("/myApi/d/getXcxDesk", { id: id }, function (ret) {
+            config.post("wxApi/d/getAliDesk", { qr: res.code }, function (ret) {
               if (ret.code == 0) {
                 my.setStorage({
                   key: 'sid',

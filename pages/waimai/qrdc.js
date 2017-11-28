@@ -43,9 +43,17 @@ Page({
             data: ret.data,
           })
         } else {
-          that.setData({
-            seadd: my.getStorageSync({ key: 'wmaddr' }).data
-          })
+          
+          if (my.getStorageSync({ key: 'wmaddr' }).data == undefined){
+            that.setData({
+              seadd: ''
+            })
+          } else{
+            that.setData({
+              seadd: my.getStorageSync({ key: 'wmaddr' }).data
+            })
+          }
+
           that.setData({
             address: my.getStorageSync({ key: 'address' }).data
           })
@@ -166,7 +174,10 @@ Page({
     })
   },
   sub: function () {
-    var addrId = my.getStorageSync({ key: 'wmaddr' }).data.id;
+    if (my.getStorageSync({ key: 'wmaddr' }).data != undefined){
+      var addrId = my.getStorageSync({ key: 'wmaddr' }).data.id;
+    }
+    
     var t = this.data;
     var sendTime = t.time + ":00";
     var obj = { list: t.obj.list };

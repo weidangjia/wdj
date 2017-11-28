@@ -1,5 +1,5 @@
 // pages/waimai/dplb.js
-var config = require("../../config.js");
+var config = require("../../config.js")
 var app=getApp();
 Page({
   data: {
@@ -21,6 +21,7 @@ Page({
   },
   onShow:function(){
     var that=this;
+    
     if (my.getStorageSync({key:'wmaddr'}).data) {
       that.setData({
         seadd: my.getStorageSync({key:'wmaddr'}).data
@@ -29,6 +30,7 @@ Page({
     } else {
       config.post('wxApi/addr/getDefault', {}, function (ret) {
         if (ret.code == 0) {
+          
           that.setData({
             seadd: ret.data
           })
@@ -37,17 +39,26 @@ Page({
             data: ret.data,
           })
         } else {
-          app.getaddress({
-            successgeocoder:function(res){
+          
+          // app.getaddress({
+          //   successgeocoder:function(res){
+          //     console.log(res)
+          //     that.setData({
+          //       address: my.getStorageSync({key:'address'}).data
+          //     })
+          //     that.listdata();
+          //   }
+          // });
+          if (my.getStorageSync({key:'wmaddr'}).data == undefined){
               that.setData({
-                address: my.getStorageSync({key:'address'}).data
+                seadd: ''
               })
-              that.listdata();
-            }
-          });
-          that.setData({
-            seadd: my.getStorageSync({key:'wmaddr'}).data
-          })
+          } else {
+            that.setData({
+              seadd: my.getStorageSync({key:'wmaddr'}).data
+            })
+          }
+          
           that.setData({
             address: my.getStorageSync({key:'address'}).data
           })

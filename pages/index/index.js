@@ -20,12 +20,18 @@ Page({
     tabbar: {},
     sheight: 0,
     stype: 'down',
-    order: ''
+    order: '',
   },
   onLoad() {
     var that=this;
-    var uid=my.getStorageSync({key:'uid'}).data;
-    if(uid){
+    app.getUserInfo().then(
+      user => this.setData({
+        user,
+      }),
+    );
+
+    var login=my.getStorageSync({key:'login'}).data;
+    if(login == '0'){
       that.load();
       that.theme();  
     }else{
@@ -64,18 +70,26 @@ Page({
       success: (res) => {
         post("wxApi/ali/login",{authcode:res.authCode},function(ret) {
           if(ret.code==0){
+
+            my.setStorageSync({
+              key:'login',
+              data:'0'
+            })
+
             my.setStorageSync({key:'uid',data:ret.data.id});
             my.setStorage({
             key: 'userInfo', // 缓存数据的 key
             data: ret.data, // 要缓存的数据
           });
           that.load();
-      that.theme();  
+          that.theme();  
           }          
         })
       },
       fail:(res)=>{
-        that.authcode();
+        setTimeout(function(){
+          that.onLoad()
+        },1000)
       }
     });
   },
@@ -83,7 +97,7 @@ Page({
     // 页面加载
     var that = this;
     post("wxApi/c/index", { lat:my.getStorageSync({key:'lat'}).data, lng:my.getStorageSync({key:'lng'}).data}, function (ret) {
-
+      console.log(ret)
       if (ret.data.coupons.length > 0) {
         var sendInfo = {};
         sendInfo.couponCanGet = ret.data.couponCanGet;
@@ -110,7 +124,6 @@ Page({
           })
 
         } else {
-          console.log(that.data.sendShow);
           if (!that.data.sendShow) {
             that.setData({
               robShow: true,
@@ -192,6 +205,7 @@ Page({
     var that = this;
     post("wxApi/c/theme", {}, function (ret) {
       if (ret.code == 0) {
+        console.log(ret)
         var btnArry = [];
         var alias = [];
         var num = ret.data.btnDc + ret.data.btnPd + ret.data.btnWm + ret.data.btnYd;
@@ -327,17 +341,23 @@ Page({
      my.getLocation({
        type:2,
       success(res) {
-        console.log(res)
         my.setStorageSync({key:'lat',data:res.latitude});
         my.setStorageSync({key:'lng',data:res.longitude});
 
         // my.setStorageSync({key:'lat',data:'31.811226'});
         // my.setStorageSync({key:'lng',data:'119.974062'});
-        var address=res.city+res.district+res.streetNumber.street+res.streetNumber.number;    
-          my.setStorage({
-            key: 'address', // 缓存数据的 key
-            data: address, // 要缓存的数据
-          });
+
+        var address = ''
+        if (res.streetNumber == undefined){
+          address = '常州市新北区太湖东路9号'
+        } else {
+          address=res.city+res.district+res.streetNumber.street+res.streetNumber.number; 
+        }
+           
+        my.setStorage({
+          key: 'address', // 缓存数据的 key
+          data: address, // 要缓存的数据
+        });
       //   if(res.street){
       //   var address=res.city+res.district+res.streetNumber.street+res.streetNumber.number;    
       //   my.setStorage({
@@ -477,5 +497,18 @@ Page({
         url: '../waimai/dplb'
       })
     }      
-  }
+  },
+  goNext:function(e){
+    var text = e.currentTarget.dataset.text;
+    var s=this.data;
+    if (text == s.aliasDc){
+      this.toMenu();
+    } else if (text == s.aliasYd){
+      this.goYd();
+    } else if (text == s.aliasPd){
+      this.goPh();
+    } else if (text == s.aliasWm){
+      this.takeOut();
+    }
+  },
 })

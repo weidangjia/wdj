@@ -2,7 +2,9 @@
 <import src="../template/template.axml"/>
 <template a:if="{{loading}}" is="loading"/> 
 <navigator url="../waimai/dzlb?byGeo=1">
+
 <view class="header {{color}}header">
+    
   <text class="current" a:if="{{seadd==''}}">当前定位：</text>
   <view a:if="{{seadd==''}}">{{address}}</view>
   <view a:else>{{seadd.address}}{{seadd.remark}}</view>

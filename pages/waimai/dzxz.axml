@@ -7,7 +7,9 @@
     <input placeholder-style="font-family:Microsoft Yahei" placeholder="姓名" class="mu-input" onInput="name" />
   </view>
 <view class="gender">
-  <!-- <text onTap="sele" class="{{sele==1 ? 'sele' :'{{color}}text_color'}}" data-se="1">先生</text><text onTap="sele" class="{{sele==2?'sele':''}}" data-se="2">女士</text> -->
+  <text onTap="sele" a:if="{{sele==1}}" class="sele" data-se="1">先生</text>
+  <text onTap="sele" a:else class="{{color}}text_color'}}" data-se="1">先生</text>
+  <text onTap="sele" class="{{sele==2?'sele':''}}" data-se="2">女士</text>
 </view>
   <view class="phone">
     <text>电话</text>

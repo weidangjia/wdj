@@ -135,6 +135,7 @@ page{
           align-items: center;
   font-size: 15px;
   position: relative;
+  /* margin-top: .15rem; */
 }
 .home-list3 .yd ,.home-list3 .dc,.home-list3 .wm{
   display: -webkit-flex;
@@ -165,7 +166,7 @@ page{
 .home-list3 .dc .img{
   background: #59d88c;
   position: absolute;
-  top: -15rpx;
+  top: -6rpx;
   width: 115rpx;
   height: 115rpx;
   border-radius:50%;
@@ -182,7 +183,9 @@ page{
   border:7rpx solid #fff;
 }
 .home-list3 .dc>text{
-  padding-top: 95rpx;
+  padding-top: 110rpx;
+  display: block;
+  text-align: center;
 }
 .home-list3 .yd .img{
   background: #ff4f39;

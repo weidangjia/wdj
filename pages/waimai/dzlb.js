@@ -23,8 +23,11 @@ Page({
         from: options.from
       })
     }
+  },
+  onShow:function(options){
+    
     this.getdata();
-  },  
+  },
   getdata:function(){
     var that = this;
     if (!my.getStorageSync({key:'color'}).data) {
@@ -38,7 +41,6 @@ Page({
       state:true,
       color: my.getStorageSync({key:'color'}).data
     })
-    console.log(that.data.byGeo)
     if (that.data.byGeo) {
       config.post('wxApi/addr/listByGeo', {}, function (ret) {
         if (ret.code == 0) {

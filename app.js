@@ -1,19 +1,19 @@
 var qqmapsdk;
 
 App({
-  userInfo2: null,
+  userInfo: null,
   onauthorsuccess:undefined,
   getUserInfo() {
     return new Promise((resolve, reject) => {
-      if (this.userInfo2) resolve(this.userInfo2);
+      if (this.userInfo) resolve(this.userInfo);
 
       my.getAuthCode({
+        scopes: ['auth_user'],
         success: (authcode) => {
           my.getAuthUserInfo({
-            scopes: ['auth_user'],
             success: (res) => {
-              this.userInfo2 = res;
-              resolve(this.userInfo2);
+              this.userInfo = res;
+              resolve(this.userInfo);
             },
             fail: () => {
               reject({});
@@ -29,10 +29,9 @@ App({
 
       function zf() {
         my.getAuthUserInfo({
-            scopes: ['auth_user'],
             success: (res) => {
-              this.userInfo2 = res;
-              resolve(this.userInfo2);
+              this.userInfo = res;
+              resolve(this.userInfo);
             },
             fail: () => {
               reject({});

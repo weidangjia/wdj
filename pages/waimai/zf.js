@@ -97,6 +97,7 @@ Page({
     my.showLoading({
       title: '加载中',
     });
+    console.log(that.data)
     config.post("/wxApi/wm/payInfo", { id: that.data.orderId }, function (ret) {
       my.hideLoading();
       if (ret.code == 0) {

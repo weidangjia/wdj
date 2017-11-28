@@ -71,8 +71,9 @@
         <image a:if="{{btnArry[1]==aliasDc}}" src="../../images/icon_dian.png"></image>
         <image a:if="{{btnArry[1]==aliasWm}}" src="../../images/icon_wm.png"></image>
         <image a:if="{{btnArry[1]==aliasPd}}" src="../../images/icon_pd.png"></image>
-      <!-- <text>{{m1.substring(btnArry[1])}}</text></view>
-      <text>{{m1.substring(btnArry[1])}}</text> -->
+      <!-- <text>{{m1.substring(btnArry[1])}}</text> -->
+    </view>
+      <text>{{btnArry[1]}}</text>
     </view>
     <view class="wm" data-text="{{btnArry[2]}}" onTap="goNext">
       <view class="img">

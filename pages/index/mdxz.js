@@ -90,7 +90,9 @@ Page({
             geoCity: that.data.city[res.index],
             nowCity: that.data.citys[res.index],
           })
-          that.onLoad();
+          if (res.index != -1){
+            that.onLoad();
+          }
         }
       }
     });

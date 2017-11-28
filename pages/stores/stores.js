@@ -48,7 +48,6 @@ Page({
               nowCity: ret.data[0],
               geoCity: ret.data[0].title
             })
-            console.log(that.data)
           }
         }
         setTimeout(function () {
@@ -62,6 +61,7 @@ Page({
   },
   load: function () {
     var that = this;
+    console.log(that.data)
     // 获取页面数据
     config.post("/wxApi/c/stores", {
       lat: my.getStorageSync({ key: 'lat' }).data, lng: my.getStorageSync({ key: 'lng' }).data,
@@ -93,7 +93,11 @@ Page({
             geoCity: that.data.citys[res.index],
             nowCity: that.data.allct[res.index]
           })
-          that.load();
+          
+          if (res.index != -1){
+            that.load();
+          }
+          
         }
       }
     });
